@@ -1,3 +1,7 @@
-public class HealthItem extends Items
-{
+public abstract class HealthItem extends Items {
+    public HealthItem(int type) {
+        super(type);
+    }
+
+    public abstract int Effect(Player player);
 }
