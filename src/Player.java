@@ -3,9 +3,14 @@ public class Player {
     private Items[] items;
     private int stageWins;
     private boolean isPlayerMoveable;
+    private int maxHp;
 
     public Player(int hp){
         this.hp=hp;
+    }
+
+    public Items[] GetAllItem(){
+        return this.items;
     }
 
     public int GetHP(){
@@ -16,6 +21,16 @@ public class Player {
         this.hp=hp;
         return 1;
     }
+
+    public int SetMaxHp(int maxHp){
+        this.maxHp=maxHp;
+        return 1;
+    }
+
+    public int GetMaxHp(){
+        return maxHp;
+    }
+
 
     public int AddHP(int num){
         hp+=num;
@@ -36,23 +51,38 @@ public class Player {
         return true;
     }
 
-    public Items[] RemoveItem (int index{
+    public Items[] RemoveItem (int index){
         items[index]=null;
         return items;
     }
 
-    public int GetItem(Items item,int index{
+    public int GetItem(Items item,int index){
         items[index]=item;
         return 1;
     }
 
     public boolean UseItem(int index){
+        if(index)
+            items[index].Effect();
         items[index]=null;
         return true;
     }
 
-    public boolean StealItem(Player opponent, int index){
+    public boolean StealItem(Player opponent, int opponentIndex,int index){
+        Items temp = opponent.GetAllItem()[opponentIndex];
+        opponent.GetAllItem()[opponentIndex]=null;
+
+        items[index]=temp;
         return true;
     }
+
+    public boolean  ItemStolen(){  //不懂
+        return false;
+    }
+
+    public void Cuffed(){
+        isPlayerMoveable=false;
+    }
+
 }
 
