@@ -10,17 +10,17 @@ public class GameMain {
         int guessCoinSide;
         int coinSide;
 
-        System.out.println("+--------------------------------+");
-        System.out.println("|        BUCKSHOT ROULETTE       |");
-        System.out.println("+--------------------------------+");
-        System.out.println("|         — MAIN MENU —          |");
-        System.out.println("|1.START GAME                    |");
-        System.out.println("|2.HOW TO PLAY                   |");
-        System.out.println("|3.EXIT GAME                     |");
-        System.out.println("|......                          |");
-        System.out.println("+--------------------------------+");
-        System.out.print("Choice one option:  ");
-        option= input.nextInt();
+        System.out.print("+--------------------------------+\n" +
+                         "|        BUCKSHOT ROULETTE       |\n" +
+                         "+--------------------------------+\n" +
+                         "|         — MAIN MENU —          |\n" +
+                         "|1.START GAME                    |\n" +
+                         "|2.HOW TO PLAY                   |\n" +
+                         "|3.EXIT GAME                     |\n" +
+                         "|......                          |\n" +
+                         "+--------------------------------+\n" +
+                         "Choice one option:  ");
+        option = input.nextInt();
         input.nextLine();
         if(option<1 || option>3){
             System.out.println("Warning");
