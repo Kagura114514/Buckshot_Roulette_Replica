@@ -46,6 +46,14 @@ public class Player {
 
     }
 
+    public boolean GetPlayerMoveable(){
+        return  isPlayerMoveable;
+    }
+
+    public boolean SetPlayerMoveable(boolean isPlayerMoveable){
+        return  this.isPlayerMoveable=isPlayerMoveable;
+    }
+
     public boolean AddItem(Items item,int index){
         items[index]=item;
         return true;
@@ -61,11 +69,16 @@ public class Player {
         return 1;
     }
 
-    public boolean UseItem(int index){
-        if(index)
-            items[index].Effect();
-        items[index]=null;
-        return true;
+    public boolean UseItem(int index,Player player, Player opponent, ShotGun gun){
+        if(0<index && index<10) {
+            items[index].Effect(player, opponent, gun);
+            items[index]=null;
+            return true;
+        }
+        else{
+            return false;
+        }
+
     }
 
     public boolean StealItem(Player opponent, int opponentIndex,int index){

@@ -3,5 +3,5 @@ public abstract class HealthItem extends Items {
         super(type);
     }
 
-    public abstract int Effect(Player player);
+    public abstract int Effect(Player player, Player opponent, ShotGun gun);
 }
