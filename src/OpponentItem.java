@@ -1,3 +1,3 @@
-public class OpponentItem extends Items
+public abstract class OpponentItem extends Items
 {
 }

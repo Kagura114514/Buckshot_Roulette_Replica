@@ -1,3 +1,3 @@
-public class InformationItem extends Items
+public abstract class InformationItem extends Items
 {
 }

@@ -19,5 +19,5 @@ public abstract class Items {
         return type;
     }
 
-    public abstract int Effect(Player player, ShotGun gun);
+    public abstract int Effect(Player player, Player opponent, ShotGun gun);
 }

@@ -1,3 +1,3 @@
-public class ShotgunEffectItem extends Items
+public abstract class ShotgunEffectItem extends Items
 {
 }
