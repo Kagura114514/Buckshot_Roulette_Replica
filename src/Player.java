@@ -52,7 +52,7 @@ public class Player {
     }
 
     public boolean StealItem(Player opponent, int index){
-
+        return true;
     }
 }
 
