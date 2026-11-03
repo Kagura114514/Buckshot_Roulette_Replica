@@ -4,11 +4,8 @@ public class GameMain {
         Scanner input = new Scanner(System.in);
         GameSystem gs= new GameSystem();
 
-        int option;
-        String player1;
-        String player2;
-        int guessCoinSide;
-        int coinSide;
+        int option, guessCoinSide, coinSide;
+        String player1, player2;
 
         System.out.print("+--------------------------------+\n" +
                          "|        BUCKSHOT ROULETTE       |\n" +
