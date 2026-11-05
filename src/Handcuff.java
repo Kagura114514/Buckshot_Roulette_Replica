@@ -3,7 +3,10 @@ public class Handcuff extends OpponentItem {
         super(Items.HANDCUFF);
     }
 
-    public int Effect(Player player, Player opponent, ShotGun gun){
+    public int Effect(Player player,Player opponent, ShotGun gun) {
+        return Effect(opponent);
+    }
+    public int Effect(Player opponent){
         if(opponent.GetPlayerMoveable()==true){
             opponent.Cuffed();
             return 1;

@@ -59,9 +59,8 @@ public class Player {
         return true;
     }
 
-    public Items[] RemoveItem (int index){
+    public void RemoveItem (int index){
         items[index]=null;
-        return items;
     }
 
     public int GetItem(Items item,int index){
@@ -69,9 +68,10 @@ public class Player {
         return 1;
     }
 
-    public boolean UseRestoreItem(int index,Player player){
+
+    public boolean UseItem(int index,Player player,Player opponent, ShotGun gun,int opponentIndex){
         if(0<index && index<10) {
-            items[index].Effect(player);
+            items[index].Effect(player,opponent, gun,opponentIndex);
             items[index]=null;
             return true;
         }
@@ -80,28 +80,9 @@ public class Player {
         }
     }
 
-    public boolean UseItem(int index,Player player, ShotGun gun){
-        if(0<index && index<10) {
-            items[index].Effect(player, player, gun);
-            items[index]=null;
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
 
-    public boolean StealItem(Player opponent, int opponentIndex,int index){
-        Items temp = opponent.GetAllItem()[opponentIndex];
-        opponent.GetAllItem()[opponentIndex]=null;
 
-        items[index]=temp;
-        return true;
-    }
 
-    public boolean  ItemStolen(){  //不懂
-        return false;
-    }
 
     public void Cuffed(){
         isPlayerMoveable=false;

@@ -3,7 +3,7 @@ public class BurnerPhone extends InformationItem {
         super(Items.BURNER_PHONE );
     }
 
-    public int Effect(Player player, Player opponent, ShotGun gun){
+    public int Effect(ShotGun gun){
         return 1;//待定
     }
 }

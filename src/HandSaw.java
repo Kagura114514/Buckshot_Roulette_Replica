@@ -3,7 +3,7 @@ public class HandSaw extends ShotgunEffectItem {
         super(Items.HANDSAW);
     }
 
-    public int Effect(Player player, Player opponent, ShotGun gun){
+    public int Effect(ShotGun gun){
         return 1;//待定
     }
 }

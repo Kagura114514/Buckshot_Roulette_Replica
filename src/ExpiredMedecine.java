@@ -1,4 +1,4 @@
-public abstract class ExpiredMedecine extends HealthItem {
+ public abstract class ExpiredMedecine extends HealthItem {
     public  ExpiredMedecine(){
         super(Items.EXPIRED_MEDECINE);
     }

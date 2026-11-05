@@ -13,4 +13,7 @@ public class CigarettesPack extends HealthItem {
             return -1;
         }
     }
+
+
+
 }
