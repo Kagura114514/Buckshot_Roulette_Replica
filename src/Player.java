@@ -69,16 +69,26 @@ public class Player {
         return 1;
     }
 
-    public boolean UseItem(int index,Player player, Player opponent, ShotGun gun){
+    public boolean UseRestoreItem(int index,Player player){
         if(0<index && index<10) {
-            items[index].Effect(player, opponent, gun);
+            items[index].Effect(player);
             items[index]=null;
             return true;
         }
         else{
             return false;
         }
+    }
 
+    public boolean UseItem(int index,Player player, ShotGun gun){
+        if(0<index && index<10) {
+            items[index].Effect(player, player, gun);
+            items[index]=null;
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     public boolean StealItem(Player opponent, int opponentIndex,int index){

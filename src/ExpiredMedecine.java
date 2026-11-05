@@ -1,9 +1,9 @@
-public class ExpiredMedecine extends HealthItem {
+public abstract class ExpiredMedecine extends HealthItem {
     public  ExpiredMedecine(){
         super(Items.EXPIRED_MEDECINE);
     }
 
-    public int Effect(Player player, Player opponent, ShotGun gun){
+    public int Effect(Player player){
         int Hp=player.GetHP();
         int maxHp=player.GetMaxHp();
         if(Hp < maxHp) {

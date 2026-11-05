@@ -1,18 +1,19 @@
 public class ShotGun {
     /** Items involved in this class are:
-     *  Magnifying Glass : 可查看当前枪膛内是否为实弹或空包弹
+     ** Magnifying Glass : 可查看当前枪膛内是否为实弹或空包弹
      *  Beer             : 弹出当前枪膛内的子弹并跳过当前回合
      *  Handsaw          : 若此发子弹为实弹则造成2点伤害
-     *  BurnerPhone      : 可预知剩余子弹中的第几发子弹为实弹或空包弹 (例：第四发为空包弹)
-     *  Inverter         : 将当前枪膛内的子弹切换为实弹或空包弹（例：当前枪膛内为空包弹，使用道具后转为实弹
+     ** BurnerPhone      : 可预知剩余子弹中的第几发子弹为实弹或空包弹 (例：第四发为空包弹)
+     ** Inverter         : 将当前枪膛内的子弹切换为实弹或空包弹（例：当前枪膛内为空包弹，使用道具后转为实弹
      */
-    public static final int BLANK = 0;
-    public static final int LIVE  = 1;
-    public static final int EMPTY = 2;
+    public static final int BLANK     = 0; // 空包弹
+    public static final int LIVE      = 1; // 实弹
+    public static final int EMPTY     = 2; // 无子弹状态（已射出）
 
-    private int[] bulletsInGun;
-    private int nextShell;
-    private int currShellType;
+    private int[]  bulletsInGun;
+    private int       nextShell;
+    private int   currShellType;
+    private boolean isDoubleDMG;
     // Constructor
     public ShotGun(Stage stg){
         // Instantiate the object depends on the stage level
@@ -31,6 +32,7 @@ public class ShotGun {
 
         nextShell     = this.bulletsInGun[1];
         currShellType = this.bulletsInGun[0];
+        isDoubleDMG   = false;
     }
 
     private int randomShellNum(int stg){
@@ -111,13 +113,32 @@ public class ShotGun {
     }
     // Magnifying Glass will need this
     public int GetCurrShellType(){
-        return this.currShellType;
+        for(int i = 0; i < bulletsInGun.length; i++){
+            if(bulletsInGun[i] != EMPTY){
+                SetCurrShellType(bulletsInGun[i]);
+                return this.bulletsInGun[i];
+            }
+        }
+        return -1;
     }
 
     public void SetCurrShellType(int type){
         currShellType = type;
     }
 
+    public boolean isDoubleDMG(){
+        return this.isDoubleDMG;
+    }
+
+    public void RevertIsDoubleDMG(){
+        if(this.isDoubleDMG){
+            this.isDoubleDMG = false;
+        }
+        else{
+            this.isDoubleDMG = true;
+        }
+    }
+    // BurnerPhone will need this
     public String GetRandomShellInfo(int stg){
         if(this.bulletsInGun[bulletsInGun.length - 2] == EMPTY){
             return "How Unfortunate...";
@@ -141,16 +162,18 @@ public class ShotGun {
             return order + " shell ...\n   ...   " + line;
         }
     }
-
+    // Inverter will need this
     public boolean SwitchShellType(){
-        if(this.currShellType == LIVE){
+        if(GetCurrShellType() == LIVE){
             SetCurrShellType(BLANK);
             return true;
         }
-        else if(this.currShellType == BLANK){
+        else if(GetCurrShellType() == BLANK){
             SetCurrShellType(LIVE);
             return true;
         }
         return false;
     }
+
+
 }
