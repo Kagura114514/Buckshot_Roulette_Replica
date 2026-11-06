@@ -153,6 +153,9 @@ public class ShotGun {
         }
     }
     // BurnerPhone will need this
+    /** Get a random shell info, (it won't give empty shell info)
+     *  param@  - current stage level
+     *  return  - Random line about the shell position info   */
     public String GetRandomShellInfo(int stg){
         String line = "something went wrong";
         if(GetBulletsInGun()[GetBulletsInGun().length - 2] == EMPTY){
@@ -161,7 +164,7 @@ public class ShotGun {
         else{
             int index;
             do{
-                index = randomShellType(stg);
+                index = randomShellNum(stg);
             }while(GetBulletsInGun()[index] == EMPTY);
 
             if(GetBulletsInGun()[index] == BLANK){

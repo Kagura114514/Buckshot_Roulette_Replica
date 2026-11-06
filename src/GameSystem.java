@@ -9,7 +9,7 @@ public class GameSystem {
     public GameSystem(int num){
         Stage stage = new Stage(num);
         firstPlayer =new Player(stage.GetStartHP());
-        fsecondPlayer =new Player(stage.GetStartHP());
+        secondPlayer =new Player(stage.GetStartHP());
 
     }
 
@@ -54,7 +54,6 @@ public class GameSystem {
     }
 
     public void SwitchPlayer(){
-        if()
     }
     public int GuessCoinSide(){
         int num=(int)(Math.random()*100)+1;
