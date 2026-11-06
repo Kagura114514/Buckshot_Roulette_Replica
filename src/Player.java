@@ -9,17 +9,16 @@ public class Player {
         this.hp=hp;
     }
 
-    public Items[] GetAllItem(){
-        return this.items;
+    /** Set the HP at the starting
+     *  @param hp  - current stage HP*/
+    public void SetHP(int hp){
+        this.hp=hp;
     }
 
+    /** Get the HP at every stage
+     *  @return  - the HP at every stage   */
     public int GetHP(){
         return hp;
-    }
-
-    public int SetHP(int hp){
-        this.hp=hp;
-        return 1;
     }
 
     public int SetMaxHp(int maxHp){
@@ -42,7 +41,7 @@ public class Player {
         return 1;
     }
 
-    public void ChangeHP(ShotGun shotGun){
+    public void ChangeHP(Stage stage){
 
     }
 
@@ -50,8 +49,8 @@ public class Player {
         return  isPlayerMoveable;
     }
 
-    public boolean SetPlayerMoveable(boolean isPlayerMoveable){
-        return  this.isPlayerMoveable=isPlayerMoveable;
+    public Items[] GetAllItem(){
+        return this.items;
     }
 
     public boolean AddItem(Items item,int index){
@@ -62,12 +61,6 @@ public class Player {
     public void RemoveItem (int index){
         items[index]=null;
     }
-
-    public int GetItem(Items item,int index){
-        items[index]=item;
-        return 1;
-    }
-
 
     public boolean UseItem(int index,Player player,Player opponent, ShotGun gun,int opponentIndex){
         if(0<index && index<10) {
@@ -80,9 +73,9 @@ public class Player {
         }
     }
 
-
-
-
+    public boolean SetPlayerMoveable(boolean isPlayerMoveable){
+        return  this.isPlayerMoveable=isPlayerMoveable;
+    }
 
     public void Cuffed(){
         isPlayerMoveable=false;
