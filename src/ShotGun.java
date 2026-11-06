@@ -33,6 +33,10 @@ public class ShotGun {
         isDoubleDMG   = false;
     }
 
+    // DEVELOPED BY: RIMI
+    /** Return the appropriate number of shells depends on the current stage players in
+     *  @param  stg - stage level players current in
+     *  @return     - appropriate number of shells depends on current stage                  */
     private int randomShellNum(int stg){
         int num = -1; // dummy value assigned
         if(stg == 1){
@@ -47,6 +51,9 @@ public class ShotGun {
         return num;
     }
 
+    // DEVELOPED BY: RIMI
+    /** Return either LIVE or BLANK (in integer) in a 1:1 probability for the other method to used
+     *  @return     - LIVE or BLANK (int)                                                             */
     private int randomShellType(){
         int prob = (int)(Math.random() * 2);
         if(prob == 1){
@@ -57,6 +64,12 @@ public class ShotGun {
         }
     }
 
+    // DEVELOPED BY: RIMI
+    /** To help constructor to assign the shells type in the bulletsInGun array
+     *  (There is a minimum number of a type of shell depend on the stage level,
+     *   and the method will handle of it)
+     *  @param  list    - The array list need to be assigned
+     *  @param  limit   - The limit number to make sure the minimum number of shells */
     private void initialize(int[] list, int limit){
         int countLive;
         int countBlank;
@@ -74,7 +87,10 @@ public class ShotGun {
             }
         }while(countBlank < limit || countLive < limit);
     }
-
+    // DEVELOPED BY: RIMI
+    /** Return the number in words
+     *  @param  num - The number needs to change into words
+     *  @return     - The number in words                   */
     private String numInWords(int num){
         String str;
         switch (num){
@@ -108,7 +124,9 @@ public class ShotGun {
         }
         return str;
     }
-
+    // DEVELOPED BY: RIMI
+    /** Return the current shell position with either blank or live bullet
+     *  @return     - the current shell position    */
     private int GetCurrShellPos(){
         for(int i = 0; i < GetBulletsInGun().length; i++){
             if(GetBulletsInGun()[i] != EMPTY){
@@ -144,14 +162,7 @@ public class ShotGun {
     public void SetIsDoubleDMG(boolean boo){
         this.isDoubleDMG = boo;
     }
-    public void RevertIsDoubleDMG(){
-        if(this.isDoubleDMG){
-            this.isDoubleDMG = false;
-        }
-        else{
-            this.isDoubleDMG = true;
-        }
-    }
+
     // BurnerPhone will need this
     /** Get a random shell info, (it won't give empty shell info)
      *  param@  - current stage level
@@ -180,6 +191,10 @@ public class ShotGun {
         }
     }
     // Inverter will need this
+    // DEVELOPED BY: RIMI
+    /** Revert the type of the current shell
+     *  @return     true  - success
+ *                  false - failed                */
     public boolean SwitchShellType(){
         if(GetCurrShellType() == LIVE){
             SetCurrShellType(BLANK);
@@ -192,13 +207,19 @@ public class ShotGun {
         return false;
     }
     // Handsaw will need this
+    // DEVELOPED BY: RIMI
+    /** Set isDoubleDMG true  */
     public void DoubleTheDMG(){
         SetIsDoubleDMG(true);
     }
     // Will need this when shooting
+    // DEVELOPED BY: RIMI
+    /** Calculate the damage to the shotgun of the current round,
+     *  the damage will be doubled if user uses a handsaw
+     *  @return     - appropriate damage of the current round                */
     public int DamageCalc(){
         if(GetIsDoubleDMG()){
-            RevertIsDoubleDMG();
+            SetIsDoubleDMG(false);
             return 2;
         }
         else {
@@ -206,6 +227,10 @@ public class ShotGun {
         }
     }
     // 注意！ 射击后/使用beer时需要被调用
+    // DEVELOPED BY: RIMI
+    /** Eject the current shell after a shot
+     *  @return  true  - ejected a shell successfully
+     *           false - failed, maybe the gun has no bullets in it already*/
     public boolean EjectShell(){
         int pos = GetCurrShellPos();
         if(pos < 0 || pos >= GetBulletsInGun().length){
