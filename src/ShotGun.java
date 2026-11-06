@@ -1,8 +1,8 @@
 public class ShotGun {
     /** Items involved in this class are:
      ** Magnifying Glass : 可查看当前枪膛内是否为实弹或空包弹
-     *  Beer             : 弹出当前枪膛内的子弹并跳过当前回合
-     *  Handsaw          : 若此发子弹为实弹则造成2点伤害
+     ** Beer             : 弹出当前枪膛内的子弹并跳过当前回合
+     ** Handsaw          : 若此发子弹为实弹则造成2点伤害
      ** BurnerPhone      : 可预知剩余子弹中的第几发子弹为实弹或空包弹 (例：第四发为空包弹)
      ** Inverter         : 将当前枪膛内的子弹切换为实弹或空包弹（例：当前枪膛内为空包弹，使用道具后转为实弹
      */
@@ -11,7 +11,6 @@ public class ShotGun {
     public static final int EMPTY     = 2; // 无子弹状态（已射出）
 
     private int[]  bulletsInGun;
-    private int       nextShell;
     private int   currShellType;
     private boolean isDoubleDMG;
     // Constructor
@@ -30,7 +29,6 @@ public class ShotGun {
             initialize(this.bulletsInGun, 2);
         }
 
-        nextShell     = this.bulletsInGun[1];
         currShellType = this.bulletsInGun[0];
         isDoubleDMG   = false;
     }
@@ -104,32 +102,48 @@ public class ShotGun {
             case 8:
                 str = "eighth";
                 break;
+            default:
+                str = "something went wrong";
+                break;
         }
         return str;
     }
 
-    public int GetNextShell(){
-        return this.nextShell;
+    private int GetCurrShellPos(){
+        for(int i = 0; i < GetBulletsInGun().length; i++){
+            if(GetBulletsInGun()[i] != EMPTY){
+                return i;
+            }
+        }
+        return -1;
     }
+
+    public int[] GetBulletsInGun(){
+        return this.bulletsInGun;
+    }
+
     // Magnifying Glass will need this
     public int GetCurrShellType(){
-        for(int i = 0; i < bulletsInGun.length; i++){
-            if(bulletsInGun[i] != EMPTY){
-                SetCurrShellType(bulletsInGun[i]);
-                return this.bulletsInGun[i];
+        for(int i = 0; i < GetBulletsInGun().length; i++){
+            if(GetBulletsInGun()[i] != EMPTY){
+                SetCurrShellType(GetBulletsInGun()[i]);
+                return this.GetBulletsInGun()[i];
             }
         }
         return -1;
     }
 
     public void SetCurrShellType(int type){
-        currShellType = type;
+        this.currShellType = type;
     }
 
-    public boolean isDoubleDMG(){
+    public boolean GetIsDoubleDMG(){
         return this.isDoubleDMG;
     }
 
+    public void SetIsDoubleDMG(boolean boo){
+        this.isDoubleDMG = boo;
+    }
     public void RevertIsDoubleDMG(){
         if(this.isDoubleDMG){
             this.isDoubleDMG = false;
@@ -140,20 +154,20 @@ public class ShotGun {
     }
     // BurnerPhone will need this
     public String GetRandomShellInfo(int stg){
-        if(this.bulletsInGun[bulletsInGun.length - 2] == EMPTY){
+        String line = "something went wrong";
+        if(GetBulletsInGun()[GetBulletsInGun().length - 2] == EMPTY){
             return "How Unfortunate...";
         }
         else{
             int index;
             do{
                 index = randomShellType(stg);
-            }while(this.bulletsInGun[index] == EMPTY);
+            }while(GetBulletsInGun()[index] == EMPTY);
 
-            String line;
-            if(bulletsInGun[index] == BLANK){
+            if(GetBulletsInGun()[index] == BLANK){
                 line = "blank.";
             }
-            else if(bulletsInGun[index] == LIVE){
+            else if(GetBulletsInGun()[index] == LIVE){
                 line = "live.";
             }
 
@@ -174,6 +188,29 @@ public class ShotGun {
         }
         return false;
     }
-
-
+    // Handsaw will need this
+    public void DoubleTheDMG(){
+        SetIsDoubleDMG(true);
+    }
+    // Will need this when shooting
+    public int DamageCalc(){
+        if(GetIsDoubleDMG()){
+            RevertIsDoubleDMG();
+            return 2;
+        }
+        else {
+            return 1;
+        }
+    }
+    // 注意！ 射击后/使用beer时需要被调用
+    public boolean EjectShell(){
+        int pos = GetCurrShellPos();
+        if(pos < 0 || pos >= GetBulletsInGun().length){
+            return false;
+        }
+        else {
+            GetBulletsInGun()[GetCurrShellPos()] = EMPTY;
+            return true;
+        }
+    }
 }
