@@ -5,7 +5,7 @@ public class GameMain {
         GameSystem gs= new GameSystem();
         Displayer dp = new Displayer();
 
-        int option, guessCoinSide, coinSide;
+        int option, guessCoinSide, coinSide, target;
         String player1, player2, firstPlayerName;
 
         // Display Main Menu
@@ -17,17 +17,17 @@ public class GameMain {
             System.out.println("Warning");
         }
         else{
-            if(option==1){
+            if(option==1) {
                 System.out.print("========== PLAYER 1 ==========\n" +
-                                 "Enter Player 1's name: ");
+                        "Enter Player 1's name: ");
                 player1 = input.nextLine();
-                gs.SetFirstPlayer(0,player1);
+                gs.SetFirstPlayer(0, player1);
 
                 System.out.println();
                 System.out.print("========== PLAYER 2 ==========\n" +
-                                 "Enter Player 2's name: ");
+                        "Enter Player 2's name: ");
                 player2 = input.nextLine();
-                gs.SetSecondPlayer(1,player2);
+                gs.SetSecondPlayer(1, player2);
 
                 System.out.println();
                 System.out.println("========== PLAYERS READY ==========");
@@ -35,12 +35,11 @@ public class GameMain {
 
                 // Display CoinToss UI
 
-                int i = (int)(Math.random()*2) + 1;
-                if(i == 1){
+                int i = (int) (Math.random() * 2) + 1;
+                if (i == 1) {
                     firstPlayerName = gs.GetAllPlayer()[0].GetName();
                     gs.SetCurrPlayer(gs.GetAllPlayer()[0]);
-                }
-                else{
+                } else {
                     firstPlayerName = gs.GetAllPlayer()[1].GetName();
                     gs.SetCurrPlayer(gs.GetAllPlayer()[1]);
                 }
@@ -51,34 +50,32 @@ public class GameMain {
                 System.out.println("Press ENTER to flip the coin...");
                 input.nextLine();
                 coinSide = gs.GuessCoinSide();
-                if(coinSide == 1){
+                if (coinSide == 1) {
                     dp.CoinOne();  // Display One
-                }
-                else if(coinSide == 0){
+                } else if (coinSide == 0) {
                     dp.CoinZero(); // Display Zero
                 }
-                if(coinSide == guessCoinSide){
+                if (coinSide == guessCoinSide) {
                     System.out.println("Correct guess! You get to go first.");
-                }
-                else{
+                } else {
                     System.out.println("Wrong guess! Your opponent goes first.");
                     gs.SwitchPlayer();
                 }
 
-                //first stage
+                //从这开始是游戏的第一阶段
                 gs.SetStage(1);
-
 
 
                 gs.SetShotGun(gs.GetStage());
                 dp.DisplayerGridWithShell(gs.GetBulletsInDisplay());
                 System.out.println("Press Enter to continue...");
                 input.nextLine();
-
-
-
+                dp.DisplayerGrid();
+                System.out.println("Choose your target:");
+                System.out.println("1. your");
+                System.out.println("2. opponent");
+                target = input.nextInt();
             }
-
         }
 
     }

@@ -11,7 +11,7 @@ public class GameSystem {
     }
 
     public void SetShotGun(Stage stage){
-        ShotGun gun =new ShotGun(stage);
+        gun =new ShotGun(stage);
     }
 
     public ShotGun GetGun(){
@@ -34,7 +34,7 @@ public class GameSystem {
             list[i]=0;
         }
         for(int i=blankNum;i<blankNum+liveNum;i++){
-            list[i]=0;
+            list[i]=1;
         }
 
         return list;

@@ -2,16 +2,16 @@ public class Displayer {
 
     private String DisplayBullets(int[] list){
         String result = "";
-        for(int i=0;i<list.length;i++){
+        for(int i=0;i<8;i++){
             String symbol =" ";
-            if(list[i]==0){
-                symbol ="■";
-            }
-            else if(list[i]==1){
-                symbol = "□";
-            }
-            else{
-                System.out.print(" ");
+            if(i<list.length) {
+                if (list[i] == 1) {
+                    symbol = "■";
+                } else if (list[i] == 0) {
+                    symbol = "□";
+                } else {
+                    System.out.print(" ");
+                }
             }
             result += " " + symbol + " \\";
         }
@@ -95,8 +95,8 @@ public class Displayer {
                 "                                 / /               /               /                                                                           \\              \\              \\ \\\n"+
                 "                                / ---------------------------------                                                                             ------------------------------- \\\n"+
                 "                               /                                                                                                               --------------------------------- \\\n"+
-                "                              /                                                                                                                 \\"+DisplayBullets(list) +"\\\n"+
-                "                             /-------------------------------------------------------------------------------------------------------------------\\"+DisplayBullets(list) +"\\\n"+
+                "                              /                                                                                                                 \\"+DisplayBullets(list) +" \\\n"+
+                "                             /-------------------------------------------------------------------------------------------------------------------\\"+DisplayBullets(list) +" \\\n"+
                 "                            /                                                                                                                     --------------------------------- \\\n"+
                 "                           / -----------------------------------                                                                                  ---------------------------------- \\\n"+
                 "                          / /                /                /                                                                                    \\                \\               \\ \\\n"+
