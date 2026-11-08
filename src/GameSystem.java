@@ -16,8 +16,7 @@ public class GameSystem {
 
     public ShotGun GetGun(){
         return gun;
-    }
-
+    }//检测在随机的弹夹中，有几个实弹和几个空弹并有序排列
     public int[] GetBulletsInDisplay(){
         int blankNum=0;
         int liveNum=0;
@@ -48,7 +47,7 @@ public class GameSystem {
         return stage;
     }
 
-    public void SetFirstPlayer(int num,String name){
+    public void SetFirstPlayer(int num,String name){//把第一个玩家放在第一位
         GetAllPlayer()[0]=new Player(num,name);
     }
 
