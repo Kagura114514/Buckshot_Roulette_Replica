@@ -71,8 +71,7 @@ public class GameMain {
 
 
                 gs.SetShotGun(gs.GetStage());
-                gs.GetBulletsInDisplay();
-                dp.DisplayerGrid();
+                dp.DisplayerGridWithShell(gs.GetBulletsInDisplay());
                 System.out.println("Press Enter to continue...");
                 input.nextLine();
 

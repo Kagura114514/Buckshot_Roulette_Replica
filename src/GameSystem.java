@@ -41,7 +41,7 @@ public class GameSystem {
     }
 
     public void SetStage(int num){
-        Stage stage = new Stage(num);
+        stage = new Stage(num);
     }
 
     public Stage GetStage(){
