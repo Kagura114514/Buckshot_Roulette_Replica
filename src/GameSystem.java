@@ -7,11 +7,7 @@ public class GameSystem {
     Stage stage;
 
     public GameSystem( ){
-        firstPlayer =new Player(0);
-        secondPlayer =new Player(1);
         allPlayer=new Player[2];
-        allPlayer[0]=firstPlayer;
-        allPlayer[1]=secondPlayer;
     }
 
     public void SetStage(int num){
@@ -22,9 +18,18 @@ public class GameSystem {
         return stage;
     }
 
+    public void SetFirstPlayer(int num,String name){
+        GetAllPlayer()[0]=new Player(num,name);
+    }
+
+    public void SetSecondPlayer(int num,String name){
+        GetAllPlayer()[1]=new Player(num,name);
+    }
+
     public Player[] GetAllPlayer(){
         return allPlayer;
     }
+
 
     public Player GetCurrPlayer(){
         return currPlayer;
@@ -58,16 +63,12 @@ public class GameSystem {
         return true;
     }
 
-    public void SetCurrPlayer(int index) {
-        currPlayer=allPlayer[index];
-    }
-
     public void SwitchPlayer(){
         if(GetCurrPlayer().getType()==0){
-            SetCurrPlayer(1);
+            SetCurrPlayer(GetAllPlayer()[1]);
         }
         else{
-            SetCurrPlayer(0);
+            SetCurrPlayer(GetAllPlayer()[0]);
         }
     }
 

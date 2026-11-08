@@ -12,11 +12,17 @@ public class Player {
     private int stageWins;
     private boolean isPlayerMoveable;
     private int maxHp;
+    private String name;
 
-    public Player(int type){
+    public Player(int type,String name){
         this.type=type;
+        this.name=name;
+
     }
 
+    public String GetName(){
+        return name;
+    }
     public int getType() {
         return type;
     }

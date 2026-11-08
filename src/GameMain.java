@@ -6,7 +6,8 @@ public class GameMain {
         Displayer dp = new Displayer();
 
         int option, guessCoinSide, coinSide;
-        String player1, player2;
+        String player1, player2, firstPlayerName;
+
         // Display Main Menu
         dp.DisplayMainMenu();
         option = input.nextInt();
@@ -20,17 +21,30 @@ public class GameMain {
                 System.out.print("========== PLAYER 1 ==========\n" +
                                  "Enter Player 1's name: ");
                 player1 = input.nextLine();
+                gs.SetFirstPlayer(0,player1);
 
                 System.out.println();
                 System.out.print("========== PLAYER 2 ==========\n" +
                                  "Enter Player 2's name: ");
                 player2 = input.nextLine();
+                gs.SetSecondPlayer(1,player2);
 
                 System.out.println();
                 System.out.println("========== PLAYERS READY ==========");
                 System.out.println(player1 + " VS " + player2);
+
                 // Display CoinToss UI
-                dp.CoinToss(player1, player2);
+
+                int i = (int)(Math.random()*2) + 1;
+                if(i == 1){
+                    firstPlayerName = gs.GetAllPlayer()[0].GetName();
+                    gs.SetCurrPlayer(gs.GetAllPlayer()[0]);
+                }
+                else{
+                    firstPlayerName = gs.GetAllPlayer()[1].GetName();
+                    gs.SetCurrPlayer(gs.GetAllPlayer()[1]);
+                }
+                dp.CoinToss(firstPlayerName);
                 System.out.print("Enter your guess: ");
                 guessCoinSide = input.nextInt();
                 input.nextLine();
@@ -48,7 +62,12 @@ public class GameMain {
                 }
                 else{
                     System.out.println("Wrong guess! Your opponent goes first.");
+                    gs.SwitchPlayer();
                 }
+
+                dp.DisplayerGrid();
+
+
 
             }
 

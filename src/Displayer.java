@@ -11,20 +11,13 @@ public class Displayer {
                          "+--------------------------------+\n" +
                          "Choice one option:  ");
     }
-    public void CoinToss(String p1, String p2){
-        String p;
-        int i = (int)(Math.random()*2) + 1;
-        if(i == 1){
-            p = p1;
-        }
-        else{
-            p = p2;
-        }
+    public void CoinToss(String firstPlayerName){
+
         System.out.print ("+------------------------------------------+\n"     +
                           "|                COIN TOSS                 |\n"     +
                           "+------------------------------------------+\n"     +
                           "|     The coin decides who goes first.     |\n"     );
-        System.out.printf("|     %7s, make your guess!            |\n", p    );
+        System.out.printf("|     %7s, make your guess!            |\n", firstPlayerName    );
         System.out.print ("|            [1] HEADS                     |\n"     +
                           "|            [0] TAILS                     |\n"     +
                           "+------------------------------------------+\n"     );
