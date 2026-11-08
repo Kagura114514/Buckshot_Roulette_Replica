@@ -6,14 +6,23 @@
  * @author Leon
  */
 public class Player {
+    private int type;
     private int hp;
     private Items[] items;
     private int stageWins;
     private boolean isPlayerMoveable;
     private int maxHp;
 
-    public Player(int hp){
-        this.hp=hp;
+    public Player(int type){
+        this.type=type;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     /** Set the HP at the starting
@@ -168,6 +177,7 @@ public class Player {
     public void Cuffed(){
         isPlayerMoveable=false;
     }
+
 
 }
 

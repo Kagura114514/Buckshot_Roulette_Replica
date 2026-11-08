@@ -1,16 +1,25 @@
 public class GameSystem {
     Player[] allPlayer;
     Player currPlayer;
-    Stage currstage;
     ShotGun gun;
     Player firstPlayer;
     Player secondPlayer;
+    Stage stage;
 
-    public GameSystem(int num){
+    public GameSystem( ){
+        firstPlayer =new Player(0);
+        secondPlayer =new Player(1);
+        allPlayer=new Player[2];
+        allPlayer[0]=firstPlayer;
+        allPlayer[1]=secondPlayer;
+    }
+
+    public void SetStage(int num){
         Stage stage = new Stage(num);
-        firstPlayer =new Player(stage.GetStartHP());
-        secondPlayer =new Player(stage.GetStartHP());
+    }
 
+    public Stage GetStage(){
+        return stage;
     }
 
     public Player[] GetAllPlayer(){
@@ -23,10 +32,6 @@ public class GameSystem {
 
     public void SetCurrPlayer(Player player){
         currPlayer=player;
-    }
-
-    public Stage GetStage(){
-        return currstage;
     }
 
     public ShotGun GetGun(){
@@ -53,8 +58,19 @@ public class GameSystem {
         return true;
     }
 
-    public void SwitchPlayer(){
+    public void SetCurrPlayer(int index) {
+        currPlayer=allPlayer[index];
     }
+
+    public void SwitchPlayer(){
+        if(GetCurrPlayer().getType()==0){
+            SetCurrPlayer(1);
+        }
+        else{
+            SetCurrPlayer(0);
+        }
+    }
+
     public int GuessCoinSide(){
         int num=(int)(Math.random()*100)+1;
         if(num%2==1){

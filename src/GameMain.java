@@ -2,7 +2,7 @@ import java.util.Scanner;
 public class GameMain {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        GameSystem gs= new GameSystem(1);
+        GameSystem gs= new GameSystem();
         Displayer dp = new Displayer();
 
         int option, guessCoinSide, coinSide;
