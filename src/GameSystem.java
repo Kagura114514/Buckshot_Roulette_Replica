@@ -10,6 +10,36 @@ public class GameSystem {
         allPlayer=new Player[2];
     }
 
+    public void SetShotGun(Stage stage){
+        ShotGun gun =new ShotGun(stage);
+    }
+
+    public ShotGun GetGun(){
+        return gun;
+    }
+
+    public int[] GetBulletsInDisplay(){
+        int blankNum=0;
+        int liveNum=0;
+        for(int i=0;i<gun.GetBulletsInGun().length;i++){
+            if(gun.GetBulletsInGun()[i]==0){
+                blankNum++;
+            }
+            else{
+                liveNum++;
+            }
+        }
+        int[] list = new int[blankNum+liveNum];
+        for(int i=0;i<blankNum;i++){
+            list[i]=0;
+        }
+        for(int i=blankNum;i<blankNum+liveNum;i++){
+            list[i]=0;
+        }
+
+        return list;
+    }
+
     public void SetStage(int num){
         Stage stage = new Stage(num);
     }
@@ -37,14 +67,6 @@ public class GameSystem {
 
     public void SetCurrPlayer(Player player){
         currPlayer=player;
-    }
-
-    public ShotGun GetGun(){
-        return gun;
-    }
-
-    public void SetShotGun(){
-
     }
 
     public boolean isShoot(){

@@ -65,7 +65,16 @@ public class GameMain {
                     gs.SwitchPlayer();
                 }
 
+                //first stage
+                gs.SetStage(1);
+
+
+
+                gs.SetShotGun(gs.GetStage());
+                gs.GetBulletsInDisplay();
                 dp.DisplayerGrid();
+                System.out.println("Press Enter to continue...");
+                input.nextLine();
 
 
 
