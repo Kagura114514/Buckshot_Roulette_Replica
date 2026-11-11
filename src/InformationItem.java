@@ -15,15 +15,19 @@ public abstract class InformationItem extends Items {
         super(type);
     }
 
-    public int Effect(Player player,Player opponentPlayer, ShotGun gun) {
-        return Effect( gun);
+    public int Effect(Player player, Player opponent, ShotGun gun){
+        return Effect(gun);
     }
 
-    /**
-     * Reveals shotgun information using the behavior defined by a concrete subclass.
-     *
-     * @param gun the shotgun used by the effect
-     * @return the result code defined by the subclass implementation
-     */
-    public  abstract int Effect(ShotGun gun);
+    public int Effect(Player player, Player opponent, ShotGun gun, Stage stg){
+        return Effect(gun, stg);
+    }
+
+    public int Effect(ShotGun gun, Stage stg){
+        return Effect(gun);
+    }
+
+    public int Effect(ShotGun gun){
+        return 1;
+    }
 }

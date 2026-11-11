@@ -1,5 +1,4 @@
 public class Displayer {
-
     private String DisplayBullets(int[] list){
         String result = "";
         for(int i=0;i<8;i++){

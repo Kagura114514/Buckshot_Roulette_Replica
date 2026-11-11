@@ -16,16 +16,14 @@ public abstract class ShotgunEffectItem extends Items {
     }
 
     public int Effect(Player player,Player opponentPlayer, ShotGun gun) {
-        return Effect( gun);
+        return Effect(gun);
     }
 
     /**
      * Applies the shotgun effect defined by a concrete subclass.
-
-
      *
      * @param gun the shotgun used by the effect
      * @return the result code defined by the subclass implementation
      */
-    public  abstract int Effect(ShotGun gun);
+    public abstract int Effect(ShotGun gun);
 }

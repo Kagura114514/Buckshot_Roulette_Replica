@@ -17,7 +17,9 @@ public class Player {
     public Player(int type,String name){
         this.type=type;
         this.name=name;
-
+        this.items = new Items[8];
+        this.stageWins = 0;
+        this.isPlayerMoveable = true;
     }
 
     public String GetName(){

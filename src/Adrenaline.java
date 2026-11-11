@@ -8,10 +8,8 @@
 public class Adrenaline extends OpponentItem {
     /**
      * Creates an adrenaline item using the fixed ADRENALINE identifier.
-     *
-     * @param tpye unused parameter retained from the original constructor
      */
-    public  Adrenaline(int tpye){
+    public Adrenaline(){
         super(Items.ADRENALINE);
     }
 

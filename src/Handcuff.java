@@ -21,7 +21,7 @@ public class Handcuff extends OpponentItem {
      * @       return   if opponent is null
      */
     public int Effect(Player opponent){
-        if(opponent.GetPlayerMoveable()==true){
+        if(opponent.GetPlayerMoveable()){
             opponent.Cuffed();
             return 1;
         }

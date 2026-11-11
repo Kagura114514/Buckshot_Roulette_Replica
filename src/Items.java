@@ -62,5 +62,8 @@ public abstract class Items {
     public int Effect(Player player, Player opponent, ShotGun gun, int opponentIndex) {
         return Effect(player, opponent, gun);
     }
-}
 
+    public int Effect(Player player, Player opponent, ShotGun gun, Stage stg) {
+        return Effect(player, opponent, gun);
+    }
+}

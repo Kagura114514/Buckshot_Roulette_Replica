@@ -31,29 +31,26 @@ public class Stage {
             System.out.println("Invalid stage. Using stage 1.");
             stageNum = 1;
         }
-
+        else if(stageNum == FST_STAGE){
+            startHP = FST_HP;
+            minShellNum = 2;
+            maxShellNum = 5;
+            perRoundNum = 0;
+        }
+        else if(stageNum == SCD_STAGE){
+            startHP = SCD_HP;
+            minShellNum = 2;
+            maxShellNum = 6;
+            perRoundNum = 2;
+        }
+        else{
+            startHP = TRD_HP;
+            minShellNum = 2;
+            maxShellNum = 8;
+            perRoundNum = 4;
+        }
         this.stageNum = stageNum;
         this.currStageNum = stageNum;
-
-        if(stageNum== FST_STAGE){
-                startHP=FST_HP;
-                minShellNum=2;
-                maxShellNum=5;
-                perRoundNum=0;
-            }
-            else if(stageNum==SCD_STAGE){
-                startHP=SCD_HP;
-                minShellNum=2;
-                maxShellNum=6;
-                perRoundNum=2;
-            }
-            else{
-                startHP=TRD_HP;
-                minShellNum=2;
-                maxShellNum=8;
-                perRoundNum=4;
-            }
-
 
     }
 

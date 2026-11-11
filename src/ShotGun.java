@@ -127,7 +127,7 @@ public class ShotGun {
     // DEVELOPED BY: RIMI
     /** Return the current shell position with either blank or live bullet
      *  @return     - the current shell position    */
-    private int GetCurrShellPos(){
+    private int getCurrShellPos(){
         for(int i = 0; i < GetBulletsInGun().length; i++){
             if(GetBulletsInGun()[i] != EMPTY){
                 return i;
@@ -208,9 +208,17 @@ public class ShotGun {
     }
     // Handsaw will need this
     // DEVELOPED BY: RIMI
-    /** Set isDoubleDMG true  */
-    public void DoubleTheDMG(){
-        SetIsDoubleDMG(true);
+    /** Set isDoubleDMG true
+     *  return  1 - Set IsDoubleDMG = true successfully
+     *         -1 - The IsDoubleDMG is already true     */
+    public int DoubleTheDMG(){
+        if(GetIsDoubleDMG() == false) {
+            SetIsDoubleDMG(true);
+            return 1;
+        }
+        else{
+            return -1;
+        }
     }
     // Will need this when shooting
     // DEVELOPED BY: RIMI
@@ -230,14 +238,14 @@ public class ShotGun {
     // DEVELOPED BY: RIMI
     /** Eject the current shell after a shot
      *  @return  true  - ejected a shell successfully
-     *           false - failed, maybe the gun has no bullets in it already*/
+     *           false - failed, maybe the gun has no bullets in it already */
     public boolean EjectShell(){
-        int pos = GetCurrShellPos();
+        int pos = getCurrShellPos();
         if(pos < 0 || pos >= GetBulletsInGun().length){
             return false;
         }
         else {
-            GetBulletsInGun()[GetCurrShellPos()] = EMPTY;
+            GetBulletsInGun()[getCurrShellPos()] = EMPTY;
             return true;
         }
     }
