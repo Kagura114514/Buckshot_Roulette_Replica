@@ -1,1 +1,1 @@
-A java Buckshot_Roulette_Replica game for practice
+A java Buckshot_Roulette game for practice
