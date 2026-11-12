@@ -16,15 +16,15 @@ public class ShotGun {
     // Constructor
     public ShotGun(Stage stg){
         // Instantiate the object depends on the stage level
-        if(stg.GetCurrStageNum() == Stage.FST_STAGE){
+        if(stg.GetStageNum() == Stage.FST_STAGE){
             this.bulletsInGun = new int[randomShellNum(1)];
             initialize(this.bulletsInGun, 1);
         }
-        else if(stg.GetCurrStageNum() == Stage.SCD_STAGE){
+        else if(stg.GetStageNum() == Stage.SCD_STAGE){
             this.bulletsInGun = new int[randomShellNum(2)];
             initialize(this.bulletsInGun, 2);
         }
-        else if(stg.GetCurrStageNum() == Stage.TRD_STAGE){
+        else if(stg.GetStageNum() == Stage.TRD_STAGE){
             this.bulletsInGun = new int[randomShellNum(3)];
             initialize(this.bulletsInGun, 2);
         }
@@ -138,6 +138,10 @@ public class ShotGun {
 
     public int[] GetBulletsInGun(){
         return this.bulletsInGun;
+    }
+
+    public void SetBulletsInGunEMPTY(){
+        GetBulletsInGun()[getCurrShellPos()] = EMPTY;
     }
 
     // Magnifying Glass will need this

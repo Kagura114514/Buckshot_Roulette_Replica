@@ -4,9 +4,11 @@ public class GameMain {
         Scanner input = new Scanner(System.in);
         GameSystem gs= new GameSystem();
         Displayer dp = new Displayer();
+        int firstPlayerWinNum = 0;
+        int secondPlayerWinNum = 0;
 
-        int option, guessCoinSide, coinSide, target;
-        String player1, player2, firstPlayerName;
+        int option, guessCoinSide, coinSide, target, result = 0;
+        String playerName1, playerName2, firstPlayerName;
 
         // Display Main Menu
         dp.DisplayMainMenu();
@@ -20,18 +22,18 @@ public class GameMain {
             if(option==1) {
                 System.out.print("========== PLAYER 1 ==========\n" +
                         "Enter Player 1's name: ");
-                player1 = input.nextLine();
-                gs.SetFirstPlayer(0, player1);
+                playerName1 = input.nextLine();
+                gs.SetAllPlayerID(playerName1);
 
                 System.out.println();
                 System.out.print("========== PLAYER 2 ==========\n" +
                         "Enter Player 2's name: ");
-                player2 = input.nextLine();
-                gs.SetSecondPlayer(1, player2);
+                playerName2 = input.nextLine();
+                gs.SetAllPlayerID(playerName2);
 
                 System.out.println();
                 System.out.println("========== PLAYERS READY ==========");
-                System.out.println(player1 + " VS " + player2);
+                System.out.println(playerName1 + " VS " + playerName2);
 
                 // Display CoinToss UI
 
@@ -64,17 +66,54 @@ public class GameMain {
 
                 //从这开始是游戏的第一阶段
                 gs.SetStage(1);
+                gs.GetAllPlayer()[0].SetHP(gs.GetStage().GetStartHP());
+                gs.GetAllPlayer()[1].SetHP(gs.GetStage().GetStartHP());
+                do{
+                    gs.GetGun() = new ShotGun(gs.GetStage());
+                    //gs.SetShotGun(gs.GetStage());//设置枪的在第几阶段，有多少子弹
+                    dp.DisplayerGridWithShell(gs.GetBulletsInDisplay(),gs.GetAllPlayer()[0],gs.GetAllPlayer()[1]);//在grid里显示几颗实弹，几颗空单
 
+                    System.out.println("Press Enter to continue...");
+                    input.nextLine();
+                    do {
+                        dp.DisplayerGrid(gs.GetAllPlayer()[0],gs.GetAllPlayer()[1]);//显示grid
+                        System.out.printf("Player:%s",gs.GetCurrPlayer().GetName());
+                        System.out.println("Choose your target:");
+                        System.out.println("1. your");
+                        System.out.println("2. opponent");
+                        target = input.nextInt();
+                        if (target == 1) {
+                            result=gs.Shooting(false);
+                        } 
+                        else if (target == 2) {
+                            result=gs.Shooting(true);
+                        } 
+                        else {
+                            System.out.println("Wrong");//暂定
+                        }
+                        if (result == 1) {
+                            System.out.println(" shot the opponent. Blank!");
+                        } 
+                        else if (result == 2) {
+                            System.out.println(" shot the opponent. Live!");
+                        } 
+                        else if (result == 3) {
+                            System.out.println(" shot yourself. Live!");
+                        }
+                        else{
+                            System.out.println(" shot yourself. Blank!");    
+                        }
+                    } while(!(gs.GetAllPlayer()[0].GetHP()==0) && !(gs.GetAllPlayer()[1].GetHP()==0) && gs.isRemainBullet());
+                } while(!(gs.GetAllPlayer()[0].GetHP()==0) && !(gs.GetAllPlayer()[1].GetHP()==0));
+                System.out.printf("winner is %s",gs.GetCurrPlayer().GetName());
 
-                gs.SetShotGun(gs.GetStage());//设置枪的在第几阶段，有多少子弹
-                dp.DisplayerGridWithShell(gs.GetBulletsInDisplay());//在grid里显示几颗实弹，几颗空单
-                System.out.println("Press Enter to continue...");
-                input.nextLine();
-                dp.DisplayerGrid();//显示grid
-                System.out.println("Choose your target:");
-                System.out.println("1. your");
-                System.out.println("2. opponent");
-                target = input.nextInt();
+                gs.SetStage(2);
+            }
+            else if(option == 2){
+
+            }
+            else if(option == 3){
+
             }
         }
 

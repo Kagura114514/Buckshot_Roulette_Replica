@@ -11,7 +11,7 @@ public class Stage {
     public static final int SCD_HP    = 4;
     public static final int TRD_HP    = 5;
 
-    private int currStageNum;
+
     private int stageNum;
     private int startHP;
     private int minShellNum;
@@ -50,7 +50,6 @@ public class Stage {
             perRoundNum = 4;
         }
         this.stageNum = stageNum;
-        this.currStageNum = stageNum;
 
     }
 
@@ -61,18 +60,9 @@ public class Stage {
      * @return the stored stage number, initially zero
      */
     public int GetStageNum(){
-        return stageNum;
+        return this.stageNum;
     }
 
-    /**
-     * Returns the stored current stage number.
-     * The current code does not assign this field.
-     *
-     * @return the current stage number, initially zero
-     */
-    public int GetCurrStageNum() {
-        return currStageNum;
-    }
 
     /**
      * Returns the stored starting health for each player.
@@ -109,5 +99,9 @@ public class Stage {
      */
     public int GetPerRoundItemNum(){
         return perRoundNum;
+    }
+
+    public int GetCurrStageNum() {
+        return stageNum;
     }
 }

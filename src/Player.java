@@ -6,31 +6,24 @@
  * @author Leon
  */
 public class Player {
-    private int type;
     private int hp;
     private Items[] items;
     private int stageWins;
-    private boolean isPlayerMoveable;
-    private int maxHp;
     private String name;
+    private boolean isPlayerMoveable;
+    private boolean isCuffed;
 
-    public Player(int type,String name){
-        this.type=type;
-        this.name=name;
+    public Player(String name){
+        this.hp = 2;
+        this.name = name;
         this.items = new Items[8];
         this.stageWins = 0;
         this.isPlayerMoveable = true;
+        this.isCuffed = false;
     }
 
     public String GetName(){
         return name;
-    }
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
     }
 
     /** Set the HP at the starting
@@ -38,7 +31,7 @@ public class Player {
      *  @param hp  - current stage HP
      */
     public void SetHP(int hp){
-        this.hp=hp;
+        this.hp = hp;
     }
 
     /** Get the HP at every stage
@@ -47,26 +40,6 @@ public class Player {
      */
     public int GetHP(){
         return hp;
-    }
-
-    /**
-     * Sets maximum health without changing current health.
-     *
-     * @param maxHp the maximum health value to store
-     * @return 1 after storing the value
-     */
-    public int SetMaxHp(int maxHp){
-        this.maxHp=maxHp;
-        return 1;
-    }
-
-    /**
-     * Returns the stored maximum health.
-     *
-     * @return the maximum health value
-     */
-    public int GetMaxHp(){
-        return maxHp;
     }
 
     /**
@@ -101,7 +74,7 @@ public class Player {
      * @return true if the flag allows the player to act; false otherwise
      */
     public boolean GetPlayerMoveable(){
-        return  isPlayerMoveable;
+        return isPlayerMoveable;
     }
 
     /**
@@ -157,9 +130,9 @@ public class Player {
      *
      *         return false if an accepted index exceeds the array bounds
      */
-    public boolean UseItem(int index,Player player,Player opponent, ShotGun gun,int opponentIndex){
+    public boolean UseItem(int index,Player player,Player opponent, ShotGun gun,int opponentIndex,Stage stg){
         if(0<index && index<10) {
-            items[index].Effect(player,opponent, gun,opponentIndex);
+            items[index].Effect(player,opponent, gun,opponentIndex,stg);
             items[index]=null;
             return true;
         }
@@ -174,16 +147,25 @@ public class Player {
      * @param isPlayerMoveable the new movement flag
      * @return the flag value assigned, not a success indicator
      */
-    public boolean SetPlayerMoveable(boolean isPlayerMoveable){
-        return  this.isPlayerMoveable=isPlayerMoveable;
+    public void SetPlayerMoveable(boolean isPlayerMoveable){
+        this.isPlayerMoveable = isPlayerMoveable;
     }
 
+    public boolean consumeCuff(){
+        if(this.isCuffed == true){
+            this.isCuffed = false;
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
     /**
      * Sets the movement flag to false.
      * Turn skipping and releasing the handcuffs must be handled elsewhere.
      */
     public void Cuffed(){
-        isPlayerMoveable=false;
+        this.isCuffed = true;
     }
 
 
