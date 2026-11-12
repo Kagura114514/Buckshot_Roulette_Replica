@@ -7,8 +7,8 @@ public class GameMain {
         int firstPlayerWinNum = 0;
         int secondPlayerWinNum = 0;
 
-        int option, guessCoinSide, coinSide, target, result = 0;
-        String playerName1, playerName2, firstPlayerName;
+        int option, guessCoinSide, coinSide, target, result = 0,position,index;
+        String playerName1, playerName2, firstPlayerName, choice;
 
         // Display Main Menu
         dp.DisplayMainMenu();
@@ -107,6 +107,61 @@ public class GameMain {
                 System.out.printf("winner is %s",gs.GetCurrPlayer().GetName());
 
                 gs.SetStage(2);
+                gs.GetAllPlayer()[0].SetHP(gs.GetStage().GetStartHP());
+                gs.GetAllPlayer()[1].SetHP(gs.GetStage().GetStartHP());
+                do{
+                    gs.SetShotGun(gs.GetStage());//设置枪的在第几阶段，有多少子弹
+                    dp.DisplayBulletNum(gs.GetBulletsInDisplay());
+                    System.out.println("Press Enter to continue...");
+                    input.nextLine();
+                    for(int j=0;j<2;j++){
+                        dp.DisplayRandomItem(gs.RandomCreatItem());
+                        System.out.println("Enter the position: ");
+                        position=input.nextInt();
+                        input.nextLine();
+                        gs.AddItem(position,gs.RandomCreatItem());
+                    }
+                    do {
+                        dp.DisplayerGrid(gs.GetAllPlayer()[0],gs.GetAllPlayer()[1]);//显示grid
+                        System.out.println("Use an item?(Y/N)");
+                        choice=input.nextLine();
+                        if(choice.equals("Y") ||choice.equals("y")){
+                            System.out.println("Enter the index: ");
+                            index=input.nextInt();
+                            if(0<index || index<)
+
+                        }
+
+
+                        System.out.printf("Player:%s",gs.GetCurrPlayer().GetName());
+                        System.out.println("Choose your target:");
+                        System.out.println("1. your");
+                        System.out.println("2. opponent");
+                        target = input.nextInt();
+                        if (target == 1) {
+                            result=gs.Shooting(false);
+                        }
+                        else if (target == 2) {
+                            result=gs.Shooting(true);
+                        }
+                        else {
+                            System.out.println("Wrong");//暂定
+                        }
+                        if (result == 1) {
+                            System.out.println(" shot the opponent. Blank!");
+                        }
+                        else if (result == 2) {
+                            System.out.println(" shot the opponent. Live!");
+                        }
+                        else if (result == 3) {
+                            System.out.println(" shot yourself. Live!");
+                        }
+                        else{
+                            System.out.println(" shot yourself. Blank!");
+                        }
+                    } while(!(gs.GetAllPlayer()[0].GetHP()==0) && !(gs.GetAllPlayer()[1].GetHP()==0) && gs.isRemainBullet());
+                } while(!(gs.GetAllPlayer()[0].GetHP()==0) && !(gs.GetAllPlayer()[1].GetHP()==0));
+                System.out.printf("winner is %s",gs.GetCurrPlayer().GetName());
             }
             else if(option == 2){
 

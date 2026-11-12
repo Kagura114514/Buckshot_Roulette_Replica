@@ -1,5 +1,5 @@
 public class Inverter extends ShotgunEffectItem {
-    public  Inverter(int tpye){
+    public  Inverter(){
         super(Items.INVERTER);
     }
     // DEVELOPED BY: RIMI

@@ -1,5 +1,3 @@
-import java.util.Random;
-
 /**
  * Stores a player's health, inventory and ability to act.
  * The current constructor initializes only health; the inventory remains null,
@@ -14,6 +12,7 @@ public class Player {
     private String name;
     private boolean isPlayerMoveable;
     private boolean isCuffed;
+    private int MaxHp;
 
     public Player(String name){
         this.hp = 2;
@@ -28,6 +27,15 @@ public class Player {
         return name;
     }
 
+
+
+    public void SetMaxHp(int MaxHp){
+        this.MaxHp = MaxHp;
+    }
+
+    public int GetMaxHp(){
+        return MaxHp;
+    }
     /** Set the HP at the starting
      *
      *  @param hp  - current stage HP
@@ -173,21 +181,6 @@ public class Player {
         this.isCuffed = true;
     }
 
-     public Items RandomItem(){
-        int index = (int)(Math.random()*9);
-        switch (index){
-            case 0:
-                tempItem = new ExpiredMedecine()
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-            case 6:
-            case 7:
-            case 8:
-        }
-        return this.items = new ;
-     }
+
 }
 

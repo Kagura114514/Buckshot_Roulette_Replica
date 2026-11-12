@@ -6,7 +6,7 @@
  *
  * @author Leon
  */
-public abstract class ExpiredMedecine extends HealthItem {
+public class ExpiredMedecine extends HealthItem {
     /**
      * Initializes the expired-medicine item type identifier for a subclass.
      */

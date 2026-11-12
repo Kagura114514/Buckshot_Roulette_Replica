@@ -17,6 +17,61 @@ public class Displayer {
         return result;
     }
 
+    private int blankBulletNum(int[] list){
+        int num=0;
+        for(int i=0;i<list.length;i++){
+            if(list[i]==0){
+                num++;
+            }
+        }
+        return num;
+    }
+
+    private int liveBulletNum(int[] list){
+        int num=0;
+        for(int i=0;i<list.length;i++){
+            if(list[i]==1){
+                num++;
+            }
+        }
+        return num;
+    }
+
+    public void DisplayBulletNum(int[] list){//过度使用
+        System.out.printf("There are %d blank bullet and %d live bullet",blankBulletNum(list),liveBulletNum(list));
+    }
+
+    public void DisplayRandomItem(Items item){
+        System.out.print("Put away the ");
+        if(item instanceof ExpiredMedecine){
+            System.out.println("ExpiredMedecine");
+        }
+        else if(item instanceof CigarettesPack){
+            System.out.println("CigarettesPack");
+        }
+        else if(item instanceof MagnifyingGlass){
+            System.out.println("MagnifyingGlass");
+        }
+        else if(item instanceof BurnerPhone){
+            System.out.println("BurnerPhone");
+        }
+        else if(item instanceof HandSaw){
+            System.out.println("HandSaw");
+        }
+        else if(item instanceof Inverter){
+            System.out.println("Inverter");
+        }
+        else if(item instanceof Beer){
+            System.out.println("Beer");
+        }
+        else if(item instanceof Adrenaline){
+            System.out.println("Adrenaline");
+        }
+        else if(item instanceof Handcuff){
+            System.out.println("Handcuff");
+        }
+    }
+
 
     public void DisplayMainMenu(){
         System.out.print("+--------------------------------+\n" +

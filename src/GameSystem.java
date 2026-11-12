@@ -200,8 +200,54 @@ public class GameSystem {
         System.out.println();
     }
 
-    public int RandomSelect(){
+    public Items RandomCreatItem(){
+        int type = (int)(Math.random() * 9) + 1;
+        Items item;
+        if(type==1){
+            item=new ExpiredMedecine();
+            return item;
+        }
+        else if(type==2){
+            item=new CigarettesPack();
+            return item;
+        }
+        else if(type==3){
+            item=new MagnifyingGlass();
+            return item;
+        }
+        else if(type==4){
+            item=new BurnerPhone();
+            return item;
+        }
+        else if(type==5){
+            item=new HandSaw();
+            return item;
+        }
+        else if(type==6){
+            item=new Inverter();
+            return item;
+        }
+        else if(type==7){
+            item=new Beer();
+            return item;
+        }
+        else if(type==8){
+            item=new Adrenaline();
+            return item;
+        }
+        else {
+            item=new Handcuff();
+            return item;
+        }
+    }
 
+    public void AddItem(int position,Items item){
+        GetCurrPlayer().GetAllItem()[position]=item;
+    }
+
+    public void UseItem(int index){
+        GetCurrPlayer().GetAllItem()[index].Effect();
+        GetCurrPlayer().GetAllItem()[index]=null;
     }
 
 }

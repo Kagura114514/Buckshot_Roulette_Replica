@@ -4,7 +4,7 @@
  * @author Leon
  */
 public class Handcuff extends OpponentItem {
-    public  Handcuff(int tpye){
+    public  Handcuff(){
         super(Items.HANDCUFF);
     }
 
