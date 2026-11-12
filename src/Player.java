@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /**
  * Stores a player's health, inventory and ability to act.
  * The current constructor initializes only health; the inventory remains null,
@@ -150,7 +152,10 @@ public class Player {
     public void SetPlayerMoveable(boolean isPlayerMoveable){
         this.isPlayerMoveable = isPlayerMoveable;
     }
-
+    // DEVELOPED BY: RIMI
+    /** Consume the handcuff
+     *  @return     true - A handcuff exists, and it is consumed
+     *             false - No handcuff exists                       */
     public boolean consumeCuff(){
         if(this.isCuffed == true){
             this.isCuffed = false;
@@ -168,6 +173,21 @@ public class Player {
         this.isCuffed = true;
     }
 
-
+     public Items RandomItem(){
+        int index = (int)(Math.random()*9);
+        switch (index){
+            case 0:
+                tempItem = new ExpiredMedecine()
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+            case 8:
+        }
+        return this.items = new ;
+     }
 }
 

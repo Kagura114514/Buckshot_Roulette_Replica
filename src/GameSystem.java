@@ -10,13 +10,18 @@ public class GameSystem {
         stg = new Stage(1);
         gun = new ShotGun(this.stg);
     }
-
-    private boolean switchPlayer(Player p2){
+    // DEVELOPED BY: RIMI
+    /** To determine is opponent handcuff exit
+     *  if exists, will consume it
+     *  @param        p2 - The target currPlayer going to shoot
+     *  @return    false - if there is no cuff on opponent
+     *              true - if there is cuff */
+    private boolean isCuffExist(Player p2){
         if(p2.consumeCuff() == true){
-            return false;
+            return true;
         }
         else{
-            return true;
+            return false;
         }
     }
 
@@ -26,6 +31,15 @@ public class GameSystem {
         }
         else {
             return  GetAllPlayer()[0];
+        }
+    }
+
+    private void switchPlayer(Player p1){
+        if(p1.GetPlayerMoveable() && getAnotherPlayer(p1).GetPlayerMoveable() == false){
+            SetCurrPlayer(p1);
+        }
+        else{
+            SetCurrPlayer(getAnotherPlayer(p1));
         }
     }
 
@@ -134,28 +148,33 @@ public class GameSystem {
     public int Shooting(boolean target){
         if(target) {  // if target is opponent
             if (gun.GetCurrShellType() == ShotGun.BLANK) {
-                currPlayer.SetPlayerMoveable(!switchPlayer(getAnotherPlayer(currPlayer)));
-                gun.SetBulletsInGunEMPTY();
-                return 1;
+                 currPlayer.SetPlayerMoveable(isCuffExist(getAnotherPlayer(currPlayer)));
+                 gun.SetBulletsInGunEMPTY();
+                 switchPlayer(currPlayer);
+                 return 1;
             }
             else if (gun.GetCurrShellType() == ShotGun.LIVE) {
-                int dmg = gun.DamageCalc();
-                getAnotherPlayer(currPlayer).SetHP(getAnotherPlayer(currPlayer).GetHP() - dmg);
-                currPlayer.SetPlayerMoveable(!switchPlayer(getAnotherPlayer(currPlayer)));
-                gun.SetBulletsInGunEMPTY();
-                return 2;
+                 int dmg = gun.DamageCalc();
+                 getAnotherPlayer(currPlayer).SetHP(getAnotherPlayer(currPlayer).GetHP() - dmg);
+                 currPlayer.SetPlayerMoveable(isCuffExist(getAnotherPlayer(currPlayer)));
+                 gun.SetBulletsInGunEMPTY();
+                 switchPlayer(currPlayer);
+                 return 2;
             }
         }
         else{        // if target is player oneself
              if (gun.GetCurrShellType() == ShotGun.LIVE) {
-                int dmg = gun.DamageCalc();
-                currPlayer.SetHP(currPlayer.GetHP() - dmg);
-                currPlayer.SetPlayerMoveable(!switchPlayer(getAnotherPlayer(currPlayer)));
-                gun.SetBulletsInGunEMPTY();
-                return 3;
+                 int dmg = gun.DamageCalc();
+                 currPlayer.SetHP(currPlayer.GetHP() - dmg);
+                 currPlayer.SetPlayerMoveable(isCuffExist(getAnotherPlayer(currPlayer)));
+                 gun.SetBulletsInGunEMPTY();
+                 switchPlayer(currPlayer);
+                 return 3;
              }
              else if(gun.GetCurrShellType() == ShotGun.BLANK){
-                return 4;
+                 gun.SetBulletsInGunEMPTY();
+                 switchPlayer(currPlayer);
+                 return 4;
              }
         }
         return ERROR;
@@ -172,6 +191,17 @@ public class GameSystem {
             }
         }
         return false;
+    }
+    // for testing
+    public void DisplayBullets(ShotGun gun){
+        for(int i = 0; i < gun.GetBulletsInGun().length; i++){
+            System.out.print(gun.GetBulletsInGun()[i] + " ");
+        }
+        System.out.println();
+    }
+
+    public int RandomSelect(){
+
     }
 
 }

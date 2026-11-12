@@ -69,10 +69,9 @@ public class GameMain {
                 gs.GetAllPlayer()[0].SetHP(gs.GetStage().GetStartHP());
                 gs.GetAllPlayer()[1].SetHP(gs.GetStage().GetStartHP());
                 do{
-                    gs.GetGun() = new ShotGun(gs.GetStage());
-                    //gs.SetShotGun(gs.GetStage());//设置枪的在第几阶段，有多少子弹
-                    dp.DisplayerGridWithShell(gs.GetBulletsInDisplay(),gs.GetAllPlayer()[0],gs.GetAllPlayer()[1]);//在grid里显示几颗实弹，几颗空单
 
+                    gs.SetShotGun(gs.GetStage());//设置枪的在第几阶段，有多少子弹
+                    dp.DisplayBulletNum(gs.GetBulletsInDisplay());
                     System.out.println("Press Enter to continue...");
                     input.nextLine();
                     do {
