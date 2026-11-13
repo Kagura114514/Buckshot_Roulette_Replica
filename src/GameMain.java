@@ -120,6 +120,7 @@ public class GameMain {
                         position=input.nextInt();
                         input.nextLine();
                         gs.AddItem(position,gs.RandomCreatItem());
+                        dp.DisplayerGridWithItem(gs.GetCurrPlayer(),gs.getAnotherPlayer(gs.GetCurrPlayer()),gs.getAnotherPlayer(gs.GetCurrPlayer()).GetAllItem(),gs.GetCurrPlayer().GetAllItem());
                     }
                     do {
                         do {
@@ -171,7 +172,7 @@ public class GameMain {
                         }
                     } while(!(gs.GetAllPlayer()[0].GetHP()==0) && !(gs.GetAllPlayer()[1].GetHP()==0) && gs.isRemainBullet());
                 } while(!(gs.GetAllPlayer()[0].GetHP()==0) && !(gs.GetAllPlayer()[1].GetHP()==0));
-                System.out.printf("winner is %s",gs.GetCurrPlayer().GetName());
+                System.out.printf("winner is %s\n",gs.GetCurrPlayer().GetName());
             }
             else if(option == 2){
 

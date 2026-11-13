@@ -131,10 +131,10 @@ public class GameSystem {
         }
         int[] list = new int[blankNum+liveNum];
         for(int i=0;i<blankNum;i++){
-            list[i]=1;
+            list[i]=0;
         }
         for(int i=blankNum;i<blankNum+liveNum;i++){
-            list[i]=0;
+            list[i]=1;
         }
 
         return list;
