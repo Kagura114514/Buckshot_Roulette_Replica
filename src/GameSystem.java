@@ -25,14 +25,7 @@ public class GameSystem {
         }
     }
 
-    private Player getAnotherPlayer(Player p){
-        if(p == GetAllPlayer()[0]){
-            return  GetAllPlayer()[1];
-        }
-        else {
-            return  GetAllPlayer()[0];
-        }
-    }
+
 
     private void switchPlayer(Player p1){
         if(p1.GetPlayerMoveable() && getAnotherPlayer(p1).GetPlayerMoveable() == false){
@@ -40,6 +33,15 @@ public class GameSystem {
         }
         else{
             SetCurrPlayer(getAnotherPlayer(p1));
+        }
+    }
+
+    public Player getAnotherPlayer(Player p){
+        if(p == GetAllPlayer()[0]){
+            return  GetAllPlayer()[1];
+        }
+        else {
+            return  GetAllPlayer()[0];
         }
     }
 
@@ -245,9 +247,9 @@ public class GameSystem {
         GetCurrPlayer().GetAllItem()[position]=item;
     }
 
-    public void UseItem(int index){
-        GetCurrPlayer().GetAllItem()[index].Effect();
-        GetCurrPlayer().GetAllItem()[index]=null;
+    public void UseItem(int index,Player currPlayer,Player opponent,ShotGun gun,int opponentIndex,Stage stage){
+        GetCurrPlayer().UseItem(index,currPlayer,opponent,gun,opponentIndex,stage);
+
     }
 
 }

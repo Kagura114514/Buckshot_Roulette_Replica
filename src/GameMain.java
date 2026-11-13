@@ -7,7 +7,7 @@ public class GameMain {
         int firstPlayerWinNum = 0;
         int secondPlayerWinNum = 0;
 
-        int option, guessCoinSide, coinSide, target, result = 0,position,index;
+        int option, guessCoinSide, coinSide, target, result = 0,position,index,opponentIndex;
         String playerName1, playerName2, firstPlayerName, choice;
 
         // Display Main Menu
@@ -122,16 +122,26 @@ public class GameMain {
                         gs.AddItem(position,gs.RandomCreatItem());
                     }
                     do {
-                        dp.DisplayerGrid(gs.GetAllPlayer()[0],gs.GetAllPlayer()[1]);//显示grid
-                        System.out.println("Use an item?(Y/N)");
-                        choice=input.nextLine();
-                        if(choice.equals("Y") ||choice.equals("y")){
-                            System.out.println("Enter the index: ");
-                            index=input.nextInt();
-                            if(0<index || index<)
-
-                        }
-
+                        do {
+                            dp.DisplayerGrid(gs.GetAllPlayer()[0], gs.GetAllPlayer()[1]);//显示grid
+                            System.out.println("Use an item?(Y/N)");
+                            choice = input.nextLine();
+                            if (choice.equals("Y") || choice.equals("y")) {
+                                System.out.println("Enter the index: ");
+                                index = input.nextInt();
+                                input.nextLine();
+                                if (0 < index && index < 4 || 4 < index && index < 8 || index == 9) {
+                                    gs.UseItem(index, gs.GetCurrPlayer(), gs.getAnotherPlayer(gs.GetCurrPlayer()), gs.GetGun(), 0, gs.GetStage());
+                                } else if (index == 4) {
+                                    gs.UseItem(index, gs.GetCurrPlayer(), gs.getAnotherPlayer(gs.GetCurrPlayer()), gs.GetGun(), 0, gs.GetStage());
+                                } else if (index == 8) {
+                                    System.out.println("Enter the opponent index ");
+                                    opponentIndex = input.nextInt();
+                                    input.nextLine();
+                                    gs.UseItem(index, gs.GetCurrPlayer(), gs.getAnotherPlayer(gs.GetCurrPlayer()), gs.GetGun(), opponentIndex, gs.GetStage());
+                                }
+                            }
+                        }while(choice.equals("Y") || choice.equals("y"));
 
                         System.out.printf("Player:%s",gs.GetCurrPlayer().GetName());
                         System.out.println("Choose your target:");

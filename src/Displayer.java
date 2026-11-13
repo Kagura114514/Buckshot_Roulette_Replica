@@ -38,7 +38,7 @@ public class Displayer {
     }
 
     public void DisplayBulletNum(int[] list){//过度使用
-        System.out.printf("There are %d blank bullet and %d live bullet",blankBulletNum(list),liveBulletNum(list));
+        System.out.printf("There are %d blank bullet and %d live bullet\n",blankBulletNum(list),liveBulletNum(list));
     }
 
     public void DisplayRandomItem(Items item){
@@ -255,7 +255,7 @@ public class Displayer {
                          "                     |                                                                                                                                      |              " +
                          "                     |                                                                                                                                      |              " +
                          "                     |                                                                                                                                      |          " +
-                         "                     ========================================================================================================================================       " +
+                         "                     ========================================================================================================================================       "
                 );
     }
 

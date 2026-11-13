@@ -59,7 +59,11 @@ public abstract class Items {
      *        ignored by this default implementation
      * @return the result returned by the three-parameter effect method
      */
-    public int Effect(Player player, Player opponent, ShotGun gun, int opponentIndex, Stage stg) {
+    public int Effect(Player player, Player opponent, ShotGun gun, int opponentIndex) {
+        return Effect(player, opponent, gun);
+    }
+
+    public int Effect(Player player, Player opponent, ShotGun gun,  Stage stg) {
         return Effect(player, opponent, gun);
     }
 

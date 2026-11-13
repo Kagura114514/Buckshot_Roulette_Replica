@@ -140,15 +140,19 @@ public class Player {
      *
      *         return false if an accepted index exceeds the array bounds
      */
-    public boolean UseItem(int index,Player player,Player opponent, ShotGun gun,int opponentIndex,Stage stg){
-        if(0<index && index<10) {
-            items[index].Effect(player,opponent, gun,opponentIndex,stg);
-            items[index]=null;
-            return true;
+
+    public void UseItem(int index,Player currPlayer,Player opponent,ShotGun gun,int opponentIndex,Stage stage){
+        if(0<index && index<4  || 4<index && index<8 || index==9) {
+           GetAllItem()[index].Effect(currPlayer,opponent,gun);
         }
-        else{
-            return false;
+        else if(index==4) {
+            GetAllItem()[index].Effect(currPlayer,opponent,gun,stage);
         }
+        else if(index==8){
+            GetAllItem()[index].Effect(currPlayer,opponent,gun,opponentIndex);
+        }
+        GetAllItem()[index]=null;
+
     }
 
     /**

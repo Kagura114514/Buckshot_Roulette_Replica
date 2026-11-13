@@ -31,7 +31,7 @@ public class Adrenaline extends OpponentItem {
         if (opponentIndex >1 && opponentIndex < 8) {
             Items stolen = opponent.GetAllItem()[opponentIndex];
             if(stolen != null) {
-                if(stolen.Effect(player, opponent, gun, opponentIndex, stg) != 1) {
+                if(stolen.Effect(player, opponent, gun, stg) != 1) {
                     opponent.RemoveItem(opponentIndex);
                     return 1;
                 }
