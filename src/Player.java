@@ -13,7 +13,6 @@ public class Player {
     private Items[] items;
     private int stageWins;
     private String name;
-    private boolean isPlayerMoveable;
     private boolean isCuffed;
 
     public Player(String name){
@@ -21,8 +20,8 @@ public class Player {
         this.name = name;
         this.items = new Items[8];
         this.stageWins = 0;
-        this.isPlayerMoveable = true;
         this.isCuffed = false;
+        this.maxHp=2;
     }
 
     public String GetName(){
@@ -80,15 +79,6 @@ public class Player {
     }
 
     /**
-     * Returns the stored movement flag.
-     *
-     * @return true if the flag allows the player to act; false otherwise
-     */
-    public boolean GetPlayerMoveable(){
-        return isPlayerMoveable;
-    }
-
-    /**
      * Returns the actual inventory array, not a copy.
      *
      * @return Items[], or null if it has not been initialized
@@ -132,7 +122,7 @@ public class Player {
      * effect result code and does not check health or the movement flag.
      *
      * @param index the inventory slot; the current condition accepts 1 through 9
-     * @param player the player using the item
+     * @param currPlayer the player using the item
      * @param opponent the opposing player
      * @param gun the shotgun currently used in the game
      * @param opponentIndex the opponent inventory slot passed to the item effect
@@ -145,44 +135,16 @@ public class Player {
      *         return false if an accepted index exceeds the array bounds
      */
 
-    public void UseItem(int index,Player currPlayer,Player opponent,ShotGun gun,int opponentIndex,Stage stage){
-        if(0<index && index<4  || 4<index && index<8 || index==9) {
-           GetAllItem()[index].Effect(currPlayer,opponent,gun);
-        }
-        else if(index==4) {
-            GetAllItem()[index].Effect(currPlayer,opponent,gun,stage);
-        }
-        else if(index==8){
-            GetAllItem()[index].Effect(currPlayer,opponent,gun,opponentIndex);
-        }
-        GetAllItem()[index]=null;
-
-    }
 
     public void SetStageWins(){
         this.stageWins++;
-    }
-    /**
-     * Sets whether the player is allowed to act.
-     *
-     * @param isPlayerMoveable the new movement flag
-     * @return the flag value assigned, not a success indicator
-     */
-    public void SetPlayerMoveable(boolean isPlayerMoveable){
-        this.isPlayerMoveable = isPlayerMoveable;
     }
     // DEVELOPED BY: RIMI
     /** Consume the handcuff
      *  @return     true - A handcuff exists, and it is consumed
      *             false - No handcuff exists                       */
-    public boolean consumeCuff(){
-        if(this.isCuffed == true){
-            this.isCuffed = false;
-            return true;
-        }
-        else{
-            return false;
-        }
+    public void ConsumeCuff(){
+        this.isCuffed = false;
     }
     /**
      * Sets the movement flag to false.
@@ -190,6 +152,10 @@ public class Player {
      */
     public void Cuffed(){
         this.isCuffed = true;
+    }
+
+    public boolean GetIsCuffed(){
+        return this.isCuffed;
     }
 }
 

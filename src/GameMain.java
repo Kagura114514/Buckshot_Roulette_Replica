@@ -2,13 +2,13 @@ import java.util.Scanner;
 public class GameMain {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        GameSystem gs= new GameSystem();
         Displayer dp = new Displayer();
         int firstPlayerWinNum = 0;
         int secondPlayerWinNum = 0;
 
         int option, guessCoinSide, coinSide, target, result = 0,position,index,opponentIndex;
         String playerName1, playerName2, firstPlayerName, choice;
+        boolean round3 = false;
 
         while(true) {
             // Display Main Menu
@@ -24,6 +24,7 @@ public class GameMain {
                 }
             }
             if(option == 1) {
+                GameSystem gs= new GameSystem();
                 playerName1 = dp.EnterName(1);
                 gs.SetAllPlayerID(playerName1);
                 System.out.println();
@@ -64,8 +65,10 @@ public class GameMain {
                     System.out.println("Wrong guess! Your opponent goes first.");
                     gs.SwitchPlayer();//猜错后，换人
                 }
-
+                /*
                 //从这开始是游戏的第一阶段
+                System.out.print("");//换行
+                System.out.println("The first stage");
                 gs.SetStage(1);
                 gs.GetAllPlayer()[0].SetHP(gs.GetStage().GetStartHP());
                 gs.GetAllPlayer()[1].SetHP(gs.GetStage().GetStartHP());
@@ -102,26 +105,33 @@ public class GameMain {
                         else{
                             System.out.println(" shot yourself. Blank!");    
                         }
-                    } while(!(gs.GetAllPlayer()[0].GetHP()==0) && !(gs.GetAllPlayer()[1].GetHP()==0) && gs.isRemainBullet());
-                } while(!(gs.GetAllPlayer()[0].GetHP()==0) && !(gs.GetAllPlayer()[1].GetHP()==0));
+                    } while(gs.GetAllPlayer()[0].GetHP()>0 && gs.GetAllPlayer()[1].GetHP()>0 && gs.isRemainBullet());
+                } while(gs.GetAllPlayer()[0].GetHP()>0 && gs.GetAllPlayer()[1].GetHP()>0);
                 gs.SetRoundWinner(gs.GetAllPlayer()[0], gs.GetAllPlayer()[1]); // Set Round Winner StageWins +1
-                //System.out.printf("winner is %s",gs.GetCurrPlayer().GetName());
+                System.out.printf("winner is %s",gs.GetCurrPlayer().GetName());
+                */
 
+                System.out.println(" ");//换行
+                System.out.println("The second stage");
                 gs.SetStage(2);
                 gs.GetAllPlayer()[0].SetHP(gs.GetStage().GetStartHP());
+                gs.GetAllPlayer()[0].SetMaxHp(gs.GetStage());
                 gs.GetAllPlayer()[1].SetHP(gs.GetStage().GetStartHP());
+                gs.GetAllPlayer()[1].SetMaxHp(gs.GetStage());
                 do{
                     gs.SetShotGun(gs.GetStage());//设置枪的在第几阶段，有多少子弹
                     dp.DisplayBulletNum(gs.GetBulletsInDisplay());// 展示几个实弹几个空弹
                     dp.Enter("Press Enter to continue...");
-                    for(int j=0;j<2;j++){//发两次道具
-                        Items item = gs.RandomCreatItem();
-                        dp.DisplayRandomItem(item);//展示发的道具（随机创建道具）
-                        position = dp.EnterPos("position");
-                        input.nextLine();
-                        gs.AddItem(position, item);// 把道具加到玩家里
-                        //展示加了道具后的棋盘
-                        dp.DisplayerGridWithItem(gs.GetCurrPlayer(),gs.getAnotherPlayer(gs.GetCurrPlayer()), gs.GetCurrPlayer().GetAllItem(), gs.getAnotherPlayer(gs.GetCurrPlayer()).GetAllItem());
+                    for(int j=0;j<2;j++) {
+                        for (int z = 0; z < gs.GetStage().GetPerRoundItemNum(); z++) {//发两次道具
+                            Items item = gs.RandomCreatItem();
+                            dp.DisplayRandomItem(item);//展示发的道具（随机创建道具）
+                            position = dp.EnterPos("position");
+                            gs.AddItem(position, item);// 把道具加到玩家里
+                            //展示加了道具后的棋盘
+                            dp.DisplayerGridWithItem(gs.GetCurrPlayer(), gs.getAnotherPlayer(gs.GetCurrPlayer()), gs.GetCurrPlayer().GetAllItem(), gs.getAnotherPlayer(gs.GetCurrPlayer()).GetAllItem());
+                        }
+                        gs.SwitchPlayer();
                     }
                     do {
                         do {
@@ -144,14 +154,16 @@ public class GameMain {
                                 }
                                 else if (gs.GetCurrPlayer().GetAllItem()[index] instanceof Adrenaline) {
                                     opponentIndex = dp.EnterPos("opponent index");
-                                    gs.UseItem(index, opponentIndex);
+                                    gs.UseItem(index, opponentIndex,gs.GetStage());
                                 }
                                 else{
                                     gs.UseItem(index);
                                 }
                             }
-                        }while(choice.equals("Y"));
-
+                        }while(choice.equals("Y")&& gs.isRemainBullet() && gs.GetAllPlayer()[0].GetHP() > 0 && gs.GetAllPlayer()[1].GetHP() > 0);
+                        if (!gs.isRemainBullet() || gs.GetAllPlayer()[0].GetHP() <= 0 || gs.GetAllPlayer()[1].GetHP() <= 0) {
+                            break;
+                        }
                         System.out.printf("Player:%s",gs.GetCurrPlayer().GetName());
                         System.out.println("Choose your target:");
                         System.out.println("1. your");
@@ -178,9 +190,25 @@ public class GameMain {
                         else{
                             System.out.println(" shot yourself. Blank!");
                         }
-                    } while(!(gs.GetAllPlayer()[0].GetHP()==0) && !(gs.GetAllPlayer()[1].GetHP()==0) && gs.isRemainBullet());
-                } while(!(gs.GetAllPlayer()[0].GetHP()==0) && !(gs.GetAllPlayer()[1].GetHP()==0));
-                System.out.printf("winner is %s\n",gs.GetCurrPlayer().GetName());
+                    } while(gs.GetAllPlayer()[0].GetHP()>0 && gs.GetAllPlayer()[1].GetHP()>0 && gs.isRemainBullet());
+                } while(gs.GetAllPlayer()[0].GetHP()>0 && gs.GetAllPlayer()[1].GetHP()>0);
+
+
+                gs.SetRoundWinner(gs.GetAllPlayer()[0], gs.GetAllPlayer()[1]); // Set Round Winner StageWins +1
+                System.out.printf("winner is %s",gs.GetCurrPlayer().GetName());
+                if(gs.GetGameWinner() == 10){
+                    System.out.println("Game Over! Winner is " + gs.GetAllPlayer()[0].GetName());
+                }
+                else if(gs.GetGameWinner() == 11){
+                    System.out.println("Game Over! Winner is " + gs.GetAllPlayer()[1].GetName());
+                }
+                else{
+                    round3 = true;
+                }
+                while(round3){
+
+                }
+
             }
             else if(option == 2){
 

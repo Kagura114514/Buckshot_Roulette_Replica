@@ -28,6 +28,7 @@ public class CigarettesPack extends HealthItem {
             return 1;
         }
         else{
+            System.out.println("The health has been fully restored and cannot be used any longer");
             return -1;
         }
     }

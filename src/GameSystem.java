@@ -14,36 +14,12 @@ public class GameSystem {
         gun = new ShotGun(this.stg);
         input = new Scanner(System.in);
     }
-    // DEVELOPED BY: RIMI
-    /** To determine is opponent handcuff exit
-     *  if exists, will consume it
-     *  @param        p2 - The target currPlayer going to shoot
-     *  @return    false - if there is no cuff on opponent
-     *              true - if there is cuff */
-    private boolean isCuffExist(Player p2){
-        if(p2.consumeCuff() == true){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
 
     public Player getAnotherPlayer(Player p) {
         if (p == GetAllPlayer()[0]) {
             return GetAllPlayer()[1];
         } else {
             return GetAllPlayer()[0];
-        }
-    }
-
-
-    private void switchPlayer(Player p1) {
-        if (p1.GetPlayerMoveable() && getAnotherPlayer(p1).GetPlayerMoveable() == false) {
-            SetCurrPlayer(p1);
-        }
-        else {
-            SetCurrPlayer(getAnotherPlayer(p1));
         }
     }
 
@@ -88,18 +64,6 @@ public class GameSystem {
         return true;
     }
 
-    public boolean HasRoundWinner() {
-        if (allPlayer[0].GetHP() == 0) {
-            allPlayer[0].SetStageWins();
-            return true;
-        } else if (allPlayer[1].GetHP() == 0) {
-            allPlayer[1].SetStageWins();
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public int GetGameWinner() {
         if(allPlayer[0].GetStageWins() >= 2){
             return 10;
@@ -113,10 +77,10 @@ public class GameSystem {
     }
 
     public void SetRoundWinner(Player p1, Player p2){
-        if(p1.GetHP() == 0) {
+        if(p1.GetHP() <= 0) {
             p2.SetStageWins();
         }
-        else if(p2.GetHP() == 0) {
+        else if(p2.GetHP() <= 0) {
             p1.SetStageWins();
         }
     }
@@ -152,16 +116,16 @@ public class GameSystem {
             if(gun.GetBulletsInGun()[i]==0){
                 blankNum++;
             }
-            else{
+            else if (gun.GetBulletsInGun()[i] == ShotGun.LIVE) {
                 liveNum++;
             }
         }
         int[] list = new int[blankNum + liveNum];
         for (int i = 0; i < blankNum; i++) {
-            list[i] = 0;
+            list[i] = ShotGun.BLANK;
         }
         for (int i = blankNum; i < blankNum + liveNum; i++) {
-            list[i] = 1;
+            list[i] = ShotGun.LIVE;
         }
 
         return list;
@@ -175,19 +139,17 @@ public class GameSystem {
      *               3 - Player shot oneself and the shell is live
      *               4 - Player shot oneself and the shell is blank   */
     public int Shooting(boolean target){
-        if(target) {  // if target is opponent
+        if(target) { // if target is opponent
             if (gun.GetCurrShellType() == ShotGun.BLANK) {
-                 currPlayer.SetPlayerMoveable(isCuffExist(getAnotherPlayer(currPlayer)));
                  gun.SetBulletsInGunEMPTY();
-                 switchPlayer(currPlayer);
+                 switchPlayerCuff();
                  return 1;
             }
             else if (gun.GetCurrShellType() == ShotGun.LIVE) {
                  int dmg = gun.DamageCalc();
                  getAnotherPlayer(currPlayer).SetHP(getAnotherPlayer(currPlayer).GetHP() - dmg);
-                 currPlayer.SetPlayerMoveable(isCuffExist(getAnotherPlayer(currPlayer)));
                  gun.SetBulletsInGunEMPTY();
-                 switchPlayer(currPlayer);
+                 switchPlayerCuff();
                  return 2;
             }
         }
@@ -195,18 +157,29 @@ public class GameSystem {
              if (gun.GetCurrShellType() == ShotGun.LIVE) {
                  int dmg = gun.DamageCalc();
                  currPlayer.SetHP(currPlayer.GetHP() - dmg);
-                 currPlayer.SetPlayerMoveable(isCuffExist(getAnotherPlayer(currPlayer)));
                  gun.SetBulletsInGunEMPTY();
-                 switchPlayer(currPlayer);
+                 switchPlayerCuff();
                  return 3;
              }
              else if(gun.GetCurrShellType() == ShotGun.BLANK){
                  gun.SetBulletsInGunEMPTY();
-                 switchPlayer(currPlayer);
+                 switchPlayerCuff();
                  return 4;
              }
         }
         return ERROR;
+    }
+
+    private void switchPlayerCuff() {
+        // 如果opponent cuffed状态 == true
+        if (getAnotherPlayer(GetCurrPlayer()).GetIsCuffed() == true) {
+            getAnotherPlayer(GetCurrPlayer()).ConsumeCuff();
+            System.out.println(getAnotherPlayer(GetCurrPlayer()).GetName() + " is cuffed...unable to move...");
+        }
+        // 如果opponent cuffed状态 == false
+        else if (getAnotherPlayer(GetCurrPlayer()).GetIsCuffed() == false) {
+            SetCurrPlayer(getAnotherPlayer(GetCurrPlayer()));
+        }
     }
 
     // DEVELOPED BY: LEON&RIMI
@@ -288,13 +261,15 @@ public class GameSystem {
 
     // For other items to use
     public void UseItem(int index) {
-        GetCurrPlayer().GetAllItem()[index].Effect(GetCurrPlayer(), getAnotherPlayer(GetCurrPlayer()), GetGun(), GetStage());
-        GetCurrPlayer().GetAllItem()[index] = null;
+        if(GetCurrPlayer().GetAllItem()[index].Effect(GetCurrPlayer(), getAnotherPlayer(GetCurrPlayer()), GetGun(), GetStage())==1) {
+            GetCurrPlayer().GetAllItem()[index] = null;
+        }
     }
     // For adrenaline to use
-    public void UseItem(int index, int opponentIndex) {
-        GetCurrPlayer().GetAllItem()[index].Effect(GetCurrPlayer(), getAnotherPlayer(GetCurrPlayer()), GetGun(), opponentIndex);
-        GetCurrPlayer().GetAllItem()[index] = null;
+    public void UseItem(int index, int opponentIndex,Stage stage) {
+        if(GetCurrPlayer().GetAllItem()[index].Effect(GetCurrPlayer(), getAnotherPlayer(GetCurrPlayer()), GetGun(), opponentIndex,stage)==1) {
+            GetCurrPlayer().GetAllItem()[index] = null;
+        }
     }
 
 }

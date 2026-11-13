@@ -28,23 +28,26 @@ public class Adrenaline extends OpponentItem {
      * @return 1 if the index is from 1 through 8; -2 if the accessed slot is empty;
      */
     public int Effect(Player player, Player opponent, ShotGun gun, int opponentIndex, Stage stg) {
-        if (opponentIndex >1 && opponentIndex < 8) {
+        if (opponentIndex >1 && opponentIndex < opponent.GetAllItem().length) {
             Items stolen = opponent.GetAllItem()[opponentIndex];
-            if(stolen != null) {
+            if(stolen != null && stolen.Gettype() != Items.ADRENALINE) {
                 if(stolen.Effect(player, opponent, gun, stg) != 1) {
                     opponent.RemoveItem(opponentIndex);
                     System.out.println("Steal one from the other party in the play and use it immediately");
                     return 1;
                 }
                 else{
-                    return -3;
+                    System.out.println("item cannot be reused..");
+                    return -1;
                 }
             }
             else{
-                return -2;
+                System.out.println("The empty one cannot be chosen");
+                return -1;
             }
         }
         else{
+            System.out.println("It's out of range");
             return -1;
         }
 

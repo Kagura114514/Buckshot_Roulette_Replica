@@ -21,11 +21,11 @@ public class ShotGun {
         }
         else if(stg.GetStageNum() == Stage.SCD_STAGE){
             this.bulletsInGun = new int[randomShellNum(2)];
-            initialize(this.bulletsInGun, 2);
+            initialize(this.bulletsInGun, 1);
         }
         else if(stg.GetStageNum() == Stage.TRD_STAGE){
             this.bulletsInGun = new int[randomShellNum(3)];
-            initialize(this.bulletsInGun, 2);
+            initialize(this.bulletsInGun, 1);
         }
 
         isDoubleDMG   = false;

@@ -26,19 +26,24 @@ public class ExpiredMedecine extends HealthItem {
     public int Effect(Player player){
         int Hp=player.GetHP();
         int maxHp=player.GetMaxHp();
-        if(Hp < maxHp) {
-            if(maxHp-Hp==1) {
-                player.AddHP(1);
+        int chance = (int)(Math.random() * 2);
+        if (chance == 0) {
+            if (Hp < maxHp) {
+                if (maxHp - Hp == 1) {
+                    player.AddHP(1);
+                } else {
+                    player.AddHP(2);
+                }
+                System.out.println("Restore two health points or lose one health point");
+
+            } else {
+                System.out.println("The health has been fully restored and cannot be used any longer");
+                return -1;
             }
-            else{
-                player.AddHP(2);
-            }
-            System.out.println("Restore two health points or lose one health point");
-            return 1;
         }
         else{
-            System.out.println("Failed to use item");
-            return -1;
+            player.SetHP(player.GetHP() - 1);
         }
+        return 1;
     }
 }
