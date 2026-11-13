@@ -33,9 +33,11 @@ public class ExpiredMedecine extends HealthItem {
             else{
                 player.AddHP(2);
             }
+            System.out.println("Restore two health points or lose one health point");
             return 1;
         }
         else{
+            System.out.println("Failed to use item");
             return -1;
         }
     }

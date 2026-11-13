@@ -9,9 +9,13 @@ public class Inverter extends ShotgunEffectItem {
      *         -1   - failed, something went wrong           */
     public int Effect(ShotGun gun){
         if(gun.SwitchShellType()){
+            System.out.println("The shell is inverted...");
+            System.out.println("Inverter is used..");
             return 1;
         }
         else{
+            System.out.println("Something went wrong..");
+            System.out.println("Inverter is used..");
             return -1;
         }
     }

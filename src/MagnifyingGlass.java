@@ -8,6 +8,14 @@ public class MagnifyingGlass extends InformationItem {
      *  return         -1 - If something went wrong
      *          otherwise - return correspond type of the shell*/
     public int Effect(ShotGun gun){
-        return gun.GetCurrShellType();
+        int type = gun.GetCurrShellType();
+        if(type != -1) {
+            System.out.println("Current Shell Type is " + type + "...");
+            return 1;
+        }
+        else{
+            System.out.println("Something went wrong...");
+            return -1;
+        }
     }
 }

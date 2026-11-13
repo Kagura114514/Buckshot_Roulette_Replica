@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class GameSystem {
     public static final int ERROR = -1;
 
@@ -5,10 +7,12 @@ public class GameSystem {
     private Player currPlayer;  // 现在的玩家
     private ShotGun gun;
     private Stage stg;
+    private Scanner input;
 
     public GameSystem(){
         stg = new Stage(1);
         gun = new ShotGun(this.stg);
+        input = new Scanner(System.in);
     }
     // DEVELOPED BY: RIMI
     /** To determine is opponent handcuff exit
@@ -25,23 +29,21 @@ public class GameSystem {
         }
     }
 
-
-
-    private void switchPlayer(Player p1){
-        if(p1.GetPlayerMoveable() && getAnotherPlayer(p1).GetPlayerMoveable() == false){
-            SetCurrPlayer(p1);
-        }
-        else{
-            SetCurrPlayer(getAnotherPlayer(p1));
+    public Player getAnotherPlayer(Player p) {
+        if (p == GetAllPlayer()[0]) {
+            return GetAllPlayer()[1];
+        } else {
+            return GetAllPlayer()[0];
         }
     }
 
-    public Player getAnotherPlayer(Player p){
-        if(p == GetAllPlayer()[0]){
-            return  GetAllPlayer()[1];
+
+    private void switchPlayer(Player p1) {
+        if (p1.GetPlayerMoveable() && getAnotherPlayer(p1).GetPlayerMoveable() == false) {
+            SetCurrPlayer(p1);
         }
         else {
-            return  GetAllPlayer()[0];
+            SetCurrPlayer(getAnotherPlayer(p1));
         }
     }
 
@@ -86,12 +88,37 @@ public class GameSystem {
         return true;
     }
 
-    public boolean HasRoundWinner(){
-        return true;
+    public boolean HasRoundWinner() {
+        if (allPlayer[0].GetHP() == 0) {
+            allPlayer[0].SetStageWins();
+            return true;
+        } else if (allPlayer[1].GetHP() == 0) {
+            allPlayer[1].SetStageWins();
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public int GetGameWinner(){
-        return 1;
+    public int GetGameWinner() {
+        if(allPlayer[0].GetStageWins() >= 2){
+            return 10;
+        }
+        else if(allPlayer[1].GetStageWins() >= 2){
+            return 11;
+        }
+        else{
+            return 0;
+        }
+    }
+
+    public void SetRoundWinner(Player p1, Player p2){
+        if(p1.GetHP() == 0) {
+            p2.SetStageWins();
+        }
+        else if(p2.GetHP() == 0) {
+            p1.SetStageWins();
+        }
     }
 
     public boolean SkipRound(){
@@ -129,12 +156,12 @@ public class GameSystem {
                 liveNum++;
             }
         }
-        int[] list = new int[blankNum+liveNum];
-        for(int i=0;i<blankNum;i++){
-            list[i]=0;
+        int[] list = new int[blankNum + liveNum];
+        for (int i = 0; i < blankNum; i++) {
+            list[i] = 0;
         }
-        for(int i=blankNum;i<blankNum+liveNum;i++){
-            list[i]=1;
+        for (int i = blankNum; i < blankNum + liveNum; i++) {
+            list[i] = 1;
         }
 
         return list;
@@ -201,7 +228,13 @@ public class GameSystem {
         }
         System.out.println();
     }
-
+    /**
+     * Randomly creates one of the nine item types.
+     * Each type has an approximately equal chance of being selected.
+     * This method creates the item but does not add it to a player's inventory.
+     *
+     * @return a new randomly selected item
+     */
     public Items RandomCreatItem(){
         int type = (int)(Math.random() * 9) + 1;
         Items item;
@@ -242,14 +275,26 @@ public class GameSystem {
             return item;
         }
     }
-
+    /**
+     * Places an item in the current player's inventory at the specified position.
+     * Replaces any item already stored in that slot.
+     *
+     * @param position the inventory index, starting from 0; must be within bounds
+     * @param item the item to store; null clears the slot
+     */
     public void AddItem(int position,Items item){
         GetCurrPlayer().GetAllItem()[position]=item;
     }
 
-    public void UseItem(int index,Player currPlayer,Player opponent,ShotGun gun,int opponentIndex,Stage stage){
-        GetCurrPlayer().UseItem(index,currPlayer,opponent,gun,opponentIndex,stage);
-
+    // For other items to use
+    public void UseItem(int index) {
+        GetCurrPlayer().GetAllItem()[index].Effect(GetCurrPlayer(), getAnotherPlayer(GetCurrPlayer()), GetGun(), GetStage());
+        GetCurrPlayer().GetAllItem()[index] = null;
+    }
+    // For adrenaline to use
+    public void UseItem(int index, int opponentIndex) {
+        GetCurrPlayer().GetAllItem()[index].Effect(GetCurrPlayer(), getAnotherPlayer(GetCurrPlayer()), GetGun(), opponentIndex);
+        GetCurrPlayer().GetAllItem()[index] = null;
     }
 
 }

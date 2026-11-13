@@ -16,7 +16,6 @@ public abstract class Items {
     public static final int BEER = 7;
     public static final int ADRENALINE = 8;
     public static final int HANDCUFF = 9;
-
     private int type;
 
     /**
@@ -63,7 +62,7 @@ public abstract class Items {
         return Effect(player, opponent, gun);
     }
 
-    public int Effect(Player player, Player opponent, ShotGun gun,  Stage stg) {
+    public int Effect(Player player, Player opponent, ShotGun gun, Stage stg) {
         return Effect(player, opponent, gun);
     }
 

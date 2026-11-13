@@ -24,6 +24,7 @@ public class CigarettesPack extends HealthItem {
         int maxHp=player.GetMaxHp();
         if(Hp < maxHp) {
             player.AddHP(1);
+            System.out.println("Restore one health point");
             return 1;
         }
         else{

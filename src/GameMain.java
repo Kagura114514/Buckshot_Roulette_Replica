@@ -10,25 +10,24 @@ public class GameMain {
         int option, guessCoinSide, coinSide, target, result = 0,position,index,opponentIndex;
         String playerName1, playerName2, firstPlayerName, choice;
 
-        // Display Main Menu
-        dp.DisplayMainMenu();
-        option = input.nextInt();
-        input.nextLine();
-
-        if(option < 1 || option > 3){
-            System.out.println("Warning");
-        }
-        else{
-            if(option==1) {
-                System.out.print("========== PLAYER 1 ==========\n" +
-                        "Enter Player 1's name: ");
-                playerName1 = input.nextLine();
+        while(true) {
+            // Display Main Menu
+            while(true) {
+                dp.DisplayMainMenu();
+                option = input.nextInt();
+                input.nextLine();
+                if (option < 1 || option > 3) {
+                    System.out.println("Warning, You Should Input A Valid Value!");
+                }
+                else {
+                    break;
+                }
+            }
+            if(option == 1) {
+                playerName1 = dp.EnterName(1);
                 gs.SetAllPlayerID(playerName1);
-
                 System.out.println();
-                System.out.print("========== PLAYER 2 ==========\n" +
-                        "Enter Player 2's name: ");
-                playerName2 = input.nextLine();
+                playerName2 = dp.EnterName(2);
                 gs.SetAllPlayerID(playerName2);
 
                 System.out.println();
@@ -49,17 +48,19 @@ public class GameMain {
                 System.out.print("Enter your guess: ");
                 guessCoinSide = input.nextInt();
                 input.nextLine();
-                System.out.println("Press ENTER to flip the coin...");
-                input.nextLine();
+
+                dp.Enter("Press ENTER to flip the coin...");
                 coinSide = gs.GuessCoinSide();
                 if (coinSide == 1) {
                     dp.CoinOne();  // Display One
-                } else if (coinSide == 0) {
+                }
+                else if (coinSide == 0) {
                     dp.CoinZero(); // Display Zero
                 }
                 if (coinSide == guessCoinSide) {
                     System.out.println("Correct guess! You get to go first.");
-                } else {
+                }
+                else {
                     System.out.println("Wrong guess! Your opponent goes first.");
                     gs.SwitchPlayer();//猜错后，换人
                 }
@@ -72,8 +73,7 @@ public class GameMain {
 
                     gs.SetShotGun(gs.GetStage());//设置枪的在第几阶段，有多少子弹
                     dp.DisplayBulletNum(gs.GetBulletsInDisplay());
-                    System.out.println("Press Enter to continue...");
-                    input.nextLine();
+                    dp.Enter("Press Enter to continue...");
                     do {
                         dp.DisplayerGrid(gs.GetAllPlayer()[0],gs.GetAllPlayer()[1]);//显示grid
                         System.out.printf("Player:%s",gs.GetCurrPlayer().GetName());
@@ -88,7 +88,7 @@ public class GameMain {
                             result=gs.Shooting(true);
                         } 
                         else {
-                            System.out.println("Wrong");//暂定
+                            System.out.println("Select a valid target..");//暂定
                         }
                         if (result == 1) {
                             System.out.println(" shot the opponent. Blank!");
@@ -104,45 +104,53 @@ public class GameMain {
                         }
                     } while(!(gs.GetAllPlayer()[0].GetHP()==0) && !(gs.GetAllPlayer()[1].GetHP()==0) && gs.isRemainBullet());
                 } while(!(gs.GetAllPlayer()[0].GetHP()==0) && !(gs.GetAllPlayer()[1].GetHP()==0));
-                System.out.printf("winner is %s",gs.GetCurrPlayer().GetName());
+                gs.SetRoundWinner(gs.GetAllPlayer()[0], gs.GetAllPlayer()[1]); // Set Round Winner StageWins +1
+                //System.out.printf("winner is %s",gs.GetCurrPlayer().GetName());
 
                 gs.SetStage(2);
                 gs.GetAllPlayer()[0].SetHP(gs.GetStage().GetStartHP());
                 gs.GetAllPlayer()[1].SetHP(gs.GetStage().GetStartHP());
                 do{
                     gs.SetShotGun(gs.GetStage());//设置枪的在第几阶段，有多少子弹
-                    dp.DisplayBulletNum(gs.GetBulletsInDisplay());
-                    System.out.println("Press Enter to continue...");
-                    input.nextLine();
-                    for(int j=0;j<2;j++){
-                        dp.DisplayRandomItem(gs.RandomCreatItem());
-                        System.out.println("Enter the position: ");
-                        position=input.nextInt();
+                    dp.DisplayBulletNum(gs.GetBulletsInDisplay());// 展示几个实弹几个空弹
+                    dp.Enter("Press Enter to continue...");
+                    for(int j=0;j<2;j++){//发两次道具
+                        Items item = gs.RandomCreatItem();
+                        dp.DisplayRandomItem(item);//展示发的道具（随机创建道具）
+                        position = dp.EnterPos("position");
                         input.nextLine();
-                        gs.AddItem(position,gs.RandomCreatItem());
-                        dp.DisplayerGridWithItem(gs.GetCurrPlayer(),gs.getAnotherPlayer(gs.GetCurrPlayer()),gs.getAnotherPlayer(gs.GetCurrPlayer()).GetAllItem(),gs.GetCurrPlayer().GetAllItem());
+                        gs.AddItem(position, item);// 把道具加到玩家里
+                        //展示加了道具后的棋盘
+                        dp.DisplayerGridWithItem(gs.GetCurrPlayer(),gs.getAnotherPlayer(gs.GetCurrPlayer()), gs.GetCurrPlayer().GetAllItem(), gs.getAnotherPlayer(gs.GetCurrPlayer()).GetAllItem());
                     }
                     do {
                         do {
-                            dp.DisplayerGrid(gs.GetAllPlayer()[0], gs.GetAllPlayer()[1]);//显示grid
+                            dp.DisplayerGridWithItem(gs.GetCurrPlayer(),gs.getAnotherPlayer(gs.GetCurrPlayer()), gs.GetCurrPlayer().GetAllItem(), gs.getAnotherPlayer(gs.GetCurrPlayer()).GetAllItem());//显示grid
                             System.out.println("Use an item?(Y/N)");
-                            choice = input.nextLine();
-                            if (choice.equals("Y") || choice.equals("y")) {
-                                System.out.println("Enter the index: ");
-                                index = input.nextInt();
-                                input.nextLine();
-                                if (0 < index && index < 4 || 4 < index && index < 8 || index == 9) {
-                                    gs.UseItem(index, gs.GetCurrPlayer(), gs.getAnotherPlayer(gs.GetCurrPlayer()), gs.GetGun(), 0, gs.GetStage());
-                                } else if (index == 4) {
-                                    gs.UseItem(index, gs.GetCurrPlayer(), gs.getAnotherPlayer(gs.GetCurrPlayer()), gs.GetGun(), 0, gs.GetStage());
-                                } else if (index == 8) {
-                                    System.out.println("Enter the opponent index ");
-                                    opponentIndex = input.nextInt();
-                                    input.nextLine();
-                                    gs.UseItem(index, gs.GetCurrPlayer(), gs.getAnotherPlayer(gs.GetCurrPlayer()), gs.GetGun(), opponentIndex, gs.GetStage());
+                            choice = input.nextLine().toUpperCase();
+                            while(true) {
+                                if (choice.length() <= 0 || choice == null || choice.length() >= 2 || !((choice.equals("Y") || choice.equals("N")))) {
+                                    System.out.println("Enter only Y or N !");
+                                    choice = input.nextLine().toUpperCase();
+                                }
+                                else{
+                                    break;
                                 }
                             }
-                        }while(choice.equals("Y") || choice.equals("y"));
+                            if (choice.equals("Y")) {
+                                index = dp.EnterPos("index");
+                                if (gs.GetCurrPlayer().GetAllItem()[index] instanceof BurnerPhone) {
+                                    gs.UseItem(index);
+                                }
+                                else if (gs.GetCurrPlayer().GetAllItem()[index] instanceof Adrenaline) {
+                                    opponentIndex = dp.EnterPos("opponent index");
+                                    gs.UseItem(index, opponentIndex);
+                                }
+                                else{
+                                    gs.UseItem(index);
+                                }
+                            }
+                        }while(choice.equals("Y"));
 
                         System.out.printf("Player:%s",gs.GetCurrPlayer().GetName());
                         System.out.println("Choose your target:");
@@ -178,7 +186,9 @@ public class GameMain {
 
             }
             else if(option == 3){
-
+                System.out.println("Goodbye.....");
+                System.out.print(".\n.\n.\n.\n.\n.\n.\nSystem is closing...");
+                break;
             }
         }
 

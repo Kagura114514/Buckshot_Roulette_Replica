@@ -11,7 +11,6 @@ public class ShotGun {
     public static final int EMPTY     = 2; // 无子弹状态（已射出）
 
     private int[]  bulletsInGun;
-    private int   currShellType;
     private boolean isDoubleDMG;
     // Constructor
     public ShotGun(Stage stg){
@@ -29,7 +28,6 @@ public class ShotGun {
             initialize(this.bulletsInGun, 2);
         }
 
-        currShellType = this.bulletsInGun[0];
         isDoubleDMG   = false;
     }
 
@@ -148,15 +146,19 @@ public class ShotGun {
     public int GetCurrShellType(){
         for(int i = 0; i < GetBulletsInGun().length; i++){
             if(GetBulletsInGun()[i] != EMPTY){
-                SetCurrShellType(GetBulletsInGun()[i]);
                 return this.GetBulletsInGun()[i];
             }
         }
         return -1;
     }
 
-    public void SetCurrShellType(int type){
-        this.currShellType = type;
+    public void SetCurrShellType(int shellType){
+        for(int i = 0; i < GetBulletsInGun().length; i++){
+            if(GetBulletsInGun()[i] != EMPTY){
+                GetBulletsInGun()[i] = shellType;
+                break;
+            }
+        }
     }
 
     public boolean GetIsDoubleDMG(){
@@ -243,14 +245,15 @@ public class ShotGun {
     /** Eject the current shell after a shot
      *  @return  true  - ejected a shell successfully
      *           false - failed, maybe the gun has no bullets in it already */
-    public boolean EjectShell(){
+    public int EjectShell(){
         int pos = getCurrShellPos();
+        int type =  GetCurrShellType();
         if(pos < 0 || pos >= GetBulletsInGun().length){
-            return false;
+            return -1;
         }
         else {
             GetBulletsInGun()[getCurrShellPos()] = EMPTY;
-            return true;
+            return type;
         }
     }
 }

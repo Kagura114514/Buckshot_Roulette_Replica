@@ -9,9 +9,13 @@ public class HandSaw extends ShotgunEffectItem {
      *         -1   - The current shell has used HandSaw already  */
     public int Effect(ShotGun gun){
         if(gun.DoubleTheDMG() == 1){
+            System.out.println("You're gun barrel is now cut in half...");
+            System.out.println("Handsaw is used..");
             return 1;
         }
         else {
+            System.out.println("You can't cut a barrel twice right?.. ");
+            System.out.println("Handsaw is used..");
             return -1;
         }
     }

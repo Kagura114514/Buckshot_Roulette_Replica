@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /**
  * Stores a player's health, inventory and ability to act.
  * The current constructor initializes only health; the inventory remains null,
@@ -7,12 +9,12 @@
  */
 public class Player {
     private int hp;
+    private int maxHp;
     private Items[] items;
     private int stageWins;
     private String name;
     private boolean isPlayerMoveable;
     private boolean isCuffed;
-    private int MaxHp;
 
     public Player(String name){
         this.hp = 2;
@@ -27,15 +29,6 @@ public class Player {
         return name;
     }
 
-
-
-    public void SetMaxHp(int MaxHp){
-        this.MaxHp = MaxHp;
-    }
-
-    public int GetMaxHp(){
-        return MaxHp;
-    }
     /** Set the HP at the starting
      *
      *  @param hp  - current stage HP
@@ -50,6 +43,14 @@ public class Player {
      */
     public int GetHP(){
         return hp;
+    }
+
+    public void SetMaxHp(Stage stage){
+        this.maxHp = stage.GetStartHP();
+    }
+
+    public int GetMaxHp(){
+        return maxHp;
     }
 
     /**
@@ -121,6 +122,9 @@ public class Player {
     public void RemoveItem (int index){
         items[index]=null;
     }
+    public int GetStageWins(){
+        return this.stageWins;
+    }
 
     /**
      * Calls an item's effect and clears its slot if the effect call returns normally.
@@ -155,6 +159,9 @@ public class Player {
 
     }
 
+    public void SetStageWins(){
+        this.stageWins++;
+    }
     /**
      * Sets whether the player is allowed to act.
      *
@@ -184,7 +191,5 @@ public class Player {
     public void Cuffed(){
         this.isCuffed = true;
     }
-
-
 }
 

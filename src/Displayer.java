@@ -1,4 +1,11 @@
+import java.util.Scanner;
+
 public class Displayer {
+    Scanner input;
+
+    public Displayer() {
+        input = new Scanner(System.in);
+    }
     private String DisplayBullets(int[] list){
         String result = "";
         for(int i=0;i<8;i++){
@@ -17,6 +24,9 @@ public class Displayer {
         return result;
     }
 
+    private String DisplayBullets2(int[] list){
+        return "";
+    }
     private int blankBulletNum(int[] list){
         int num=0;
         for(int i=0;i<list.length;i++){
@@ -69,6 +79,52 @@ public class Displayer {
             return "wrong";
         }
     }
+    public String EnterName(int num){
+        String name;
+        while(true) {
+            System.out.print("========== PLAYER " + num + " ==========\n" +
+                    "Enter Player " + num + "'s name: ");
+            name = input.nextLine();
+            if(name.equals("") || name == null || name.length() <= 0) {
+                System.out.println("You should input your Player name!");
+            }
+            else if(name.length() >= 8){
+                System.out.println("You're name should not be longer than 8 characters!");
+            }
+            else{
+                break;
+            }
+        }
+        return name;
+    }
+
+    public void Enter(String line){
+        System.out.print(line);
+        String inp = input.nextLine();
+        while(true) {
+            if (inp.equals("")) {
+                break;
+            } else if (inp.length() > 0) {
+                System.out.println(line);
+                inp = input.nextLine();
+            }
+        }
+    }
+
+    public int EnterPos(String line){
+        int position;
+        System.out.print("Enter the " + line + ": ");
+        while(true) {
+            position = input.nextInt();
+            if (position >= 1 && position <= 8) {
+                break;
+            }
+            else {
+                System.out.print("Enter the correct" + line + " !: ");
+            }
+        }
+        return position;
+    }
 
     public void DisplayBulletNum(int[] list){//过度使用
         System.out.printf("There are %d blank bullet and %d live bullet\n",blankBulletNum(list),liveBulletNum(list));
@@ -104,6 +160,9 @@ public class Displayer {
             System.out.println("Handcuff");
         }
     }
+
+
+
 
 
     public void DisplayMainMenu(){
@@ -274,22 +333,24 @@ public class Displayer {
 
         );}
 
+
+
+
     public void DisplayBullets(){
-        System.out.print("                              =====================================================================================================================  " +
-                         "                             /            //            //            //            //            //            //            //                                                     \\            " +
-                         "                            /            //            //            //            //            //            //             //                             \\               " +
-                         "                           /            //            //            //            //            //            //             //                               \\             " +
-                         "                          /            //            //            //            //            //            //             //                                 \\            " +
-                         "                         /            //            //            //            //            //            //             //                                   \\          " +
-                         "                        /            //            //            //            //            //            //             //                                      \\        " +
-                         "                       /            //            //            //            //            //            //             //                                        \\       " +
-                         "                      /            //            //            //            //            //            //             //                                         \\         " +
-                         "                     ========================================================================================================================================             " +
-                         "                     |                                                                                                                                      |              " +
-                         "                     |                                                                                                                                      |              " +
-                         "                     |                                                                                                                                      |          " +
-                         "                     ========================================================================================================================================       "
-                );
+        System.out.print("                              ================================================================================================================|  " +
+                         "                             /            //            //            //            //            //            //            //            //|  " +
+                         "                            /            //            //            //            //            //            //            //            // |  " +
+                         "                           /            //            //            //            //            //            //            //            //  |  " +
+                         "                          /            //            //            //            //            //            //            //            //   |  " +
+                         "                         /            //            //            //            //            //            //            //            //    |  " +
+                         "                        /            //            //            //            //            //            //            //            //     |  " +
+                         "                       /            //            //            //            //            //            //            //            //      |  " +
+                         "                      /            //            //            //            //            //            //            //            //      //  " +
+                         "                     =================================================================================================================|     //   " +
+                         "                     |                                                                                                                |    //    " +
+                         "                     |                                                                                                                |   //     " +
+                         "                     |                                                                                                                |  //      " +
+                         "                     ===================================================================================================================//       " );
     }
 
     public void DisplayerGridWithItem(Player p1,Player p2,Items[] p1itemList,Items[] p2itemList){
