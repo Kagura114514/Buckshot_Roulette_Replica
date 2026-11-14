@@ -7,7 +7,7 @@ public class BurnerPhone extends InformationItem {
      *                stg - Current stage info
      *  return         1  - Will just print the Line  */
     public int Effect(ShotGun gun, Stage stg){
-        System.out.println(gun.GetRandomShellInfo(stg.GetCurrStageNum()));
+        System.out.println(gun.GetRandomShellInfo());
         return 1;
     }
 }

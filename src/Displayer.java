@@ -103,6 +103,7 @@ public class Displayer {
         String inp = input.nextLine();
         while(true) {
             if (inp.equals("")) {
+                System.out.println();
                 break;
             } else if (inp.length() > 0) {
                 System.out.println(line);
@@ -120,7 +121,7 @@ public class Displayer {
                 break;
             }
             else {
-                System.out.print("Enter the correct" + line + " !: ");
+                System.out.print("Enter the correct " + line + " !: ");
             }
         }
         return position-1;
@@ -130,35 +131,36 @@ public class Displayer {
         System.out.printf("There are %d blank bullet and %d live bullet\n",blankBulletNum(list),liveBulletNum(list));
     }
 
-    public void DisplayRandomItem(Items item){
-        System.out.print("Put away the ");
+    public void DisplayRandomItem(Items item, Player p){
+        System.out.print(p.GetName() + " ,you got a ");
         if(item instanceof ExpiredMedecine){
-            System.out.println("ExpiredMedecine");
+            System.out.print("ExpiredMedecine");
         }
         else if(item instanceof CigarettesPack){
-            System.out.println("CigarettesPack");
+            System.out.print("CigarettesPack");
         }
         else if(item instanceof MagnifyingGlass){
-            System.out.println("MagnifyingGlass");
+            System.out.print("MagnifyingGlass");
         }
         else if(item instanceof BurnerPhone){
-            System.out.println("BurnerPhone");
+            System.out.print("BurnerPhone");
         }
         else if(item instanceof HandSaw){
-            System.out.println("HandSaw");
+            System.out.print("HandSaw");
         }
         else if(item instanceof Inverter){
-            System.out.println("Inverter");
+            System.out.print("Inverter");
         }
         else if(item instanceof Beer){
-            System.out.println("Beer");
+            System.out.print("Beer");
         }
         else if(item instanceof Adrenaline){
-            System.out.println("Adrenaline");
+            System.out.print("Adrenaline");
         }
         else if(item instanceof Handcuff){
-            System.out.println("Handcuff");
+            System.out.print("Handcuff");
         }
+        System.out.println(", select a grid to place it on");
     }
 
 

@@ -139,7 +139,12 @@ public class ShotGun {
     }
 
     public void SetBulletsInGunEMPTY(){
-        GetBulletsInGun()[getCurrShellPos()] = EMPTY;
+        int position = getCurrShellPos();
+
+        if (position >= 0) {
+            GetBulletsInGun()[position] = EMPTY;
+        }
+
     }
 
     // Magnifying Glass will need this
@@ -173,16 +178,15 @@ public class ShotGun {
     /** Get a random shell info, (it won't give empty shell info)
      *  param@  - current stage level
      *  return  - Random line about the shell position info   */
-    public String GetRandomShellInfo(int stg){
-        String line = "something went wrong";
-        if(GetBulletsInGun()[GetBulletsInGun().length - 2] == EMPTY){
+    public String GetRandomShellInfo(){
+        int current = getCurrShellPos();
+        int remainingOpt = GetBulletsInGun().length - 1 - current;
+        String line = "Something went wrong";
+        if(current == -1 || current > GetBulletsInGun().length - 2){
             return "How Unfortunate...";
         }
         else{
-            int index;
-            do{
-                index = randomShellNum(stg);
-            }while(GetBulletsInGun()[index] == EMPTY);
+            int index = (int)(Math.random() * remainingOpt) + current + 1;
 
             if(GetBulletsInGun()[index] == BLANK){
                 line = "blank.";
@@ -191,7 +195,7 @@ public class ShotGun {
                 line = "live.";
             }
 
-            String order = numInWords(index);
+            String order = numInWords(index + 1);
 
             return order + " shell ...\n   ...   " + line;
         }
