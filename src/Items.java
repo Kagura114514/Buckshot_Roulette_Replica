@@ -1,5 +1,6 @@
 /**
- * Defines the common type identifiers and effect methods for game items.
+ * Defines the common item type identifiers and polymorphic effect entry points. Concrete
+ * subclasses implement game effects; the controller removes an item after success.
  *
  * @author Leon
  */
@@ -18,54 +19,71 @@ public abstract class Items {
     public static final int HANDCUFF = 9;
     private int type;
 
+    // DEVELOPED BY: Leon
     /**
-     * Creates an item with the given type identifier.
-     *
-     * @param type the identifier of this item
+     * Stores the supplied item type.
+     * @param type the item type identifier defined by Items
      */
     public Items(int type) {
         this.type = type;
     }
 
+    // DEVELOPED BY: Leon
     /**
-     * Returns this item's type identifier.
-     *
-     * @return the item type
+     * Returns the identifier assigned when the item was constructed.
+     * @return the item type identifier from 1 through 9
      */
     public int Gettype() {
         return type;
     }
 
+    // DEVELOPED BY: Leon
     /**
-     * Applies the effect implemented by a concrete item subclass.
-     *
-     * @param player the player using the item
+     * Defines the common game-effect contract implemented by item subclasses.
+     * @param player the player using or receiving the effect
      * @param opponent the opposing player
-     * @param gun the shotgun currently used in the game
-     * @return the result code defined by the subclass implementation
+     * @param gun the shotgun involved in the operation
+     * @return the result supplied by the concrete effect implementation
      */
     public abstract int Effect(Player player,Player opponent, ShotGun gun);
 
+    // DEVELOPED BY:
     /**
-     * Calls the three-parameter effect method by default.
-     * This implementation ignores the opponent inventory index. Subclasses such as
-     * Adrenaline can override this method to use the index.
-     *
-     * @param player the player using the item
+     * Forwards to the three-parameter effect, ignoring the opponent slot. Adrenaline
+     * requires its five-parameter overload to actually select an opponent item.
+     * @param player the player using or receiving the effect
      * @param opponent the opposing player
-     * @param gun the shotgun currently used in the game
-     * @param opponentIndex the opponent inventory slot selected for stealing;
-     *        ignored by this default implementation
-     * @return the result returned by the three-parameter effect method
+     * @param gun the shotgun involved in the operation
+     * @param opponentIndex the zero-based opponent inventory slot, from 0 through 7
+     * @return the result supplied by the concrete effect implementation
      */
     public int Effect(Player player, Player opponent, ShotGun gun, int opponentIndex) {
         return Effect(player, opponent, gun);
     }
-
+    // DEVELOPED BY:
+    /**
+     * Forwards to the three-parameter effect, ignoring the stage by default.
+     * InformationItem overrides this entry point to forward stage information.
+     * @param player the player using or receiving the effect
+     * @param opponent the opposing player
+     * @param gun the shotgun involved in the operation
+     * @param stg the stage configuration
+     * @return the result supplied by the concrete effect implementation
+     */
     public int Effect(Player player, Player opponent, ShotGun gun, Stage stg) {
         return Effect(player, opponent, gun);
     }
-
+    // DEVELOPED BY: Leon
+    /**
+     * Forwards to the stage-aware effect, ignoring the opponent slot by default.
+     * Adrenaline overrides this entry point to steal the selected item.
+     * @param player the player using or receiving the effect
+     * @param opponent the opposing player
+     * @param gun the shotgun involved in the operation
+     * @param opponentIndex the zero-based opponent inventory slot, from 0 through 7
+     * @param stage the stage configuration
+     * @return the result supplied by the concrete effect implementation
+     */
     public int Effect(Player player, Player opponent, ShotGun gun, int opponentIndex, Stage stage) {
         return Effect(player, opponent, gun, stage);
     }

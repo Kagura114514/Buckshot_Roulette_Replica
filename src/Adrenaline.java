@@ -1,31 +1,42 @@
 /**
- * Represents an adrenaline item intended to steal and immediately use
- * an opponent's item. This draft has inverted index and effect-result checks
- * and does not prevent stealing another adrenaline item.
+ * Steals and immediately uses a selected opponent item through the five-parameter effect
+ * method. Another adrenaline item cannot be stolen.
  *
  * @author Leon
  */
 public class Adrenaline extends OpponentItem {
+    // DEVELOPED BY: Leon
     /**
-     * Creates an adrenaline item using the fixed ADRENALINE identifier.
+     * Initializes this item with its fixed type identifier.
      */
     public Adrenaline(){
         super(Items.ADRENALINE);
     }
 
+
+    // DEVELOPED BY: Leon
+    /**
+     * Placeholder overload without a target slot. Does not steal or use an item; use the
+     * five-parameter overload for stealing.
+     * @param player the player using or receiving the effect
+     * @param opponent the opposing player
+     * @param gun the shotgun involved in the operation
+     * @return 1 without performing an action
+     */
     public int Effect(Player player,Player opponent, ShotGun gun) {
         return 1;
     }
 
+    // DEVELOPED BY: Leon
     /**
-     * Attempts to use the item at the supplied opponent inventory index.
-     * The current condition enters the inventory-access branch only for indices
-     *
-     * @param player the player passed to the selected item
-     * @param opponent the player whose inventory is accessed
-     * @param gun the shotgun passed to the selected item
-     * @param opponentIndex the array index used to select the opponent's item
-     * @return 1 if the index is from 1 through 8; -2 if the accessed slot is empty;
+     * Validates the selected opponent slot, immediately applies that item to the user,
+     * and removes it from the opponent only on success. Rejects another adrenaline item.
+     * @param player the player using or receiving the effect
+     * @param opponent the opposing player
+     * @param gun the shotgun involved in the operation
+     * @param opponentIndex the zero-based opponent inventory slot, from 0 through 7
+     * @param stg the stage configuration
+     * @return 1 on success; -1 if the effect cannot be applied
      */
     public int Effect(Player player, Player opponent, ShotGun gun, int opponentIndex, Stage stg) {
         if (opponentIndex >= 0 && opponentIndex <= 7) {

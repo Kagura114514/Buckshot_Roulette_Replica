@@ -1,9 +1,8 @@
 import java.util.Random;
 
 /**
- * Stores a player's health, inventory and ability to act.
- * The current constructor initializes only health; the inventory remains null,
- * maximum health remains zero and the movement flag remains false.
+ * Stores a player name, health, inventory, stage wins and handcuff state. Private fields are
+ * accessed through methods; the inventory getter exposes the actual array.
  *
  * @author Leon
  */
@@ -15,6 +14,12 @@ public class Player {
     private String name;
     private boolean isCuffed;
 
+    // DEVELOPED BY:
+    /**
+     * Creates a player with two health points, maximum health two, eight empty slots,
+     * zero wins and no handcuffs.
+     * @param name the player name
+     */
     public Player(String name){
         this.hp = 2;
         this.name = name;
@@ -24,38 +29,57 @@ public class Player {
         this.maxHp=2;
     }
 
+    // DEVELOPED BY: Leon
+    /**
+     * Returns the player name.
+     * @return the stored name
+     */
     public String GetName(){
         return name;
     }
 
-    /** Set the HP at the starting
-     *
-     *  @param hp  - current stage HP
+    // DEVELOPED BY: Leon
+    /**
+     * Assigns current health directly. This method does not clamp health to zero or
+     * maximum health.
+     * @param hp the health value to assign
      */
     public void SetHP(int hp){
         this.hp = hp;
     }
 
-    /** Get the HP at every stage
-     *
-     * @return  - the HP at every stage
+    // DEVELOPED BY: Leon
+    /**
+     * Returns current health.
+     * @return the current health, which may be negative
      */
     public int GetHP(){
         return hp;
     }
 
+    // DEVELOPED BY: Leon
+    /**
+     * Sets maximum health from the supplied stage without changing current health.
+     * @param stage the stage configuration
+     */
     public void SetMaxHp(Stage stage){
         this.maxHp = stage.GetStartHP();
     }
 
+    // DEVELOPED BY: Leon
+    /**
+     * Returns the health limit used by health items.
+     * @return the maximum health
+     */
     public int GetMaxHp(){
         return maxHp;
     }
 
+    // DEVELOPED BY: Leon
     /**
-     * Adds the given amount to current health without enforcing maximum health.
-     *
-     * @param num the amount to add
+     * Adds the supplied amount directly; the caller is responsible for enforcing a health
+     * limit.
+     * @param num the number of health points to add or subtract
      * @return 1 after updating health
      */
     public int AddHP(int num){
@@ -63,10 +87,10 @@ public class Player {
         return 1;
     }
 
+    // DEVELOPED BY: Leon
     /**
-     * Subtracts the given amount from current health without enforcing a lower limit.
-     *
-     * @param num the amount to subtract
+     * Subtracts the supplied amount directly without clamping to zero.
+     * @param num the number of health points to add or subtract
      * @return 1 after updating health
      */
     public int MinusHP(int num){
@@ -74,45 +98,31 @@ public class Player {
         return 1;
     }
 
-    public void ChangeHP(Stage stage){
 
-    }
-
+    // DEVELOPED BY: Leon
     /**
-     * Returns the actual inventory array, not a copy.
-     *
-     * @return Items[], or null if it has not been initialized
+     * Returns the actual inventory array, not a copy. Null elements represent unused
+     * slots.
+     * @return the mutable eight-slot inventory
      */
     public Items[] GetAllItem(){
         return this.items;
     }
 
+    // DEVELOPED BY: Leon
     /**
-     * Stores an item in the selected slot, replacing any existing item.
-     * The inventory must already be initialized.
-     *
-     * @param item the item to store; may be null
-     * @param index the zero-based inventory slot
-     * @return return true after the assignment completes
-     *         return    if the inventory is null
-     *         return if the index is outside the array
-     */
-    public boolean AddItem(Items item,int index){
-        items[index]=item;
-        return true;
-    }
-
-    /**
-     * Clears the selected inventory slot.
-     *
-     * @param index the zero-based slot to clear
-     * @return return   if the inventory is null
-     * @       return   if the index is outside the array
+     * Clears the selected inventory slot. The caller must supply a valid index.
+     * @param index the zero-based inventory slot, from 0 through 7
      */
     public void RemoveItem (int index){
         items[index]=null;
     }
 
+    // DEVELOPED BY:
+    /**
+     * Counts non-null inventory slots.
+     * @return the number of items currently held
+     */
     public int CountItems(){
         int count = 0;
         for(int i = 0;i < items.length;i++){
@@ -126,26 +136,10 @@ public class Player {
         return this.stageWins;
     }
 
+    // DEVELOPED BY: RIMI
     /**
-     * Calls an item's effect and clears its slot if the effect call returns normally.
-     * The current implementation accepts only indices 1 through 9, ignores the
-     * effect result code and does not check health or the movement flag.
-     *
-     * @param index the inventory slot; the current condition accepts 1 through 9
-     * @param currPlayer the player using the item
-     * @param opponent the opposing player
-     * @param gun the shotgun currently used in the game
-     * @param opponentIndex the opponent inventory slot passed to the item effect
-     * @return true after the effect call and removal complete; false if index is
-     *         outside the accepted range
-     *
-     *         return false if the accepted slot is accessed while the
-     *         inventory or selected item is null
-     *
-     *         return false if an accepted index exceeds the array bounds
+     * Increments the stage-win count by one; it does not assign a supplied value.
      */
-
-
     public void SetStageWins(){
         this.stageWins++;
     }
@@ -156,14 +150,18 @@ public class Player {
     public void ConsumeCuff(){
         this.isCuffed = false;
     }
+    // DEVELOPED BY:
     /**
-     * Sets the movement flag to false.
-     * Turn skipping and releasing the handcuffs must be handled elsewhere.
+     * Sets the handcuff flag. Turn skipping is handled by GameSystem.
      */
     public void Cuffed(){
         this.isCuffed = true;
     }
-
+    // DEVELOPED BY:
+    /**
+     * Checks the handcuff flag.
+     * @return true if the player is currently cuffed; false otherwise
+     */
     public boolean GetIsCuffed(){
         return this.isCuffed;
     }

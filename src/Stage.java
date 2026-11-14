@@ -1,16 +1,17 @@
 /**
- * Stores stage health, shell limits and item distribution settings.
+ * Stores the starting health, shell-count limits and item allowance for a stage. GameSystem
+ * selects the stage and other classes read its settings.
  *
  * @author Leon
  */
 public class Stage {
+    /** Constant identifier for stage. */
     public static final int FST_STAGE = 1;
     public static final int SCD_STAGE = 2;
     public static final int TRD_STAGE = 3;
     public static final int FST_HP    = 2;
     public static final int SCD_HP    = 4;
     public static final int TRD_HP    = 5;
-
 
     private int stageNum;
     private int startHP;
@@ -21,10 +22,10 @@ public class Stage {
     public Stage(){
     }
 
+    // DEVELOPED BY: Leon
     /**
-     * Background rules for each round, such as starting health and the countdown value
-     *
-     * @param stageNum the intended stage number: 1, 2 or 3
+     * Initializes the stage settings. An unsupported stage number falls back to stage 1.
+     * @param stageNum the stage number, normally 1, 2 or 3
      */
     public Stage(int stageNum){
         if (stageNum < 1 || stageNum > 3) {//预防报错
@@ -53,55 +54,42 @@ public class Stage {
 
     }
 
+    // DEVELOPED BY: Leon
     /**
-     * Returns the stored stage number.
-     * The current constructors do not assign this field.
-     *
-     * @return the stored stage number, initially zero
+     * Returns the corresponding stage setting.
+     * @return the stored stage number
      */
     public int GetStageNum(){
         return this.stageNum;
     }
 
 
+    // DEVELOPED BY: Leon
     /**
-     * Returns the stored starting health for each player.
-     *
-     * @return the starting health setting
+     * Returns the corresponding stage setting.
+     * @return the starting health per player
      */
     public int GetStartHP(){
         return startHP;
     }
 
+    // DEVELOPED BY: Leon
     /**
-     * Returns the minimum number of shells per load.
-     *
-     * @return the stored minimum shell count
+     * Returns the corresponding stage setting.
+     * @return the starting health per player
      */
     public int GetMinShellNum(){
         return minShellNum;
     }
 
-    /**
-     * Returns the maximum number of shells per load.
-     *
-     * @return the stored maximum shell count
-     */
-    public int GetMaxShellNum(){
-        return maxShellNum;
-    }
 
+    // DEVELOPED BY:
     /**
-     * Returns the same item count as GetItemNum.
-     * Here a round refers to a load of shells, not a single player turn.
-     *
-     * @return the number of items intended for each player per load
+     * Returns the corresponding stage setting.
+     * @return the minimum shells per load
      */
     public int GetPerRoundItemNum(){
         return perRoundNum;
     }
 
-    public int GetCurrStageNum() {
-        return stageNum;
-    }
 }

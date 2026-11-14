@@ -1,11 +1,25 @@
 import java.util.Scanner;
 
+/**
+ * Provides console menus, board drawings, item labels and input helpers. GameMain supplies
+ * game data for display; this class also reads names and inventory positions.
+ *
+ * @author TODO: confirm original code author(s)
+ */
 public class Displayer {
     Scanner input;
 
     public Displayer() {
         input = new Scanner(System.in);
     }
+
+    // DEVELOPED BY: TODO: confirm original code author(s)
+    /**
+     * Builds eight display positions from shell codes: solid for live, hollow for blank.
+     * Positions beyond the array length are represented by spaces.
+     * @param list the array of shell codes
+     * @return the shell-symbol string; codes other than 0 and 1 also print a space
+     */
     private String DisplayBullets(int[] list){
         String result = "";
         for(int i=0;i<8;i++){
@@ -27,6 +41,13 @@ public class Displayer {
     private String DisplayBullets2(int[] list){
         return "";
     }
+
+    // DEVELOPED BY: TODO: confirm original code author(s)
+    /**
+     * Counts array entries with the blank-shell code 0.
+     * @param list the array of shell codes
+     * @return the number of blank shells
+     */
     private int blankBulletNum(int[] list){
         int num=0;
         for(int i=0;i<list.length;i++){
@@ -36,7 +57,12 @@ public class Displayer {
         }
         return num;
     }
-
+    // DEVELOPED BY: TODO: confirm original code author(s)
+    /**
+     * Counts array entries with the live-shell code 1.
+     * @param list the array of shell codes
+     * @return the number of live shells
+     */
     private int liveBulletNum(int[] list){
         int num=0;
         for(int i=0;i<list.length;i++){
@@ -47,7 +73,12 @@ public class Displayer {
         return num;
     }
 
-
+    // DEVELOPED BY: TODO: confirm original code author(s)
+    /**
+     * Prompts for a player name until it contains from one through seven characters.
+     * @param num the player number shown in the prompt
+     * @return the accepted name
+     */
     public String EnterName(int num){
         String name;
         while(true) {
@@ -67,6 +98,11 @@ public class Displayer {
         return name;
     }
 
+    // DEVELOPED BY: TODO: confirm original code author(s)
+    /**
+     * Shows a prompt and reads input until an empty line is entered.
+     * @param line the text used in the input prompt
+     */
     public void Enter(String line){
         System.out.print(line);
         String inp = input.nextLine();
@@ -81,6 +117,13 @@ public class Displayer {
         }
     }
 
+    // DEVELOPED BY: TODO: confirm original code author(s)
+    /**
+     * Reads a single digit from 1 through 8 and converts it to an inventory array index.
+     * Invalid text is rejected before parsing.
+     * @param line the text used in the input prompt
+     * @return the accepted zero-based index from 0 through 7
+     */
     public int EnterPos(String line){
         String position;
         int pos;
@@ -106,10 +149,22 @@ public class Displayer {
         return pos-1;
     }
 
+    // DEVELOPED BY: TODO: confirm original code author(s)
+    /**
+     * Prints the numbers of blank and live shells.
+     * @param list the array of shell codes
+     */
     public void DisplayBulletNum(int[] list){//过度使用
         System.out.printf("There are %d blank bullet and %d live bullet\n",blankBulletNum(list),liveBulletNum(list));
     }
 
+    // DEVELOPED BY: TODO: confirm original code author(s)
+    /**
+     * Prints the receiving player name and the generated item name, then asks where to
+     * place it.
+     * @param item the item to store or describe
+     * @param p one of the registered players
+     */
     public void DisplayRandomItem(Items item, Player p){
         System.out.print(p.GetName() + " ,you got a ");
         if(item instanceof ExpiredMedecine){
@@ -145,7 +200,10 @@ public class Displayer {
 
 
 
-
+    // DEVELOPED BY: TODO: confirm original code author(s)
+    /**
+     * Prints the main menu choices.
+     */
     public void DisplayMainMenu(){
         System.out.print("+--------------------------------+\n" +
                          "|        BUCKSHOT ROULETTE       |\n" +
@@ -158,6 +216,13 @@ public class Displayer {
                          "+--------------------------------+\n" +
                          "Choice one option:  ");
     }
+
+    // DEVELOPED BY: TODO: confirm original code author(s)
+    /**
+     * Prints the coin-guessing instructions for the selected player; does not generate
+     * the coin result.
+     * @param firstPlayerName the name of the player guessing the coin
+     */
     public void CoinToss(String firstPlayerName){
 
         System.out.print ("+------------------------------------------+\n"     +
@@ -169,6 +234,10 @@ public class Displayer {
                           "|            [0] TAILS                     |\n"     +
                           "+------------------------------------------+\n"     );
     }
+    // DEVELOPED BY: TODO: confirm original code author(s)
+    /**
+     * Prints the ASCII illustration of coin result 1.
+     */
     public void CoinOne(){
         System.out.print("     ...........\n"      +
                          "  ...           ...\n"    +
@@ -183,6 +252,10 @@ public class Displayer {
                          "     ...........\n"       );
     }
 
+    // DEVELOPED BY: TODO: confirm original code author(s)
+    /**
+     * Prints the ASCII illustration of coin result 0.
+     */
     public void CoinZero(){
         System.out.println("     ...........\n"     +
                            "  ...           ...\n"   +
@@ -200,6 +273,14 @@ public class Displayer {
     public void DisplaySignMachine(){
     }
 
+    // DEVELOPED BY: TODO: confirm original code author(s)
+    /**
+     * Prints the board with shell symbols and both player health values. Supply a grouped
+     * display array to avoid revealing the firing order.
+     * @param list the array of shell codes
+     * @param p1 the first player supplied to this method
+     * @param p2 the second player supplied to this method
+     */
     public void DisplayerGridWithShell(int[] list,Player p1,Player p2){
         System.out.print("                                                   -----------------------------------------------------------------------------------------------------------\n"+
                 "                                                  /                                       -------------------------------                                     \\\n"+
@@ -252,9 +333,6 @@ public class Displayer {
                 "    |                                                                                                                                                                                                       |\n"+
                 "    |                                                                                                                                                                                                       |\n"+
                 "    +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+\n"+p1.GetHP()+" "+p2.GetHP()+"\n"
-
-
-
         );}
 
     public void DisplayerGrid(Player p1,Player p2){

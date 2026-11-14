@@ -1,38 +1,37 @@
 /**
- * Provides a common base for items that affect the user's health.
- * The shared three-parameter effect method delegates to the player-only method
- * implemented by a concrete subclass.
+ * Groups items that change player health. Inherits the item type from Items and
+ * forwards the shared effect call to the player-only method.
  *
  * @author Leon
  */
 public  abstract class HealthItem extends Items {
+    // DEVELOPED BY: Leon
     /**
-     * Initializes a health item with its type identifier.
-     *
-     * @param type the item type identifier passed to Items
+     * Passes the item type to the Items constructor.
+     * @param type the item type identifier defined by Items
      */
     public HealthItem(int type) {
         super(type);
     }
 
+    // DEVELOPED BY: Leon
     /**
-     * Delegates the effect to the player-only method.
-     * The opponent and shotgun parameters are not used by this implementation.
-     *
-     * @param player the player receiving the health effect
-     * @param opponentPlayer the opposing player; ignored by this implementation
-     * @param gun the current shotgun; ignored by this implementation
-     * @return the result code returned by the player-only effect method
+     * Forwards to the specialized effect overload, allowing subclass overrides to apply
+     * the actual game effect.
+     * @param player the player using or receiving the effect
+     * @param opponentPlayer the opposing player (unused by this adapter)
+     * @param gun the shotgun involved in the operation
+     * @return the result returned by the specialized effect
      */
     public int Effect(Player player,Player opponentPlayer, ShotGun gun) {
         return Effect(player);
     }
 
+    // DEVELOPED BY: Leon
     /**
-     * Applies the health effect defined by a subclass.
-     *
-     * @param player the player receiving the health effect
-     * @return the result code defined by the subclass implementation
+     * Defines the specialized effect that concrete item subclasses must implement.
+     * @param player the player using or receiving the effect
+     * @return the result returned by the specialized effect
      */
     public  abstract int Effect(Player player);
 }
