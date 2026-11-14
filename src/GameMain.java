@@ -302,16 +302,15 @@ public class GameMain {
                             }
                         } while(gs.GetAllPlayer()[0].GetHP()>0 && gs.GetAllPlayer()[1].GetHP()>0 && gs.isRemainBullet());
                     } while(gs.GetAllPlayer()[0].GetHP()>0 && gs.GetAllPlayer()[1].GetHP()>0);
-                    winner=gs.SetRoundWinner(gs.GetAllPlayer()[0], gs.GetAllPlayer()[1]); // Set Round Winner StageWins +1
+                    winner = gs.SetRoundWinner(gs.GetAllPlayer()[0], gs.GetAllPlayer()[1]); // Set Round Winner StageWins +1
                     System.out.printf("Round winner is %s",winner.GetName());
                     round3 = false;
-                }
-                Player dummy = gs.SetRoundWinner(gs.GetAllPlayer()[0], gs.GetAllPlayer()[1]); // Set Round Winner StageWins +1
-                if(gs.GetGameWinner() == 10){
-                    System.out.println("Game Over! Game Winner is " + gs.GetAllPlayer()[0].GetName());
-                }
-                else if(gs.GetGameWinner() == 11){
-                    System.out.println("Game Over! Game Winner is " + gs.GetAllPlayer()[1].GetName());
+                    if(gs.GetGameWinner() == 10){
+                        System.out.println("Game Over! Game Winner is " + gs.GetAllPlayer()[0].GetName());
+                    }
+                    else if(gs.GetGameWinner() == 11){
+                        System.out.println("Game Over! Game Winner is " + gs.GetAllPlayer()[1].GetName());
+                    }
                 }
             }
             else if(option == 2){

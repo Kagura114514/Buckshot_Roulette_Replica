@@ -345,7 +345,7 @@ public class Displayer {
 
 
     public void DisplayMiniGrid(Items[] p1itemList){
-        System.out.printf("     +-----------------+-----------------+           +-----------------+-----------------+\n" +
+        System.out.printf(      "     +-----------------+-----------------+           +-----------------+-----------------+\n" +
                                 "     |1%15s |2%15s |           |5%15s |6%15s |             \n"+
                                 "     +-----------------+-----------------+           +-----------------+-----------------+\n" +
                                 "     |3%15s |4%15s |           |7%15s |8%15s |             \n"+
@@ -485,7 +485,7 @@ public class Displayer {
         System.out.printf("                                                   -------------------------------------------------------------------------------------------------------------\n"+
                 "                                                  /                                       -------------------------------                                       \\\n"+
                 "                                                 / ---------------------------------     /                               \\     --------------------------------- \\\n"  +
-                "                                                / /%16s/%16s/     /                                 \\     \\%16s\\%16s\\ \\\n"+
+                "                                                / /%15s/%15s/     /                                 \\     \\%15s\\%15s\\ \\\n"+
                 "                                               / /               /               /     /                                   \\     \\               \\               \\ \\\n"+
                 "                                              / /               /               /     /                                     \\     \\               \\               \\ \\\n"+
                 "                                             / /               /               /     /                                       \\     \\               \\               \\ \\\n"+
@@ -493,7 +493,7 @@ public class Displayer {
                 "                                           / /               /               /     ---------------------------------------------     \\               \\               \\ \\\n"+
                 "                                          / /               /               /                                                         \\               \\               \\ \\\n"+
                 "                                         / ---------------------------------                                                           --------------------------------- \\\n"+
-                "                                        / /%16s/%16s/                                                             \\%16s\\%16s\\ \\\n"+
+                "                                        / /%15s/%15s/                                                             \\%15s\\%15s\\ \\\n"+
                 "                                       / /               /               /                                                               \\               \\               \\ \\\n"+
                 "                                      / /               /               /                                                                 \\               \\               \\ \\\n"+
                 "                                     / /               /               /                                                                   \\               \\               \\ \\\n"+
@@ -534,8 +534,8 @@ public class Displayer {
                 "    |                                                                                                                                                                                                       |\n"+
                 "    +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+\n"+p1.GetHP()+" "+p2.GetHP()+"\n"
 
-                ,  DisplayItem(p2itemList[0]),   DisplayItem(p2itemList[1]),  DisplayItem(p2itemList[2]),   DisplayItem(p2itemList[3]),  DisplayItem(p2itemList[4]),  DisplayItem(p2itemList[5]),  DisplayItem(p2itemList[6]),  DisplayItem(p2itemList[7]),
-                        DisplayItem(p1itemList[0]),   DisplayItem(p1itemList[1]),  DisplayItem(p1itemList[2]),   DisplayItem(p1itemList[3]),  DisplayItem(p1itemList[4]),  DisplayItem(p1itemList[5]),  DisplayItem(p1itemList[6]),  DisplayItem(p1itemList[7]));
+                ,  DisplayItem(p2itemList[0]),   DisplayItem(p2itemList[1]),  DisplayItem(p2itemList[4]),   DisplayItem(p2itemList[5]),  DisplayItem(p2itemList[2]),  DisplayItem(p2itemList[3]),  DisplayItem(p2itemList[6]),  DisplayItem(p2itemList[7]),
+                        DisplayItem(p1itemList[0]),   DisplayItem(p1itemList[1]),  DisplayItem(p1itemList[4]),   DisplayItem(p1itemList[5]),  DisplayItem(p1itemList[2]),  DisplayItem(p1itemList[3]),  DisplayItem(p1itemList[6]),  DisplayItem(p1itemList[7]));
     }
 
 
