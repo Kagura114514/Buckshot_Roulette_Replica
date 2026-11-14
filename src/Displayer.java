@@ -47,38 +47,7 @@ public class Displayer {
         return num;
     }
 
-    public String DisplayItem(Items item){
-        if(item instanceof ExpiredMedecine){
-            return "ExpiredMedecine";
-        }
-        else if(item instanceof CigarettesPack){
-            return "CigarettesPack";
-        }
-        else if(item instanceof MagnifyingGlass){
-            return "MagnifyingGlass";
-        }
-        else if(item instanceof BurnerPhone){
-            return "BurnerPhone";
-        }
-        else if(item instanceof HandSaw){
-            return "HandSaw";
-        }
-        else if(item instanceof Inverter){
-            return "Inverter";
-        }
-        else if(item instanceof Beer){
-            return "Beer";
-        }
-        else if(item instanceof Adrenaline){
-            return "Adrenaline";
-        }
-        else if(item instanceof Handcuff){
-            return "Handcuff";
-        }
-        else{
-            return "wrong";
-        }
-    }
+
     public String EnterName(int num){
         String name;
         while(true) {
@@ -103,6 +72,7 @@ public class Displayer {
         String inp = input.nextLine();
         while(true) {
             if (inp.equals("")) {
+                System.out.println();
                 break;
             } else if (inp.length() > 0) {
                 System.out.println(line);
@@ -112,53 +82,64 @@ public class Displayer {
     }
 
     public int EnterPos(String line){
-        int position;
+        String position;
+        int pos;
         System.out.print("Enter the " + line + ": ");
         while(true) {
-            position = input.nextInt();
-            if (position >= 1 && position <= 8) {
+            while(true) {
+                position = input.nextLine();
+                if (position.length() != 1 || !(((int)((char)(position.charAt(0)))) >= 48 && ((int)((char)(position.charAt(0)))) <= 57)){
+                    System.out.print("Enter the correct " + line + " !: ");
+                }
+                else {
+                    break;
+                }
+            }
+            pos = Integer.parseInt(position);
+            if (pos >= 1 && pos <= 8) {
                 break;
             }
             else {
-                System.out.print("Enter the correct" + line + " !: ");
+                System.out.print("Enter the correct " + line + " !: ");
             }
         }
-        return position;
+        return pos-1;
     }
 
     public void DisplayBulletNum(int[] list){//过度使用
         System.out.printf("There are %d blank bullet and %d live bullet\n",blankBulletNum(list),liveBulletNum(list));
     }
 
-    public void DisplayRandomItem(Items item){
-        System.out.print("Put away the ");
+    public void DisplayRandomItem(Items item, Player p){
+        System.out.print(p.GetName() + " ,you got a ");
         if(item instanceof ExpiredMedecine){
-            System.out.println("ExpiredMedecine");
+            System.out.print("ExpiredMedecine");
         }
         else if(item instanceof CigarettesPack){
-            System.out.println("CigarettesPack");
+            System.out.print("CigarettesPack");
         }
         else if(item instanceof MagnifyingGlass){
-            System.out.println("MagnifyingGlass");
+            System.out.print("MagnifyingGlass");
         }
         else if(item instanceof BurnerPhone){
-            System.out.println("BurnerPhone");
+            System.out.print("BurnerPhone");
         }
         else if(item instanceof HandSaw){
-            System.out.println("HandSaw");
+            System.out.print("HandSaw");
         }
         else if(item instanceof Inverter){
-            System.out.println("Inverter");
+            System.out.print("Inverter");
         }
         else if(item instanceof Beer){
-            System.out.println("Beer");
+            System.out.print("Beer");
         }
         else if(item instanceof Adrenaline){
-            System.out.println("Adrenaline");
+            System.out.print("Adrenaline");
         }
         else if(item instanceof Handcuff){
-            System.out.println("Handcuff");
+            System.out.print("Handcuff");
         }
+        System.out.println(", select a grid to place it on");
     }
 
 
@@ -333,10 +314,19 @@ public class Displayer {
 
         );}
 
+    int[][] shells = new int[8][1];
+
+    private String shellInGraphic(ShotGun gun, int[][] list){
+        for(int i = 0; i < 8; i++){
+            if(gun.GetBulletsInGun()[i] == ShotGun.EMPTY){
+                this.shells[i][0] = ShotGun.EMPTY;
+            }
+        }
+        return"";
+    }
 
 
-
-    public void DisplayBullets(){
+    public void DisplayBullets(ShotGun gun){
         System.out.print("                              ================================================================================================================|  " +
                          "                             /            //            //            //            //            //            //            //            //|  " +
                          "                            /            //            //            //            //            //            //            //            // |  " +
@@ -351,6 +341,144 @@ public class Displayer {
                          "                     |                                                                                                                |   //     " +
                          "                     |                                                                                                                |  //      " +
                          "                     ===================================================================================================================//       " );
+    }
+
+
+    public void DisplayMiniGrid(Items[] p1itemList){
+        System.out.printf(      "     +-----------------+-----------------+           +-----------------+-----------------+\n" +
+                                "     |1%15s |2%15s |           |5%15s |6%15s |             \n"+
+                                "     +-----------------+-----------------+           +-----------------+-----------------+\n" +
+                                "     |3%15s |4%15s |           |7%15s |8%15s |             \n"+
+                                "     +-----------------+-----------------+           +-----------------+-----------------+\n" ,
+                DisplayItem(p1itemList[0]),   DisplayItem(p1itemList[1]),  DisplayItem(p1itemList[4]),   DisplayItem(p1itemList[5]),  DisplayItem(p1itemList[2]),  DisplayItem(p1itemList[3]),  DisplayItem(p1itemList[6]),  DisplayItem(p1itemList[7]));
+    }
+
+    public String DisplayItem(Items item){
+        if(item instanceof ExpiredMedecine){
+            return "ExpiredMedecine";
+        }
+        else if(item instanceof CigarettesPack){
+            return "CigarettesPack";
+        }
+        else if(item instanceof MagnifyingGlass){
+            return "MagnifyingGlass";
+        }
+        else if(item instanceof BurnerPhone){
+            return "BurnerPhone";
+        }
+        else if(item instanceof HandSaw){
+            return "HandSaw";
+        }
+        else if(item instanceof Inverter){
+            return "Inverter";
+        }
+        else if(item instanceof Beer){
+            return "Beer";
+        }
+        else if(item instanceof Adrenaline){
+            return "Adrenaline";
+        }
+        else if(item instanceof Handcuff){
+            return "Handcuff";
+        }
+        else{
+            return "wrong";
+        }
+    }
+
+    private String[][] AllItemGraph(){
+        String[][] allItemGraph =new String[7][14];
+        allItemGraph[0]= new String[]{
+                "    _______    ",
+                "   /__===__\\   ",
+                "   |       |   ",
+                "   | ///// |   ",
+                "   | ///// |   ",
+                "   |_______|   ",
+                "   \\_______/   "
+        };
+
+        allItemGraph[1]= new String[]{
+                "    _______    ",
+                "   /__===__\\   ",
+                "   |       |   ",
+                "   | ///// |   ",
+                "   | ///// |   ",
+                "   |_______|   ",
+                "   \\_______/   "
+        };
+
+        allItemGraph[2]= new String[]{
+                "    _______    ",
+                "   /__===__\\   ",
+                "   |       |   ",
+                "   | ///// |   ",
+                "   | ///// |   ",
+                "   |_______|   ",
+                "   \\_______/   "
+        };
+
+        allItemGraph[3]= new String[]{
+                "    _______    ",
+                "   /__===__\\   ",
+                "   |       |   ",
+                "   | ///// |   ",
+                "   | ///// |   ",
+                "   |_______|   ",
+                "   \\_______/   "
+        };
+
+        allItemGraph[4]= new String[]{
+                "    _______    ",
+                "   /__===__\\   ",
+                "   |       |   ",
+                "   | ///// |   ",
+                "   | ///// |   ",
+                "   |_______|   ",
+                "   \\_______/   "
+        };
+
+        allItemGraph[5]= new String[]{
+                "    _______    ",
+                "   /__===__\\   ",
+                "   |       |   ",
+                "   | ///// |   ",
+                "   | ///// |   ",
+                "   |_______|   ",
+                "   \\_______/   "
+        }
+
+        ;allItemGraph[6]= new String[]{
+                "    _______    ",
+                "   /__===__\\   ",
+                "   |       |   ",
+                "   | ///// |   ",
+                "   | ///// |   ",
+                "   |_______|   ",
+                "   \\_______/   "
+        };
+
+        allItemGraph[7]= new String[]{
+                "    _______    ",
+                "   /__===__\\   ",
+                "   |       |   ",
+                "   | ///// |   ",
+                "   | ///// |   ",
+                "   |_______|   ",
+                "   \\_______/   "
+        };
+
+        allItemGraph[8]= new String[]{
+                "    _______    ",
+                "   /__===__\\   ",
+                "   |       |   ",
+                "   | ///// |   ",
+                "   | ///// |   ",
+                "   |_______|   ",
+                "   \\_______/   "
+        };
+
+        return allItemGraph;
     }
 
     public void DisplayerGridWithItem(Player p1,Player p2,Items[] p1itemList,Items[] p2itemList){
@@ -406,8 +534,8 @@ public class Displayer {
                 "    |                                                                                                                                                                                                       |\n"+
                 "    +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+\n"+p1.GetHP()+" "+p2.GetHP()+"\n"
 
-                ,  DisplayItem(p1itemList[0]),   DisplayItem(p1itemList[1]),  DisplayItem(p1itemList[2]),   DisplayItem(p1itemList[3]),  DisplayItem(p1itemList[4]),  DisplayItem(p1itemList[5]),  DisplayItem(p1itemList[6]),  DisplayItem(p1itemList[7]),
-                        DisplayItem(p2itemList[0]),   DisplayItem(p2itemList[1]),  DisplayItem(p2itemList[2]),   DisplayItem(p2itemList[3]),  DisplayItem(p2itemList[4]),  DisplayItem(p2itemList[5]),  DisplayItem(p2itemList[6]),  DisplayItem(p2itemList[7]));
+                ,  DisplayItem(p2itemList[0]),   DisplayItem(p2itemList[1]),  DisplayItem(p2itemList[4]),   DisplayItem(p2itemList[5]),  DisplayItem(p2itemList[2]),  DisplayItem(p2itemList[3]),  DisplayItem(p2itemList[6]),  DisplayItem(p2itemList[7]),
+                        DisplayItem(p1itemList[0]),   DisplayItem(p1itemList[1]),  DisplayItem(p1itemList[4]),   DisplayItem(p1itemList[5]),  DisplayItem(p1itemList[2]),  DisplayItem(p1itemList[3]),  DisplayItem(p1itemList[6]),  DisplayItem(p1itemList[7]));
     }
 
 

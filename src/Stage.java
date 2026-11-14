@@ -29,9 +29,9 @@ public class Stage {
     public Stage(int stageNum){
         if (stageNum < 1 || stageNum > 3) {//预防报错
             System.out.println("Invalid stage. Using stage 1.");
-            stageNum = 1;
+            stageNum = FST_STAGE;
         }
-        else if(stageNum == FST_STAGE){
+        if(stageNum == FST_STAGE){
             startHP = FST_HP;
             minShellNum = 2;
             maxShellNum = 5;

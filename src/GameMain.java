@@ -119,7 +119,7 @@ public class GameMain {
                         dp.DisplayRandomItem(item);//展示发的道具（随机创建道具）
                         position = dp.EnterPos("position");
                         input.nextLine();
-                        gs.AddItem(position-1, item);// 把道具加到玩家里
+                        gs.AddItem(position, item);// 把道具加到玩家里
                         //展示加了道具后的棋盘
                         dp.DisplayerGridWithItem(gs.GetCurrPlayer(),gs.getAnotherPlayer(gs.GetCurrPlayer()), gs.GetCurrPlayer().GetAllItem(), gs.getAnotherPlayer(gs.GetCurrPlayer()).GetAllItem());
                     }

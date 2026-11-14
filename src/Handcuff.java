@@ -21,11 +21,15 @@ public class Handcuff extends OpponentItem {
      * @       return   if opponent is null
      */
     public int Effect(Player opponent){
-        if(opponent.GetPlayerMoveable()){
+        if(opponent.GetIsCuffed() == false){
             opponent.Cuffed();
+            System.out.println("You're opponent is now cuffed...");
+            System.out.println("Handcuff is used..");
             return 1;
         }
         else{
+            System.out.println("You can't cut a barrel twice right?.. ");
+            System.out.println("Handcuff is used..");
             return -1;
         }
     }
