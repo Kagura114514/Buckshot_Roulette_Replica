@@ -28,7 +28,6 @@ public class Adrenaline extends OpponentItem {
      * @return 1 if the index is from 1 through 8; -2 if the accessed slot is empty;
      */
     public int Effect(Player player, Player opponent, ShotGun gun, int opponentIndex, Stage stg) {
-        opponentIndex--;
         if (opponentIndex >= 0 && opponentIndex <= 7) {
             Items stolen = opponent.GetAllItem()[opponentIndex];
 

@@ -195,7 +195,7 @@ public class ShotGun {
                 line = "live.";
             }
 
-            String order = numInWords(index + 1);
+            String order = numInWords(index - current + 1);
 
             return order + " shell ...\n   ...   " + line;
         }

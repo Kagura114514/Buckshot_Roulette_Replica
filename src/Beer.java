@@ -10,24 +10,20 @@ public class Beer extends ShotgunEffectItem {
     public int Effect(ShotGun gun){
         int result = gun.EjectShell();
         String shell = "";
-        switch(result){
-            case ShotGun.BLANK:
-                shell = "blank";
-                break;
-            case ShotGun.LIVE:
-                shell = "live";
-                break;
+        if(result == ShotGun.BLANK) {
+            shell = "blank";
         }
-
-        if(result == ShotGun.BLANK || result == ShotGun.LIVE){
-            System.out.println("An " + shell + " shell is ejected...");
-            System.out.println("Beer is used..");
-            return 1;
+        else if(result == ShotGun.LIVE){
+            shell = "live";
         }
         else{
-            System.out.println("Something went wrong..");
-            System.out.println("Beer is used..");
+            System.out.println("No shell can be ejected.");
+            System.out.println("Beer is used..\n");
             return -1;
         }
+
+        System.out.println("An " + shell + " shell is ejected...");
+        System.out.println("Beer is used..\n");
+        return 1;
     }
 }
