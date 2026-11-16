@@ -1,23 +1,23 @@
 /**
- * Represents a cigarette pack that restores one health point.
+ * Restores one health point when the player is below maximum health.
  *
  * @author Leon
  */
 public class CigarettesPack extends HealthItem {
 
+    // DEVELOPED BY: Leon
     /**
-     * Creates a cigarette pack with the cigarette item type identifier.
+     * Initializes this item with its fixed type identifier.
      */
     public  CigarettesPack(){
         super(Items.CIGARETTES_PACK);
     }
 
+    // DEVELOPED BY: Leon
     /**
-     * Restores one health point if current health is below maximum health.
-     *
-     * @param player the player receiving the health effect
-     * @return return 1 if health is restored; -1 if current health is at or above the maximum
-     *         return   if player is null
+     * Restores one health point if below maximum health; otherwise reports failure.
+     * @param player the player using or receiving the effect
+     * @return 1 on success; -1 if the effect cannot be applied
      */
     public int Effect(Player player){
         int Hp=player.GetHP();

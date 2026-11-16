@@ -1,27 +1,24 @@
 /**
- * Defines an abstract expired-medicine item with a healing effect.
- * The current implementation always heals when health is below the maximum;
- * it does implement the game rule requiring a 50 percent chance of healing
- * and a 50 percent chance of losing health. This class cannot be instantiated
+ * Randomly attempts to restore up to two health points or removes one health point. The
+ * healing branch fails when health is already full.
  *
  * @author Leon
  */
 public class ExpiredMedecine extends HealthItem {
+    // DEVELOPED BY: Leon
     /**
-     * Initializes the expired-medicine item type identifier for a subclass.
+     * Initializes this item with its fixed type identifier.
      */
     public  ExpiredMedecine(){
         super(Items.EXPIRED_MEDECINE);
     }
 
+    // DEVELOPED BY: Leon
     /**
-     * Restores up to two health points without exceeding maximum health.
-     * Restores one point if only one point is missing, and two points otherwise.
-     * This method does not remove the inventory item.
-     *
-     * @param player the player receiving the health effect
-     * @return return 1 if health is restored; -1 if current health is at or above the maximum
-     *         return   if player is null
+     * Randomly chooses between healing up to two health points and losing one point.
+     * Healing fails at full health; loss is applied directly without clamping.
+     * @param player the player using or receiving the effect
+     * @return 1 on success; -1 if the effect cannot be applied
      */
     public int Effect(Player player){
         int Hp=player.GetHP();
