@@ -558,7 +558,7 @@ public class Displayer {
 
         return allItemGraph;
     }
-
+    /*
     public void DisplayerGridWithItem(Player p1,Player p2,Items[] p1itemList,Items[] p2itemList){
         System.out.printf("                                                   -------------------------------------------------------------------------------------------------------------\n"+
                 "                                                  /                                       -------------------------------                                       \\\n"+
@@ -616,6 +616,57 @@ public class Displayer {
                         DisplayItem(p1itemList[0]),   DisplayItem(p1itemList[1]),  DisplayItem(p1itemList[4]),   DisplayItem(p1itemList[5]),  DisplayItem(p1itemList[2]),  DisplayItem(p1itemList[3]),  DisplayItem(p1itemList[6]),  DisplayItem(p1itemList[7]));
     }
 
+     */
+    public void DisplayerGridWithItem(Player p1,Player p2,Items[] p1itemList,Items[] p2itemList){
+        System.out.printf(
+                "        +---------------------------------------------------------------------------------------------------------+\n" +
+                        "|                                                 OPPONENT                                                |\n" +
+                        "|                                                                                                         |\n" +
+                        "| +---------------+---------------+                                     +---------------+---------------+ |\n" +
+                        "| |%15s|%15s|                                     |%15s|%15s| |\n" +
+                        "| |               |               |                                     |               |               | |\n" +
+                        "| |               |               |                                     |               |               | |\n" +
+                        "| |               |               |                                     |               |               | |\n" +
+                        "| |               |               |                                     |               |               | |\n" +
+                        "| |               |               |                                     |               |               | |\n" +
+                        "| |               |               |                                     |               |               | |\n" +
+                        "| +---------------+---------------+                                     +---------------+---------------+ |\n" +
+                        "| |%15s|%15s|                                     |%15s|%15s| |\n" +
+                        "| |               |               |                                     |               |               | |\n" +
+                        "| |               |               |                                     |               |               | |\n" +
+                        "| |               |               |                                     |               |               | |\n" +
+                        "| |               |               |                                     |               |               | |\n" +
+                        "| |               |               |                                     |               |               | |\n" +
+                        "| |               |               |                                     |               |               | |\n" +
+                        "| +---------------+---------------+                                     +---------------+---------------+ |\n" +
+                        "|                                                                                                         |\n" +
+                        "|---------------------------------------------------------------------------------------------------------|\n" +
+                        "|                                                                                                         |\n" +
+                        "| +---------------+---------------+                                     +---------------+---------------+ |\n" +
+                        "| |%15s|%15s|                                     |%15s|%15s| |\n" +
+                        "| |               |               |                                     |               |               | |\n" +
+                        "| |               |               |                                     |               |               | |\n" +
+                        "| |               |               |                                     |               |               | |\n" +
+                        "| |               |               |                                     |               |               | |\n" +
+                        "| |               |               |                                     |               |               | |\n" +
+                        "| |               |               |                                     |               |               | |\n" +
+                        "| +---------------+---------------+                                     +---------------+---------------+ |\n" +
+                        "| |%15s|%15s|                                     |%15s|%15s| |\n" +
+                        "| |               |               |                                     |               |               | |\n" +
+                        "| |               |               |                                     |               |               | |\n" +
+                        "| |               |               |                                     |               |               | |\n" +
+                        "| |               |               |                                     |               |               | |\n" +
+                        "| |               |               |                                     |               |               | |\n" +
+                        "| |               |               |                                     |               |               | |\n" +
+                        "| +---------------+---------------+                                     +---------------+---------------+ |\n" +
+                        "|                                                                                                         |\n" +
+                        "|                                                  PLAYER                                                 |\n" +
+                        "+---------------------------------------------------------------------------------------------------------+\n",
+                DisplayItem(p2itemList[0]), DisplayItem(p2itemList[1]), DisplayItem(p2itemList[4]), DisplayItem(p2itemList[5]),
+                DisplayItem(p2itemList[2]), DisplayItem(p2itemList[3]), DisplayItem(p2itemList[6]), DisplayItem(p2itemList[7]),
+                DisplayItem(p1itemList[0]), DisplayItem(p1itemList[1]), DisplayItem(p1itemList[4]), DisplayItem(p1itemList[5]),
+                DisplayItem(p1itemList[2]), DisplayItem(p1itemList[3]), DisplayItem(p1itemList[6]), DisplayItem(p1itemList[7])
+        );
 
     }
 
