@@ -273,84 +273,110 @@ public class Displayer {
     public void DisplaySignMachine(){
     }
 
+    int[] shells;
 
-
-
-    /*
-    String[] shells = new String[8];
-
-    private String shellSave(ShotGun gun, int[][] bullets){
+    private void shellSave(ShotGun gun){
+        this.shells = new int[8];
+        int[] bullets = gun.GetBulletsInDisplay();
         for(int i = 0; i < 8; i++){
-            if(gun.GetBulletsInGun() == null || i >= gun.GetBulletsInGun().length)
-                if(gun.GetBulletsInGun()[i] == ShotGun.EMPTY){
-                    this.shells[i] = "" + ShotGun.EMPTY;
-                }
+            if(bullets == null || i >= bullets.length)
+                this.shells[i] = ShotGun.EMPTY;
             else{
-                this.shells[i] = "" + ShotGun.EMPTY;
+                if(bullets[i] == ShotGun.EMPTY){
+                    this.shells[i] = ShotGun.EMPTY;
+                }
+                else if(bullets[i] == ShotGun.BLANK){
+                    this.shells[i] = ShotGun.BLANK;
+                }
+                else{
+                    this.shells[i] = ShotGun.LIVE;
+                }
             }
         }
-        return"";
     }
 
     private void DisplayLine(int i){
         switch (i){
             case 1:
                 System.out.print("|\n                            /");
+                break;
             case 2:
                 System.out.print(" |\n                           /");
+                break;
             case 3:
                 System.out.print("  |\n                          /");
+                break;
             case 4:
                 System.out.print("   |\n                         /");
+                break;
             case 5:
                 System.out.print("    |\n                        /");
+                break;
             case 6:
                 System.out.print("     |\n                       /");
+                break;
             case 7:
                 System.out.print("      |\n                      /");
+                break;
             case 8:
-                System.out.print("       //\n");
-            case 9:
+                System.out.print("      //\n");
+                break;
         }
     }
-    private String shellDisplay(String[] shellType){
-        String graph = "";
+    private void shellDisplay(int[] shellType){
         for(int i = 0; i < 8; i++){
+            String graph = "";
             for(int k = 0; k < 8; k++) {
-                switch (shellType[i]) {
-                    case ShotGun.BLANK:
-                        graph += String.format("            //");
-                        break;
-                    case ShotGun.LIVE:
-                        break;
-                    case ShotGun.EMPTY:
-                        graph += String.format("            //" +
-                                "            //\n");
-                        break;
+                if(i == 0){
+                    if(shellType[k] == ShotGun.BLANK){
+                        graph += "[          ]//";
+                    }
+                    else if(shellType[k] == ShotGun.LIVE){
+                        graph += "[##########]//";
+                    }
+                    else{
+                        graph += "            //";
+                    }
+                }
+                else if(i >= 1 && i <= 6){
+                    if(shellType[k] == ShotGun.BLANK){
+                        graph += "|          |//";
+                    }
+                    else if(shellType[k] == ShotGun.LIVE){
+                        graph += "|##########|//";
+                    }
+                    else{
+                        graph += "            //";
+                    }
+                }
+                else if(i == 7){
+                    if(shellType[k] == ShotGun.BLANK || shellType[k] == ShotGun.LIVE){
+                        graph += "[==========]//";
+                    }
+                    else{
+                        graph += "            //";
+                    }
                 }
             }
-            System.out.println();
+            System.out.print(graph);
+            DisplayLine(i + 1);
         }
-        return graph;
     }
 
-     */
+
 
     public void DisplayBullets(ShotGun gun){
-        System.out.print("                              ================================================================================================================|  " +
-                         "                             /            //            //            //            //            //            //            //            //|  " + //1
-                         "                            /            //            //            //            //            //            //            //            // |  " + //2
-                         "                           /            //            //            //            //            //            //            //            //  |  " + //3
-                         "                          /            //            //            //            //            //            //            //            //   |  " + //4
-                         "                         /            //            //            //            //            //            //            //            //    |  " + //5
-                         "                        /            //            //            //            //            //            //            //            //     |  " + //6
-                         "                       /            //            //            //            //            //            //            //            //      |  " + //7
-                         "                      /            //            //            //            //            //            //            //            //      //  " + //8
-                         "                     =================================================================================================================|     //   " +
-                         "                     |                                                                                                                |    //    " +
-                         "                     |                                                                                                                |   //     " +
-                         "                     |                                                                                                                |  //      " +
-                         "                     ===================================================================================================================//       " );
+        shellSave(gun);
+        System.out.print("                              ================================================================================================================|\n" +
+                         "                             /");
+
+        shellDisplay(this.shells);
+
+        System.out.print("                     =================================================================================================================|     //\n"  +
+                         "                     |                                                                                                                |    //\n"   +
+                         "                     |                                                                                                                |   //\n"    +
+                         "                     |                                                                                                                |  //\n"     +
+                         "                     ===================================================================================================================//\n"      );
     }
 
 

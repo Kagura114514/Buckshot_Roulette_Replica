@@ -243,7 +243,7 @@ public class GameSystem {
         if(target) {  // if target is opponent
             if (gun.GetCurrShellType() == ShotGun.BLANK) {
                 gun.SetBulletsInGunEMPTY();
-                System.out.println(" shot the opponent. Blank!");
+                System.out.println("shot the opponent. Blank!");
                 if(gun.GetIsDoubleDMG() == true){
                     gun.SetIsDoubleDMG(false);
                     System.out.println("The gun barrel has reinstalled/...");
@@ -254,7 +254,7 @@ public class GameSystem {
             else if (gun.GetCurrShellType() == ShotGun.LIVE) {
                 int dmg = gun.DamageCalc();
                 getAnotherPlayer(currPlayer).SetHP(getAnotherPlayer(currPlayer).GetHP() - dmg);
-                System.out.println(" shot the opponent. Live!\n");
+                System.out.println("shot the opponent. Live!\n");
                 gun.SetBulletsInGunEMPTY();
                 switchPlayerCuff();
                 return 2;
@@ -264,14 +264,14 @@ public class GameSystem {
             if (gun.GetCurrShellType() == ShotGun.LIVE) {
                 int dmg = gun.DamageCalc();
                 currPlayer.SetHP(currPlayer.GetHP() - dmg);
-                System.out.println(" shot yourself. Live!\n");
+                System.out.println("shot yourself. Live!\n");
                 gun.SetBulletsInGunEMPTY();
                 switchPlayerCuff();
                 return 3;
             }
             else if(gun.GetCurrShellType() == ShotGun.BLANK){
                 gun.SetBulletsInGunEMPTY();
-                System.out.println(" shot yourself. Blank!");
+                System.out.println("shot yourself. Blank!");
                 if(gun.GetIsDoubleDMG() == true){
                     gun.SetIsDoubleDMG(false);
                     System.out.println("The gun barrel has reinstalled/...");

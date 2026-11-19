@@ -260,4 +260,42 @@ public class ShotGun {
             return type;
         }
     }
+
+    public int[] GetBulletsInDisplay(){
+        int[] list = new int[8];
+        int liveCount = 0;
+        int blankCount = 0;
+
+        for(int i = 0; i < GetBulletsInGun().length; i++){
+            if(GetBulletsInGun()[i] == LIVE){
+                liveCount++;
+            }
+            else if(GetBulletsInGun()[i] == BLANK){
+                blankCount++;
+            }
+        }
+
+        for(int i = 0; i < 8; i++){
+            list[i] = ShotGun.EMPTY;
+        }
+
+        int totalShell = liveCount + blankCount;
+        for(int i = 0; i < totalShell; i++){
+            int v = (int)(Math.random() * 2);
+            if(v == 0 && liveCount > 0){
+                list[i] = ShotGun.LIVE;
+                liveCount--;
+            }
+            else if(blankCount > 0){
+                list[i] = ShotGun.BLANK;
+                blankCount--;
+            }
+            else{
+                list[i] = ShotGun.LIVE;
+                liveCount--;
+            }
+        }
+
+        return list;
+    }
 }

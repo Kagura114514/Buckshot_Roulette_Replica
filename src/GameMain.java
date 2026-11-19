@@ -82,6 +82,7 @@ public class GameMain {
                 do{
 
                     gs.SetShotGun(gs.GetStage());//设置枪的在第几阶段，有多少子弹
+                    dp.DisplayBullets(gs.GetGun());
                     dp.DisplayBulletNum(gs.GetBulletsInDisplay());
                     dp.Enter("Press Enter to continue...");
                     do {
@@ -115,6 +116,7 @@ public class GameMain {
                 gs.GetAllPlayer()[1].SetMaxHp(gs.GetStage());
                 do{
                     gs.SetShotGun(gs.GetStage());//设置枪的在第几阶段，有多少子弹
+                    dp.DisplayBullets(gs.GetGun());
                     dp.DisplayBulletNum(gs.GetBulletsInDisplay());// 展示几个实弹几个空弹
                     dp.Enter("Press Enter to continue...");
                     boolean p1Received = false;
@@ -219,6 +221,7 @@ public class GameMain {
                     gs.GetAllPlayer()[1].SetMaxHp(gs.GetStage());
                     do{
                         gs.SetShotGun(gs.GetStage());//设置枪的在第几阶段，有多少子弹
+                        dp.DisplayBullets(gs.GetGun());
                         dp.DisplayBulletNum(gs.GetBulletsInDisplay());// 展示几个实弹几个空弹
                         dp.Enter("Press Enter to continue...");
                         boolean p1Received = false;
