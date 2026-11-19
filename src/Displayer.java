@@ -550,6 +550,7 @@ public class Displayer {
                     "     _________     " ,
                     "    /   (_)   \\   " ,
                     "    |=========|    " ,
+                    "    |         |    " ,
                     "    |  .---.  |    " ,
                     "    |  |~~~|  |    " ,
                     "    |  '---'  |    " ,
@@ -588,7 +589,9 @@ public class Displayer {
             };
         }
         else{
-            return new String[]{"","","","","","","",""};
+            return new String[]{"",
+                                "",
+                                "","","","","",""};
         }
     }
 
