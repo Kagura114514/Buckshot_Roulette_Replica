@@ -835,6 +835,7 @@ public class Displayer {
                         DisplayItem(p2itemList[0])[5], DisplayItem(p2itemList[1])[5], DisplayItem(p2itemList[4])[5], DisplayItem(p2itemList[5])[5],
                         DisplayItem(p2itemList[0])[6], DisplayItem(p2itemList[1])[6], DisplayItem(p2itemList[4])[6], DisplayItem(p2itemList[5])[6],
                         DisplayItem(p2itemList[0])[7], DisplayItem(p2itemList[1])[7], DisplayItem(p2itemList[4])[7], DisplayItem(p2itemList[5])[7],
+                        DisplayItem(p2itemList[0])[8], DisplayItem(p2itemList[1])[8], DisplayItem(p2itemList[4])[8], DisplayItem(p2itemList[5])[8],
 
                         DisplayItem(p2itemList[2])[0], DisplayItem(p2itemList[3])[0], DisplayItem(p2itemList[6])[0], DisplayItem(p2itemList[7])[0],
                         DisplayItem(p2itemList[2])[1], DisplayItem(p2itemList[3])[1], DisplayItem(p2itemList[6])[1], DisplayItem(p2itemList[7])[1],
@@ -844,6 +845,7 @@ public class Displayer {
                         DisplayItem(p2itemList[2])[5], DisplayItem(p2itemList[3])[5], DisplayItem(p2itemList[6])[5], DisplayItem(p2itemList[7])[5],
                         DisplayItem(p2itemList[2])[6], DisplayItem(p2itemList[3])[6], DisplayItem(p2itemList[6])[6], DisplayItem(p2itemList[7])[6],
                         DisplayItem(p2itemList[2])[7], DisplayItem(p2itemList[3])[7], DisplayItem(p2itemList[6])[7], DisplayItem(p2itemList[7])[7],
+                        DisplayItem(p2itemList[2])[8], DisplayItem(p2itemList[3])[8], DisplayItem(p2itemList[6])[8], DisplayItem(p2itemList[7])[8],
 
                         DisplayItem(p1itemList[0])[0], DisplayItem(p1itemList[1])[0], DisplayItem(p1itemList[4])[0], DisplayItem(p1itemList[5])[0],
                         DisplayItem(p1itemList[0])[1], DisplayItem(p1itemList[1])[1], DisplayItem(p1itemList[4])[1], DisplayItem(p1itemList[5])[1],
@@ -853,6 +855,7 @@ public class Displayer {
                         DisplayItem(p1itemList[0])[5], DisplayItem(p1itemList[1])[5], DisplayItem(p1itemList[4])[5], DisplayItem(p1itemList[5])[5],
                         DisplayItem(p1itemList[0])[6], DisplayItem(p1itemList[1])[6], DisplayItem(p1itemList[4])[6], DisplayItem(p1itemList[5])[6],
                         DisplayItem(p1itemList[0])[7], DisplayItem(p1itemList[1])[7], DisplayItem(p1itemList[4])[7], DisplayItem(p1itemList[5])[7],
+                        DisplayItem(p1itemList[0])[8], DisplayItem(p1itemList[1])[8], DisplayItem(p1itemList[4])[8], DisplayItem(p1itemList[5])[8],
 
                         DisplayItem(p1itemList[2])[0], DisplayItem(p1itemList[3])[0], DisplayItem(p1itemList[6])[0], DisplayItem(p1itemList[7])[0],
                         DisplayItem(p1itemList[2])[1], DisplayItem(p1itemList[3])[1], DisplayItem(p1itemList[6])[1], DisplayItem(p1itemList[7])[1],
@@ -862,6 +865,7 @@ public class Displayer {
                         DisplayItem(p1itemList[2])[5], DisplayItem(p1itemList[3])[5], DisplayItem(p1itemList[6])[5], DisplayItem(p1itemList[7])[5],
                         DisplayItem(p1itemList[2])[6], DisplayItem(p1itemList[3])[6], DisplayItem(p1itemList[6])[6], DisplayItem(p1itemList[7])[6],
                         DisplayItem(p1itemList[2])[7], DisplayItem(p1itemList[3])[7], DisplayItem(p1itemList[6])[7], DisplayItem(p1itemList[7])[7],
+                        DisplayItem(p1itemList[2])[8], DisplayItem(p1itemList[3])[8], DisplayItem(p1itemList[6])[8], DisplayItem(p1itemList[7])[8],
                         p1.GetHP(),p1.GetName()
         );}
     /*
