@@ -428,7 +428,40 @@ public class Displayer {
                                 "     +-----------------+-----------------+           +-----------------+-----------------+\n" +
                                 "     |3%15s |4%15s |           |7%15s |8%15s |             \n"+
                                 "     +-----------------+-----------------+           +-----------------+-----------------+\n" ,
-                DisplayItem(p1itemList[0]),   DisplayItem(p1itemList[1]),  DisplayItem(p1itemList[4]),   DisplayItem(p1itemList[5]),  DisplayItem(p1itemList[2]),  DisplayItem(p1itemList[3]),  DisplayItem(p1itemList[6]),  DisplayItem(p1itemList[7]));
+                DisplayItemWithMiniGrid(p1itemList[0]),   DisplayItemWithMiniGrid(p1itemList[1]),  DisplayItemWithMiniGrid(p1itemList[4]),   DisplayItemWithMiniGrid(p1itemList[5]),  DisplayItemWithMiniGrid(p1itemList[2]),  DisplayItemWithMiniGrid(p1itemList[3]),  DisplayItemWithMiniGrid(p1itemList[6]),  DisplayItemWithMiniGrid(p1itemList[7]));
+    }
+
+    public String DisplayItemWithMiniGrid(Items item){
+        if(item instanceof ExpiredMedecine){
+            return "ExpiredMedecine";
+        }
+        else if(item instanceof CigarettesPack){
+            return "CigarettesPack";
+        }
+        else if(item instanceof MagnifyingGlass){
+            return "MagnifyingGlass";
+        }
+        else if(item instanceof BurnerPhone){
+            return "BurnerPhone";
+        }
+        else if(item instanceof HandSaw){
+            return "HandSaw";
+        }
+        else if(item instanceof Inverter){
+            return "Inverter";
+        }
+        else if(item instanceof Beer){
+            return "Beer";
+        }
+        else if(item instanceof Adrenaline){
+            return "Adrenaline";
+        }
+        else if(item instanceof Handcuff){
+            return "Handcuff";
+        }
+        else{
+            return "";
+        }
     }
 
     public String[] DisplayItem(Items item){
@@ -749,7 +782,7 @@ public class Displayer {
                         "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
                         "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
                         "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
-                        "| |                   |                   |                                                 |                   |                   | |\n" +
+                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
                         "| +-------------------+-------------------+                                                 +-------------------+-------------------+ |\n" +
                         "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
                         "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
@@ -759,7 +792,7 @@ public class Displayer {
                         "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
                         "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
                         "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
-                        "| |                   |                   |                                                 |                   |                   | |\n" +
+                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
                         "| +-------------------+-------------------+                                                 +-------------------+-------------------+ |\n" +
                         "|                                                                                                                                     |\n" +
                         "|-------------------------------------------------------------------------------------------------------------------------------------|\n" +
@@ -773,7 +806,7 @@ public class Displayer {
                         "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
                         "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
                         "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
-                        "| |                   |                   |                                                 |                   |                   | |\n" +
+                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
                         "| +-------------------+-------------------+                                                 +-------------------+-------------------+ |\n" +
                         "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
                         "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
@@ -783,7 +816,7 @@ public class Displayer {
                         "| |%19s|%19s|     +-------------------------------------+     |%19s|%19s| |\n" +
                         "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
                         "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
-                        "| |                   |                   |     |                                     |     |                   |                   | |\n" +
+                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
                         "| +-------------------+-------------------+     |                                     |     +-------------------+-------------------+ |\n" +
                         "|                                               |                  %d                  |                                               |\n" +
                         "|                                               |            %16s         |                                               |\n" +
