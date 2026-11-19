@@ -425,6 +425,7 @@ public class Displayer {
                 System.out.print("      |\n                      /");
             case 8:
                 System.out.print("       //\n");
+            case 9:
         }
     }
     private String shellDisplay(String[] shellType){
