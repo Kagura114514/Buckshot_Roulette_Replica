@@ -55,6 +55,7 @@ public class GameMain {
                     else{
                         System.out.println("Warning, You Should Input A Valid Value!");
                     }
+                    System.out.println(" ");
                 }
                 dp.Enter("Press ENTER to flip the coin...");
                 coinSide = gs.GuessCoinSide();
@@ -210,7 +211,7 @@ public class GameMain {
 
                 while(round3){
                     System.out.println(" ");//换行
-                    System.out.println("The second stage");
+                    System.out.println("The Third stage");
                     gs.SetStage(3);
                     gs.GetAllPlayer()[0].SetHP(gs.GetStage().GetStartHP());
                     gs.GetAllPlayer()[0].SetMaxHp(gs.GetStage());
