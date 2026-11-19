@@ -334,8 +334,8 @@ public class Displayer {
                 "    |                                                                                                                                                                                                       |\n"+
                 "    +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+\n"+p1.GetHP()+" "+p2.GetHP()+"\n"
         );}
-
-    public void DisplayerGrid(Player p1,Player p2){
+    /*
+    public void DisplayerGri(Player p1,Player p2){
         System.out.print("                                                   -----------------------------------------------------------------------------------------------------------\n"+
                 "                                                  /                                       -------------------------------                                     \\\n"+
                 "                                                 / ---------------------------------     /                               \\     ------------------------------- \\\n"  +
@@ -391,18 +391,42 @@ public class Displayer {
 
 
         );}
+        */
+    String[] shells = new String[8];
 
-    int[][] shells = new int[8][1];
-
-    private String shellInGraphic(ShotGun gun, int[][] list){
+    private String shellSave(ShotGun gun, int[][] bullets){
         for(int i = 0; i < 8; i++){
-            if(gun.GetBulletsInGun()[i] == ShotGun.EMPTY){
-                this.shells[i][0] = ShotGun.EMPTY;
+            if(gun.GetBulletsInGun() == null || i >= gun.GetBulletsInGun().length)
+                if(gun.GetBulletsInGun()[i] == ShotGun.EMPTY){
+                    this.shells[i] = "" + ShotGun.EMPTY;
+                }
+            else{
+                this.shells[i] = "" + ShotGun.EMPTY;
             }
         }
         return"";
     }
 
+    private String shellDisplay(String[] shellType){
+        String graph = "";
+        for(int i = 0; i < 8; i++){
+            for(int k = 0; k < 8; k++) {
+                switch (shellType[i]) {
+                    case ShotGun.BLANK:
+                        graph += String.format("            //");
+                        break;
+                    case ShotGun.LIVE:
+                        break;
+                    case ShotGun.EMPTY:
+                        graph += String.format("            //" +
+                                "            //\n");
+                        break;
+                }
+            }
+            System.out.println();
+        }
+        return graph;
+    }
 
     public void DisplayBullets(ShotGun gun){
         System.out.print("                              ================================================================================================================|  " +
@@ -533,7 +557,7 @@ public class Displayer {
         }
         else if(item instanceof Inverter){
             return new String[]{
-                        "     __________    "  ,
+                        "    ___________    "  ,
                         "   /_________/|    " ,
                         "   |  ---->  ||    " ,
                         "   |  <----  ||    " ,
@@ -548,14 +572,14 @@ public class Displayer {
         else if(item instanceof Beer){
             return new String[]{
                     "     _________     " ,
-                    "    /   (_)   \\   " ,
+                    "   /   (_)   \\    " ,
                     "    |=========|    " ,
                     "    |         |    " ,
                     "    |  .----. |    " ,
                     "    |  |Beer| |    " ,
                     "    |  '----' |    " ,
                     "    |         |    " ,
-                    "    \\_________/   "
+                    "   \\_________/    "
 
             };
         }
@@ -568,7 +592,7 @@ public class Displayer {
                     "       |   |       " ,
                     "       |---|       " ,
                     "       |---|       " ,
-                    "       \\___/      " ,
+                    "      \\___/       " ,
                     "         |         ",
 
             };
@@ -576,13 +600,13 @@ public class Displayer {
         else if(item instanceof Handcuff){
             return new String[]{
                     "  .----.           ",
-                    " / .--. \\         " ,
-                    "||    | |--o       " ,
-                    " \\ '--' /   o     " ,
+                    "/ .--. \\          " ,
+                    " | |    | |--o     " ,
+                    "\\ '--' /    o     " ,
                     "  '----'  .--o--.  " ,
-                    "         / .---. \\" ,
-                    "        |  |   |  |" ,
-                    "         \\ '---' /",
+                    "        / .---. \\ " ,
+                    "        |  |    | |" ,
+                    "        \\ '---' / ",
                     "          '-----'  "
 
 
@@ -775,10 +799,10 @@ public class Displayer {
                         "+-------------------------------------------------------------------------------------------------------------------------------------+\n" +
                         "|                                               +-------------------------------------+                                               |\n" +
                         "|                                               |            %16s         |                                               |\n" +
-                        "|                                               |                  %d                  |                                               |\n" +
+                        "|                                               |                                     |                                               |\n" +
                         "| +-------------------+-------------------+     |                                     |     +-------------------+-------------------+ |\n" +
                         "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
-                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
+                        "| |%19s|%19s|     |                  %d                  |     |%19s|%19s| |\n" +
                         "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
                         "| |%19s|%19s|     +-------------------------------------+     |%19s|%19s| |\n" +
                         "| |%19s|%19s|                                                 |%19s|%19s| |\n" +
@@ -794,8 +818,8 @@ public class Displayer {
                         "| |%19s|%19s|                                                 |%19s|%19s| |\n" +
                         "| |%19s|%19s|                                                 |%19s|%19s| |\n" +
                         "| |%19s|%19s|                                                 |%19s|%19s| |\n" +
-                        "| |%19s|%19s|                                                |%19s|%19s| |\n" +
-                        "| |%19s|%19s|                                           |     |%19s|%19s| |\n" +
+                        "| |%19s|%19s|                                                 |%19s|%19s| |\n" +
+                        "| |%19s|%19s|                                                 |%19s|%19s| |\n" +
                         "| +-------------------+-------------------+                                                 +-------------------+-------------------+ |\n" +
                         "|                                                                                                                                     |\n" +
                         "|-------------------------------------------------------------------------------------------------------------------------------------|\n" +
@@ -818,11 +842,11 @@ public class Displayer {
                         "| |%19s|%19s|                                                 |%19s|%19s| |\n" +
                         "| |%19s|%19s|     +-------------------------------------+     |%19s|%19s| |\n" +
                         "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
-                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
+                        "| |%19s|%19s|     |                  %d                  |     |%19s|%19s| |\n" +
                         "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
                         "| +-------------------+-------------------+     |                                     |     +-------------------+-------------------+ |\n" +
-                        "|                                               |                  %d                  |                                               |\n" +
                         "|                                               |            %16s         |                                               |\n" +
+                        "|                                               |                                     |                                               |\n" +
                         "|                                               +-------------------------------------+                                               |\n" +
                         "+-------------------------------------------------------------------------------------------------------------------------------------+\n" ,
 
@@ -868,17 +892,17 @@ public class Displayer {
                         DisplayItem(p1itemList[2])[8], DisplayItem(p1itemList[3])[8], DisplayItem(p1itemList[6])[8], DisplayItem(p1itemList[7])[8],
                         p1.GetHP(),p1.GetName()
         );}
-    /*
 
-    public void DisplayerGridWithItem(Player p1,Player p2,Items[] p1itemList,Items[] p2itemList){
+
+    public void DisplayerGrid(Player p1,Player p2){
         System.out.printf(
                         "+-------------------------------------------------------------------------------------------------------------------------------------+\n" +
                         "|                                               +-------------------------------------+                                               |\n" +
                         "|                                               |                                     |                                               |\n" +
-                        "|                                               |                                     |                                               |\n" +
+                        "|                                               |            %16s         |                                               |\n" +
                         "| +-------------------+-------------------+     |                                     |     +-------------------+-------------------+ |\n" +
                         "| |                   |                   |     |                                     |     |                   |                   | |\n" +
-                        "| |                   |                   |     |                                     |     |                   |                   | |\n" +
+                        "| |                   |                   |     |                  %d                  |     |                   |                   | |\n" +
                         "| |                   |                   |     |                                     |     |                   |                   | |\n" +
                         "| |                   |                   |     +-------------------------------------+     |                   |                   | |\n" +
                         "| |                   |                   |                                                 |                   |                   | |\n" +
@@ -918,52 +942,18 @@ public class Displayer {
                         "| |                   |                   |                                                 |                   |                   | |\n" +
                         "| |                   |                   |     +-------------------------------------+     |                   |                   | |\n" +
                         "| |                   |                   |     |                                     |     |                   |                   | |\n" +
-                        "| |                   |                   |     |                                     |     |                   |                   | |\n" +
+                        "| |                   |                   |     |            %16s         |     |                   |                   | |\n" +
                         "| |                   |                   |     |                                     |     |                   |                   | |\n" +
                         "| +-------------------+-------------------+     |                                     |     +-------------------+-------------------+ |\n" +
-                        "|                                               |                                     |                                               |\n" +
+                        "|                                               |                  %d                  |                                               |\n" +
                         "|                                               |                                     |                                               |\n" +
                         "|                                               +-------------------------------------+                                               |\n" +
                         "+-------------------------------------------------------------------------------------------------------------------------------------+\n",
-                        DisplayItem(p2itemList[0])[0], DisplayItem(p2itemList[1])[0], DisplayItem(p2itemList[4])[0], DisplayItem(p2itemList[5])[0],
-                        DisplayItem(p2itemList[0])[1], DisplayItem(p2itemList[1])[1], DisplayItem(p2itemList[4])[1], DisplayItem(p2itemList[5])[1],
-                        DisplayItem(p2itemList[0])[2], DisplayItem(p2itemList[1])[2], DisplayItem(p2itemList[4])[2], DisplayItem(p2itemList[5])[2],
-                        DisplayItem(p2itemList[0])[3], DisplayItem(p2itemList[1])[3], DisplayItem(p2itemList[4])[3], DisplayItem(p2itemList[5])[3],
-                        DisplayItem(p2itemList[0])[4], DisplayItem(p2itemList[1])[4], DisplayItem(p2itemList[4])[4], DisplayItem(p2itemList[5])[4],
-                        DisplayItem(p2itemList[0])[5], DisplayItem(p2itemList[1])[5], DisplayItem(p2itemList[4])[5], DisplayItem(p2itemList[5])[5],
-                        DisplayItem(p2itemList[0])[6], DisplayItem(p2itemList[1])[6], DisplayItem(p2itemList[4])[6], DisplayItem(p2itemList[5])[6],
-                        DisplayItem(p2itemList[0])[7], DisplayItem(p2itemList[1])[7], DisplayItem(p2itemList[4])[7], DisplayItem(p2itemList[5])[7],
-
-                        DisplayItem(p2itemList[2])[0], DisplayItem(p2itemList[3])[0], DisplayItem(p2itemList[6])[0], DisplayItem(p2itemList[7])[0],
-                        DisplayItem(p2itemList[2])[1], DisplayItem(p2itemList[3])[1], DisplayItem(p2itemList[6])[1], DisplayItem(p2itemList[7])[1],
-                        DisplayItem(p2itemList[2])[2], DisplayItem(p2itemList[3])[2], DisplayItem(p2itemList[6])[2], DisplayItem(p2itemList[7])[2],
-                        DisplayItem(p2itemList[2])[3], DisplayItem(p2itemList[3])[3], DisplayItem(p2itemList[6])[3], DisplayItem(p2itemList[7])[3],
-                        DisplayItem(p2itemList[2])[4], DisplayItem(p2itemList[3])[4], DisplayItem(p2itemList[6])[4], DisplayItem(p2itemList[7])[4],
-                        DisplayItem(p2itemList[2])[5], DisplayItem(p2itemList[3])[5], DisplayItem(p2itemList[6])[5], DisplayItem(p2itemList[7])[5],
-                        DisplayItem(p2itemList[2])[6], DisplayItem(p2itemList[3])[6], DisplayItem(p2itemList[6])[6], DisplayItem(p2itemList[7])[6],
-                        DisplayItem(p2itemList[2])[7], DisplayItem(p2itemList[3])[7], DisplayItem(p2itemList[6])[7], DisplayItem(p2itemList[7])[7],
-
-                        DisplayItem(p1itemList[0])[0], DisplayItem(p1itemList[1])[0], DisplayItem(p1itemList[4])[0], DisplayItem(p1itemList[5])[0],
-                        DisplayItem(p1itemList[0])[1], DisplayItem(p1itemList[1])[1], DisplayItem(p1itemList[4])[1], DisplayItem(p1itemList[5])[1],
-                        DisplayItem(p1itemList[0])[2], DisplayItem(p1itemList[1])[2], DisplayItem(p1itemList[4])[2], DisplayItem(p1itemList[5])[2],
-                        DisplayItem(p1itemList[0])[3], DisplayItem(p1itemList[1])[3], DisplayItem(p1itemList[4])[3], DisplayItem(p1itemList[5])[3],
-                        DisplayItem(p1itemList[0])[4], DisplayItem(p1itemList[1])[4], DisplayItem(p1itemList[4])[4], DisplayItem(p1itemList[5])[4],
-                        DisplayItem(p1itemList[0])[5], DisplayItem(p1itemList[1])[5], DisplayItem(p1itemList[4])[5], DisplayItem(p1itemList[5])[5],
-                        DisplayItem(p1itemList[0])[6], DisplayItem(p1itemList[1])[6], DisplayItem(p1itemList[4])[6], DisplayItem(p1itemList[5])[6],
-                        DisplayItem(p1itemList[0])[7], DisplayItem(p1itemList[1])[7], DisplayItem(p1itemList[4])[7], DisplayItem(p1itemList[5])[7],
-
-                        DisplayItem(p1itemList[2])[0], DisplayItem(p1itemList[3])[0], DisplayItem(p1itemList[6])[0], DisplayItem(p1itemList[7])[0],
-                        DisplayItem(p1itemList[2])[1], DisplayItem(p1itemList[3])[1], DisplayItem(p1itemList[6])[1], DisplayItem(p1itemList[7])[1],
-                        DisplayItem(p1itemList[2])[2], DisplayItem(p1itemList[3])[2], DisplayItem(p1itemList[6])[2], DisplayItem(p1itemList[7])[2],
-                        DisplayItem(p1itemList[2])[3], DisplayItem(p1itemList[3])[3], DisplayItem(p1itemList[6])[3], DisplayItem(p1itemList[7])[3],
-                        DisplayItem(p1itemList[2])[4], DisplayItem(p1itemList[3])[4], DisplayItem(p1itemList[6])[4], DisplayItem(p1itemList[7])[4],
-                        DisplayItem(p1itemList[2])[5], DisplayItem(p1itemList[3])[5], DisplayItem(p1itemList[6])[5], DisplayItem(p1itemList[7])[5],
-                        DisplayItem(p1itemList[2])[6], DisplayItem(p1itemList[3])[6], DisplayItem(p1itemList[6])[6], DisplayItem(p1itemList[7])[6],
-                        DisplayItem(p1itemList[2])[7], DisplayItem(p1itemList[3])[7], DisplayItem(p1itemList[6])[7], DisplayItem(p1itemList[7])[7]
+                        p2.GetName(),p2.GetHP(),p1.GetHP(),p1.GetName()
 
         );}
 
-     */
+
 
     }
 

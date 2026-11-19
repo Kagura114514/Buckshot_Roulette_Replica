@@ -84,7 +84,7 @@ public class GameMain {
                     dp.DisplayBulletNum(gs.GetBulletsInDisplay());
                     dp.Enter("Press Enter to continue...");
                     do {
-                        dp.DisplayerGrid(gs.GetAllPlayer()[0],gs.GetAllPlayer()[1]);//显示grid
+                        dp.DisplayerGrid(gs.GetCurrPlayer(),gs.getAnotherPlayer(gs.GetCurrPlayer()));//显示grid
                         System.out.printf("Player:%s\n",gs.GetCurrPlayer().GetName());
                         System.out.println("Choose your target:");
                         System.out.println("1. your");
@@ -122,23 +122,21 @@ public class GameMain {
                         Player curr = gs.GetCurrPlayer();
                         if(curr == gs.GetAllPlayer()[0] && p1Received == false) {
                             for (int z = 0; z < gs.GetStage().GetPerRoundItemNum(); z++) {//发两次道具
+                                dp.DisplayMiniGrid(gs.GetCurrPlayer().GetAllItem());
                                 Items item = gs.RandomCreatItem();
                                 dp.DisplayRandomItem(item, gs.GetCurrPlayer());//展示发的道具（随机创建道具）
                                 position = dp.EnterPos("position");
                                 gs.AddItem(position, item);// 把道具加到玩家里
-                                //展示加了道具后的棋盘
-                                dp.DisplayMiniGrid(gs.GetCurrPlayer().GetAllItem());
                             }
                             p1Received = true;
                         }
                         else if(curr == gs.GetAllPlayer()[1] && p2Received == false){
                             for (int z = 0; z < gs.GetStage().GetPerRoundItemNum(); z++) {//发两次道具
+                                dp.DisplayMiniGrid(gs.GetCurrPlayer().GetAllItem());
                                 Items item = gs.RandomCreatItem();
                                 dp.DisplayRandomItem(item, gs.GetCurrPlayer());//展示发的道具（随机创建道具）
                                 position = dp.EnterPos("position");
                                 gs.AddItem(position, item);// 把道具加到玩家里
-                                //展示加了道具后的棋盘
-                                dp.DisplayMiniGrid(gs.GetCurrPlayer().GetAllItem());
                             }
                             p2Received = true;
                         }
@@ -228,23 +226,21 @@ public class GameMain {
                             Player curr = gs.GetCurrPlayer();
                             if(curr == gs.GetAllPlayer()[0] && p1Received == false) {
                                 for (int z = 0; z < gs.GetStage().GetPerRoundItemNum(); z++) {//发两次道具
+                                    dp.DisplayMiniGrid(gs.GetCurrPlayer().GetAllItem());
                                     Items item = gs.RandomCreatItem();
                                     dp.DisplayRandomItem(item, gs.GetCurrPlayer());//展示发的道具（随机创建道具）
                                     position = dp.EnterPos("position");
                                     gs.AddItem(position, item);// 把道具加到玩家里
-                                    //展示加了道具后的棋盘
-                                    dp.DisplayMiniGrid(gs.GetCurrPlayer().GetAllItem());
                                 }
                                 p1Received = true;
                             }
                             else if(curr == gs.GetAllPlayer()[1] && p2Received == false){
                                 for (int z = 0; z < gs.GetStage().GetPerRoundItemNum(); z++) {//发两次道具
+                                    dp.DisplayMiniGrid(gs.GetCurrPlayer().GetAllItem());
                                     Items item = gs.RandomCreatItem();
                                     dp.DisplayRandomItem(item, gs.GetCurrPlayer());//展示发的道具（随机创建道具）
                                     position = dp.EnterPos("position");
                                     gs.AddItem(position, item);// 把道具加到玩家里
-                                    //展示加了道具后的棋盘
-                                    dp.DisplayMiniGrid(gs.GetCurrPlayer().GetAllItem());
                                 }
                                 p2Received = true;
                             }
