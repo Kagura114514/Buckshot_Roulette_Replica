@@ -431,40 +431,135 @@ public class Displayer {
                 DisplayItem(p1itemList[0]),   DisplayItem(p1itemList[1]),  DisplayItem(p1itemList[4]),   DisplayItem(p1itemList[5]),  DisplayItem(p1itemList[2]),  DisplayItem(p1itemList[3]),  DisplayItem(p1itemList[6]),  DisplayItem(p1itemList[7]));
     }
 
-    public String DisplayItem(Items item){
+    public String[] DisplayItem(Items item){
         if(item instanceof ExpiredMedecine){
-            return "ExpiredMedecine";
+            return  new String[]{
+                    "     _________     ",
+                    "    |=========|    ",
+                    "    |_________|    ",
+                    "    /         \\   ",
+                    "   |  +     X  |   ",
+                    "   | --------- |   ",
+                    "   |  /\\  /\\   |   ",
+                    "   | /  \\/  \\  |   ",
+                    "   |___________|   ",
+            };
         }
         else if(item instanceof CigarettesPack){
-            return "CigarettesPack";
+            return  new String[]{
+                    "      _______      ",
+                    "     | || || |     ",
+                    "     | || || |     ",
+                    "    _|_||_||_|_    ",
+                    "   /__________/|   ",
+                    "   | ///////  ||   ",
+                    "   | -------  ||   ",
+                    "   |          ||   ",
+                    "   |__________|/   "
+            };
         }
         else if(item instanceof MagnifyingGlass){
-            return "MagnifyingGlass";
+            return new String[]{
+                    "      .------.     ",
+                    "    /   /      \\  ",
+                    "   |   /        |  ",
+                    "   |            |  ",
+                    "    \\          /  ",
+                    "     '.______.'    ",
+                    "         ||        ",
+                    "         ||        ",
+                    "         ||        "
+            };
         }
         else if(item instanceof BurnerPhone){
-            return "BurnerPhone";
+            return new String[]{
+                    "     __            ",
+                    "    |  |______     ",
+                    "    |  _____  |    ",
+                    "    | |     | |    ",
+                    "    | |_____| |    ",
+                    "    |  o o o  |    ",
+                    "    |  o o o  |    ",
+                    "    |  o o o  |    ",
+                    "    |_________|    "
+            };
         }
         else if(item instanceof HandSaw){
-            return "HandSaw";
+            return new String[]{
+                    "       ______      " ,
+                    "     / ____ \\     " ,
+                    "     | |  | |      " ,
+                    "     | |__| |      " ,
+                    "     \\______ /    " ,
+                    "       |   |>      " ,
+                    "       |   |>      " ,
+                    "       |   |>      " ,
+                    "       |___|       "
+
+            };
         }
         else if(item instanceof Inverter){
-            return "Inverter";
+            return new String[]{
+                        "     __________    "  ,
+                        "   /_________/|    " ,
+                        "   |  ---->  ||    " ,
+                        "   |  <----  ||    " ,
+                        "   |---------||    " ,
+                        "   |   (+)   ||    " ,
+                        "   |  □   ■  ||    " ,
+                        "   |_________|/    " ,
+                        "     ||   ||       "
+
+            };
         }
         else if(item instanceof Beer){
-            return "Beer";
+            return new String[]{
+                    "     _________     " ,
+                    "    /   (_)   \\   " ,
+                    "    |=========|    " ,
+                    "    |  .---.  |    " ,
+                    "    |  |~~~|  |    " ,
+                    "    |  '---'  |    " ,
+                    "    |         |    " ,
+                    "    \\_________/   "
+
+            };
         }
         else if(item instanceof Adrenaline){
-            return "Adrenaline";
+            return new String[]{
+                    "       _____       " ,
+                    "      |_____|      " ,
+                    "        | |        " ,
+                    "     ___|_|___     " ,
+                    "       |   |       " ,
+                    "       |---|       " ,
+                    "       |---|       " ,
+                    "       \\___/      " ,
+                    "         |         ",
+
+            };
         }
         else if(item instanceof Handcuff){
-            return "Handcuff";
+            return new String[]{
+                    "  .----.           ",
+                    " / .--. \\         " ,
+                    "||    | |--o       " ,
+                    " \\ '--' /   o     " ,
+                    "  '----'  .--o--.  " ,
+                    "         / .---. \\" ,
+                    "        |  |   |  |" ,
+                    "         \\ '---' /",
+                    "          '-----'  "
+
+
+            };
         }
         else{
-            return "wrong";
+            return new String[]{"","","","","","","",""};
         }
     }
 
-    private String[][] AllItemGraph(){
+    private void AllItemGraph(){
         String[][] allItemGraph =new String[7][14];
         allItemGraph[0]= new String[]{
                 "     _________     ",
@@ -579,7 +674,6 @@ public class Displayer {
 
         };
 
-        return allItemGraph;
     }
     /*
     public void DisplayerGridWithItem(Player p1,Player p2,Items[] p1itemList,Items[] p2itemList){
@@ -644,6 +738,102 @@ public class Displayer {
         System.out.printf(
                         "+-------------------------------------------------------------------------------------------------------------------------------------+\n" +
                         "|                                               +-------------------------------------+                                               |\n" +
+                        "|                                               |            %16s         |                                               |\n" +
+                        "|                                               |                  %d                  |                                               |\n" +
+                        "| +-------------------+-------------------+     |                                     |     +-------------------+-------------------+ |\n" +
+                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
+                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
+                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
+                        "| |%19s|%19s|     +-------------------------------------+     |%19s|%19s| |\n" +
+                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
+                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
+                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
+                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
+                        "| |                   |                   |                                                 |                   |                   | |\n" +
+                        "| +-------------------+-------------------+                                                 +-------------------+-------------------+ |\n" +
+                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
+                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
+                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
+                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
+                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
+                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
+                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
+                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
+                        "| |                   |                   |                                                 |                   |                   | |\n" +
+                        "| +-------------------+-------------------+                                                 +-------------------+-------------------+ |\n" +
+                        "|                                                                                                                                     |\n" +
+                        "|-------------------------------------------------------------------------------------------------------------------------------------|\n" +
+                        "|                                                                                                                                     |\n" +
+                        "| +-------------------+-------------------+                                                 +-------------------+-------------------+ |\n" +
+                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
+                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
+                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
+                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
+                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
+                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
+                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
+                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
+                        "| |                   |                   |                                                 |                   |                   | |\n" +
+                        "| +-------------------+-------------------+                                                 +-------------------+-------------------+ |\n" +
+                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
+                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
+                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
+                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
+                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
+                        "| |%19s|%19s|     +-------------------------------------+     |%19s|%19s| |\n" +
+                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
+                        "| |%19s|%19s|     |                                     |     |%19s|%19s| |\n" +
+                        "| |                   |                   |     |                                     |     |                   |                   | |\n" +
+                        "| +-------------------+-------------------+     |                                     |     +-------------------+-------------------+ |\n" +
+                        "|                                               |                  %d                  |                                               |\n" +
+                        "|                                               |            %16s         |                                               |\n" +
+                        "|                                               +-------------------------------------+                                               |\n" +
+                        "+-------------------------------------------------------------------------------------------------------------------------------------+\n" ,
+
+                        p2.GetName(),p2.GetHP(),
+                        DisplayItem(p2itemList[0])[0], DisplayItem(p2itemList[1])[0], DisplayItem(p2itemList[4])[0], DisplayItem(p2itemList[5])[0],
+                        DisplayItem(p2itemList[0])[1], DisplayItem(p2itemList[1])[1], DisplayItem(p2itemList[4])[1], DisplayItem(p2itemList[5])[1],
+                        DisplayItem(p2itemList[0])[2], DisplayItem(p2itemList[1])[2], DisplayItem(p2itemList[4])[2], DisplayItem(p2itemList[5])[2],
+                        DisplayItem(p2itemList[0])[3], DisplayItem(p2itemList[1])[3], DisplayItem(p2itemList[4])[3], DisplayItem(p2itemList[5])[3],
+                        DisplayItem(p2itemList[0])[4], DisplayItem(p2itemList[1])[4], DisplayItem(p2itemList[4])[4], DisplayItem(p2itemList[5])[4],
+                        DisplayItem(p2itemList[0])[5], DisplayItem(p2itemList[1])[5], DisplayItem(p2itemList[4])[5], DisplayItem(p2itemList[5])[5],
+                        DisplayItem(p2itemList[0])[6], DisplayItem(p2itemList[1])[6], DisplayItem(p2itemList[4])[6], DisplayItem(p2itemList[5])[6],
+                        DisplayItem(p2itemList[0])[7], DisplayItem(p2itemList[1])[7], DisplayItem(p2itemList[4])[7], DisplayItem(p2itemList[5])[7],
+
+                        DisplayItem(p2itemList[2])[0], DisplayItem(p2itemList[3])[0], DisplayItem(p2itemList[6])[0], DisplayItem(p2itemList[7])[0],
+                        DisplayItem(p2itemList[2])[1], DisplayItem(p2itemList[3])[1], DisplayItem(p2itemList[6])[1], DisplayItem(p2itemList[7])[1],
+                        DisplayItem(p2itemList[2])[2], DisplayItem(p2itemList[3])[2], DisplayItem(p2itemList[6])[2], DisplayItem(p2itemList[7])[2],
+                        DisplayItem(p2itemList[2])[3], DisplayItem(p2itemList[3])[3], DisplayItem(p2itemList[6])[3], DisplayItem(p2itemList[7])[3],
+                        DisplayItem(p2itemList[2])[4], DisplayItem(p2itemList[3])[4], DisplayItem(p2itemList[6])[4], DisplayItem(p2itemList[7])[4],
+                        DisplayItem(p2itemList[2])[5], DisplayItem(p2itemList[3])[5], DisplayItem(p2itemList[6])[5], DisplayItem(p2itemList[7])[5],
+                        DisplayItem(p2itemList[2])[6], DisplayItem(p2itemList[3])[6], DisplayItem(p2itemList[6])[6], DisplayItem(p2itemList[7])[6],
+                        DisplayItem(p2itemList[2])[7], DisplayItem(p2itemList[3])[7], DisplayItem(p2itemList[6])[7], DisplayItem(p2itemList[7])[7],
+
+                        DisplayItem(p1itemList[0])[0], DisplayItem(p1itemList[1])[0], DisplayItem(p1itemList[4])[0], DisplayItem(p1itemList[5])[0],
+                        DisplayItem(p1itemList[0])[1], DisplayItem(p1itemList[1])[1], DisplayItem(p1itemList[4])[1], DisplayItem(p1itemList[5])[1],
+                        DisplayItem(p1itemList[0])[2], DisplayItem(p1itemList[1])[2], DisplayItem(p1itemList[4])[2], DisplayItem(p1itemList[5])[2],
+                        DisplayItem(p1itemList[0])[3], DisplayItem(p1itemList[1])[3], DisplayItem(p1itemList[4])[3], DisplayItem(p1itemList[5])[3],
+                        DisplayItem(p1itemList[0])[4], DisplayItem(p1itemList[1])[4], DisplayItem(p1itemList[4])[4], DisplayItem(p1itemList[5])[4],
+                        DisplayItem(p1itemList[0])[5], DisplayItem(p1itemList[1])[5], DisplayItem(p1itemList[4])[5], DisplayItem(p1itemList[5])[5],
+                        DisplayItem(p1itemList[0])[6], DisplayItem(p1itemList[1])[6], DisplayItem(p1itemList[4])[6], DisplayItem(p1itemList[5])[6],
+                        DisplayItem(p1itemList[0])[7], DisplayItem(p1itemList[1])[7], DisplayItem(p1itemList[4])[7], DisplayItem(p1itemList[5])[7],
+
+                        DisplayItem(p1itemList[2])[0], DisplayItem(p1itemList[3])[0], DisplayItem(p1itemList[6])[0], DisplayItem(p1itemList[7])[0],
+                        DisplayItem(p1itemList[2])[1], DisplayItem(p1itemList[3])[1], DisplayItem(p1itemList[6])[1], DisplayItem(p1itemList[7])[1],
+                        DisplayItem(p1itemList[2])[2], DisplayItem(p1itemList[3])[2], DisplayItem(p1itemList[6])[2], DisplayItem(p1itemList[7])[2],
+                        DisplayItem(p1itemList[2])[3], DisplayItem(p1itemList[3])[3], DisplayItem(p1itemList[6])[3], DisplayItem(p1itemList[7])[3],
+                        DisplayItem(p1itemList[2])[4], DisplayItem(p1itemList[3])[4], DisplayItem(p1itemList[6])[4], DisplayItem(p1itemList[7])[4],
+                        DisplayItem(p1itemList[2])[5], DisplayItem(p1itemList[3])[5], DisplayItem(p1itemList[6])[5], DisplayItem(p1itemList[7])[5],
+                        DisplayItem(p1itemList[2])[6], DisplayItem(p1itemList[3])[6], DisplayItem(p1itemList[6])[6], DisplayItem(p1itemList[7])[6],
+                        DisplayItem(p1itemList[2])[7], DisplayItem(p1itemList[3])[7], DisplayItem(p1itemList[6])[7], DisplayItem(p1itemList[7])[7],
+                        p1.GetHP(),p1.GetName()
+        );}
+    /*
+
+    public void DisplayerGridWithItem(Player p1,Player p2,Items[] p1itemList,Items[] p2itemList){
+        System.out.printf(
+                        "+-------------------------------------------------------------------------------------------------------------------------------------+\n" +
+                        "|                                               +-------------------------------------+                                               |\n" +
                         "|                                               |                                     |                                               |\n" +
                         "|                                               |                                     |                                               |\n" +
                         "| +-------------------+-------------------+     |                                     |     +-------------------+-------------------+ |\n" +
@@ -694,12 +884,46 @@ public class Displayer {
                         "|                                               |                                     |                                               |\n" +
                         "|                                               |                                     |                                               |\n" +
                         "|                                               +-------------------------------------+                                               |\n" +
-                        "+-------------------------------------------------------------------------------------------------------------------------------------+\n"                  );
-                DisplayItem(p2itemList[0]), DisplayItem(p2itemList[1]), DisplayItem(p2itemList[4]), DisplayItem(p2itemList[5]),
-                DisplayItem(p2itemList[2]), DisplayItem(p2itemList[3]), DisplayItem(p2itemList[6]), DisplayItem(p2itemList[7]),
-                DisplayItem(p1itemList[0]), DisplayItem(p1itemList[1]), DisplayItem(p1itemList[4]), DisplayItem(p1itemList[5]),
-                DisplayItem(p1itemList[2]), DisplayItem(p1itemList[3]), DisplayItem(p1itemList[6]), DisplayItem(p1itemList[7])
+                        "+-------------------------------------------------------------------------------------------------------------------------------------+\n",
+                        DisplayItem(p2itemList[0])[0], DisplayItem(p2itemList[1])[0], DisplayItem(p2itemList[4])[0], DisplayItem(p2itemList[5])[0],
+                        DisplayItem(p2itemList[0])[1], DisplayItem(p2itemList[1])[1], DisplayItem(p2itemList[4])[1], DisplayItem(p2itemList[5])[1],
+                        DisplayItem(p2itemList[0])[2], DisplayItem(p2itemList[1])[2], DisplayItem(p2itemList[4])[2], DisplayItem(p2itemList[5])[2],
+                        DisplayItem(p2itemList[0])[3], DisplayItem(p2itemList[1])[3], DisplayItem(p2itemList[4])[3], DisplayItem(p2itemList[5])[3],
+                        DisplayItem(p2itemList[0])[4], DisplayItem(p2itemList[1])[4], DisplayItem(p2itemList[4])[4], DisplayItem(p2itemList[5])[4],
+                        DisplayItem(p2itemList[0])[5], DisplayItem(p2itemList[1])[5], DisplayItem(p2itemList[4])[5], DisplayItem(p2itemList[5])[5],
+                        DisplayItem(p2itemList[0])[6], DisplayItem(p2itemList[1])[6], DisplayItem(p2itemList[4])[6], DisplayItem(p2itemList[5])[6],
+                        DisplayItem(p2itemList[0])[7], DisplayItem(p2itemList[1])[7], DisplayItem(p2itemList[4])[7], DisplayItem(p2itemList[5])[7],
+
+                        DisplayItem(p2itemList[2])[0], DisplayItem(p2itemList[3])[0], DisplayItem(p2itemList[6])[0], DisplayItem(p2itemList[7])[0],
+                        DisplayItem(p2itemList[2])[1], DisplayItem(p2itemList[3])[1], DisplayItem(p2itemList[6])[1], DisplayItem(p2itemList[7])[1],
+                        DisplayItem(p2itemList[2])[2], DisplayItem(p2itemList[3])[2], DisplayItem(p2itemList[6])[2], DisplayItem(p2itemList[7])[2],
+                        DisplayItem(p2itemList[2])[3], DisplayItem(p2itemList[3])[3], DisplayItem(p2itemList[6])[3], DisplayItem(p2itemList[7])[3],
+                        DisplayItem(p2itemList[2])[4], DisplayItem(p2itemList[3])[4], DisplayItem(p2itemList[6])[4], DisplayItem(p2itemList[7])[4],
+                        DisplayItem(p2itemList[2])[5], DisplayItem(p2itemList[3])[5], DisplayItem(p2itemList[6])[5], DisplayItem(p2itemList[7])[5],
+                        DisplayItem(p2itemList[2])[6], DisplayItem(p2itemList[3])[6], DisplayItem(p2itemList[6])[6], DisplayItem(p2itemList[7])[6],
+                        DisplayItem(p2itemList[2])[7], DisplayItem(p2itemList[3])[7], DisplayItem(p2itemList[6])[7], DisplayItem(p2itemList[7])[7],
+
+                        DisplayItem(p1itemList[0])[0], DisplayItem(p1itemList[1])[0], DisplayItem(p1itemList[4])[0], DisplayItem(p1itemList[5])[0],
+                        DisplayItem(p1itemList[0])[1], DisplayItem(p1itemList[1])[1], DisplayItem(p1itemList[4])[1], DisplayItem(p1itemList[5])[1],
+                        DisplayItem(p1itemList[0])[2], DisplayItem(p1itemList[1])[2], DisplayItem(p1itemList[4])[2], DisplayItem(p1itemList[5])[2],
+                        DisplayItem(p1itemList[0])[3], DisplayItem(p1itemList[1])[3], DisplayItem(p1itemList[4])[3], DisplayItem(p1itemList[5])[3],
+                        DisplayItem(p1itemList[0])[4], DisplayItem(p1itemList[1])[4], DisplayItem(p1itemList[4])[4], DisplayItem(p1itemList[5])[4],
+                        DisplayItem(p1itemList[0])[5], DisplayItem(p1itemList[1])[5], DisplayItem(p1itemList[4])[5], DisplayItem(p1itemList[5])[5],
+                        DisplayItem(p1itemList[0])[6], DisplayItem(p1itemList[1])[6], DisplayItem(p1itemList[4])[6], DisplayItem(p1itemList[5])[6],
+                        DisplayItem(p1itemList[0])[7], DisplayItem(p1itemList[1])[7], DisplayItem(p1itemList[4])[7], DisplayItem(p1itemList[5])[7],
+
+                        DisplayItem(p1itemList[2])[0], DisplayItem(p1itemList[3])[0], DisplayItem(p1itemList[6])[0], DisplayItem(p1itemList[7])[0],
+                        DisplayItem(p1itemList[2])[1], DisplayItem(p1itemList[3])[1], DisplayItem(p1itemList[6])[1], DisplayItem(p1itemList[7])[1],
+                        DisplayItem(p1itemList[2])[2], DisplayItem(p1itemList[3])[2], DisplayItem(p1itemList[6])[2], DisplayItem(p1itemList[7])[2],
+                        DisplayItem(p1itemList[2])[3], DisplayItem(p1itemList[3])[3], DisplayItem(p1itemList[6])[3], DisplayItem(p1itemList[7])[3],
+                        DisplayItem(p1itemList[2])[4], DisplayItem(p1itemList[3])[4], DisplayItem(p1itemList[6])[4], DisplayItem(p1itemList[7])[4],
+                        DisplayItem(p1itemList[2])[5], DisplayItem(p1itemList[3])[5], DisplayItem(p1itemList[6])[5], DisplayItem(p1itemList[7])[5],
+                        DisplayItem(p1itemList[2])[6], DisplayItem(p1itemList[3])[6], DisplayItem(p1itemList[6])[6], DisplayItem(p1itemList[7])[6],
+                        DisplayItem(p1itemList[2])[7], DisplayItem(p1itemList[3])[7], DisplayItem(p1itemList[6])[7], DisplayItem(p1itemList[7])[7]
+
         );}
+
+     */
 
     }
 
