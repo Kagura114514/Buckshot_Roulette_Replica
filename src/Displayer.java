@@ -591,7 +591,7 @@ public class Displayer {
         else{
             return new String[]{"",
                                 "",
-                                "","","","","",""};
+                                "","","","","","",""};
         }
     }
 
