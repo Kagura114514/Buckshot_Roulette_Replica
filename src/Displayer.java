@@ -197,8 +197,7 @@ public class Displayer {
                          "+--------------------------------+\n" +
                          "|         — MAIN MENU —          |\n" +
                          "|1.START GAME                    |\n" +
-                         "|2.HOW TO PLAY                   |\n" +
-                         "|3.EXIT GAME                     |\n" +
+                         "|2.EXIT GAME                     |\n" +
                          "|......                          |\n" +
                          "+--------------------------------+\n" +
                          "Choice one option:  ");
