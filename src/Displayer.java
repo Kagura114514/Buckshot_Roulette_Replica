@@ -539,7 +539,7 @@ public class Displayer {
         else if(item instanceof Handcuff){
             return new String[]{
                     "  .----.           ",
-                    " / .--. \\          " ,
+                    " / .--. \\         " ,
                     "||   | |--o        " ,
                     " \\ '--' /   o     " ,
                     "   '----' .--o--.  " ,
