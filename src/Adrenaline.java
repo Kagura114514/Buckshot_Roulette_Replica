@@ -30,7 +30,7 @@ public class Adrenaline extends OpponentItem {
     // DEVELOPED BY: Leon
     /**
      * Validates the selected opponent slot, immediately applies that item to the user,
-     * and removes it from the opponent only on success. Rejects another adrenaline item.
+     * and removes it from the opponent if it on success. Rejects another adrenaline item.
      * @param player the player using or receiving the effect
      * @param opponent the opposing player
      * @param gun the shotgun involved in the operation
@@ -39,14 +39,14 @@ public class Adrenaline extends OpponentItem {
      * @return 1 on success; -1 if the effect cannot be applied
      */
     public int Effect(Player player, Player opponent, ShotGun gun, int opponentIndex, Stage stg) {
-        if (opponentIndex >= 0 && opponentIndex <= 7) {
+        if (opponentIndex >= 0 && opponentIndex <= 7) {//Sets maximum health from the supplied stage without changing current health.
             Items stolen = opponent.GetAllItem()[opponentIndex];
 
-            if(stolen == null ) {
+            if(stolen == null ) {//if is empty
                 System.out.println("The empty one cannot be chosen");
                 return -1;
             }
-            else if(stolen.GetType() == Items.ADRENALINE){
+            else if(stolen.GetType() == Items.ADRENALINE){// if is same item
                 System.out.println("Cannot steal Adrenaline!");
                 return -1;
             }

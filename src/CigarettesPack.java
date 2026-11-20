@@ -22,7 +22,7 @@ public class CigarettesPack extends HealthItem {
     public int Effect(Player player){
         int Hp=player.GetHP();
         int maxHp=player.GetMaxHp();
-        if(Hp < maxHp) {
+        if(Hp < maxHp) {//Sets maximum health from the supplied stage without changing current health.
             player.AddHP(1);
             System.out.println("Restore one health point");
             return 1;

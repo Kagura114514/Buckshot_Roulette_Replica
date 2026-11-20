@@ -3,31 +3,29 @@ import java.util.Scanner;
  * Coordinates players, stages, the shotgun and item effects. Calls item effects
  * polymorphically and removes successfully used items from their owners.
  *
- * @author TODO: confirm original code author(s)
+ * @author RIMI & LEON
  */
 public class GameSystem {
     private final Player[] all_Player = new Player[2];
-    private Player currPlayer;  // 现在的玩家
+    private Player currPlayer;
     private ShotGun gun;
     private Stage stg;
     private Scanner input;
-    // DEVELOPED BY: TODO: confirm original code author(s)
-    /**
-     * Creates the first-stage configuration, its shotgun and an input scanner. Players
-     * are registered separately.
-     */
+
+    // DEVELOPED BY: RIMI
+    /** Creates the first-stage configuration, its shotgun and an input scanner.
+     *  Players are registered separately.                                                          */
     public GameSystem(){
         stg = new Stage(1);
         gun = new ShotGun(this.stg);
         input = new Scanner(System.in);
     }
-    // DEVELOPED BY: TODO: confirm original code author(s)
-    /**
-     * Finds the other player by comparing object references. The argument should be one
-     * of the two registered players.
-     * @param p one of the registered players
-     * @return player 2 when p is player 1; otherwise player 1
-     */
+
+    // DEVELOPED BY: RIMI
+    /** Finds the other player by comparing object references.
+     *  The argument should be one of the two registered players.
+     *  @param  p - one of the registered players
+     *  @return player 2 when p is player 1; otherwise player 1                             */
     public Player GetAnotherPlayer(Player p) {
         if (p == GetAllPlayer()[0]) {
             return GetAllPlayer()[1];
@@ -36,20 +34,16 @@ public class GameSystem {
         }
     }
 
-    // DEVELOPED BY: TODO: confirm original code author(s)
-    /**
-     * Returns the actual array of registered players.
-     * @return the mutable two-player array
-     */
+    // DEVELOPED BY: RIMI
+    /** Returns the actual array of registered players.
+     *  @return the mutable two-player array            */
     public Player[] GetAllPlayer(){
         return all_Player;
     }
 
-    // DEVELOPED BY: TODO: confirm original code author(s)
-    /**
-     * Creates player 1 if that slot is empty; otherwise creates or replaces player 2.
-     * @param name the player name
-     */
+    // DEVELOPED BY: RIMI
+    /** Creates player 1 if that slot is empty; otherwise creates or replaces player 2.
+     *  @param name the player name                                                     */
     public void SetAllPlayerID(String name){
         if(GetAllPlayer()[0] == null) {
             GetAllPlayer()[0] = new Player(name);
@@ -60,66 +54,52 @@ public class GameSystem {
     }
 
 
-    // DEVELOPED BY: TODO: confirm original code author(s)
-    /**
-     * Returns the player currently acting.
-     * @return the current player
-     */
+    // DEVELOPED BY: RIMI
+    /** Returns the player currently acting.
+     *  @return the current player              */
     public Player GetCurrPlayer(){
         return currPlayer;
     }
 
-    // DEVELOPED BY: TODO: confirm original code author(s)
-    /**
-     * Assigns the current player.
-     * @param player the player using or receiving the effect
-     */
+    // DEVELOPED BY: RIMI
+    /** Assigns the current player.
+     *  @param player - the player */
     public void SetCurrPlayer(Player player){
         currPlayer = player;
     }
 
-    // DEVELOPED BY: TODO: confirm original code author(s)
-    /**
-     * Returns the current stage configuration.
-     * @return the current stage
-     */
+    // DEVELOPED BY: RIMI
+    /** Returns the current stage configuration.
+     * @return the current stage                    */
     public Stage GetStage(){
         return stg;
     }
 
-    // DEVELOPED BY: TODO: confirm original code author(s)
-    /**
-     * Replaces the stage configuration. Player health and inventory are not reset by this
-     * method.
-     * @param num the requested stage number
-     */
+    // DEVELOPED BY: RIMI
+    /** Replaces the stage configuration.
+     *  Player health and inventory are not reset by this method.
+     *  @param num the requested stage number                                           */
     public void SetStage(int num){
         stg = new Stage(num);
     }
 
-    // DEVELOPED BY: TODO: confirm original code author(s)
-    /**
-     * Returns the current shotgun.
-     * @return the current shotgun
-     */
+    // DEVELOPED BY: RIMI
+    /** Returns the current shotgun.
+     *  @return the current shotgun  */
     public ShotGun GetGun(){
         return gun;
     }
 
-    // DEVELOPED BY: TODO: confirm original code author(s)
-    /**
-     * Creates a new shotgun using the supplied stage, replacing the previous load.
-     * @param stg the stage configuration
-     */
+    // DEVELOPED BY: RIMI
+    /** Creates a new shotgun using the supplied stage, replacing the previous load.
+     *  @param stg - the stage configuration                                              */
     public void SetShotGun(Stage stg){
         gun = new ShotGun(stg);
     }
 
-    // DEVELOPED BY: TODO: confirm original code author(s)
-    /**
-     * Checks whether either player has won at least two stages.
-     * @return 10 for player 1, 11 for player 2, or 0 if neither has won
-     */
+    // DEVELOPED BY: RIMI
+    /** Checks whether either player has won at least two stages.
+     *  @return 10 for player 1, 11 for player 2, or 0 if neither has won  */
     public int GetGameWinner() {
         if(all_Player[0].GetStageWins() >= 2){
             return 10;
@@ -132,13 +112,12 @@ public class GameSystem {
         }
     }
 
-    // DEVELOPED BY: TODO: confirm original code author(s)
-    /**
-     * Records one stage win and returns its winner. Call exactly once after a stage ends,
-     * with exactly one player dead; otherwise the result is not a valid winner check.
-     * @param p1 the first player supplied to this method
-     * @param p2 the second player supplied to this method
-     * @return p2 if p1 has no health; otherwise p1
+    // DEVELOPED BY: RIMI
+    /** Records one stage win and returns its winner. Call exactly once after a stage ends,
+     *  with exactly one player dead; otherwise the result is not a valid winner check.
+     *  @param p1 the first player supplied to this method
+     *  @param p2 the second player supplied to this method
+     *  @return p2 if p1 has no health; otherwise p1
      */
     public Player SetRoundWinner(Player p1, Player p2){
         if(p1.GetHP() <= 0) {
@@ -152,10 +131,8 @@ public class GameSystem {
 
     }
 
-    // DEVELOPED BY: TODO: confirm original code author(s)
-    /**
-     * Changes the current player to the other player without checking handcuffs.
-     */
+    // DEVELOPED BY: RIMI
+    /** Changes the current player to the other player without checking handcuffs.  */
     public void SwitchPlayer(){
         if(GetCurrPlayer() == GetAllPlayer()[0]){
             SetCurrPlayer(GetAllPlayer()[1]);
@@ -165,9 +142,9 @@ public class GameSystem {
         }
     }
 
-    // DEVELOPED BY: TODO: confirm original code author(s)
+    // DEVELOPED BY: Leon
     /**
-     * Simulates a fair coin using the parity of a random integer from 1 through 100.
+     * Get a fair coin using the parity of a random integer from 1 through 100.
      * @return 0 or 1 with equal probability
      */
     public int GuessCoinSide(){
@@ -180,9 +157,7 @@ public class GameSystem {
         }
     }
 
-    //检测在随机的弹夹中，有几个实弹和几个空弹并有序排列
-
-    // DEVELOPED BY: TODO: confirm original code author(s)
+    // DEVELOPED BY: Leon
     /**
      * Builds a separate array of remaining shells grouped by type. This reveals counts
      * without revealing the actual firing order.
@@ -192,19 +167,19 @@ public class GameSystem {
     public int[] GetBulletsInDisplay(){
         int blankNum=0;
         int liveNum=0;
-        for(int i=0;i<gun.GetBulletsInGun().length;i++){
+        for(int i=0;i<gun.GetBulletsInGun().length;i++){//count number of blanknum
             if(gun.GetBulletsInGun()[i]==0){
                 blankNum++;
             }
-            else if (gun.GetBulletsInGun()[i] == ShotGun.LIVE) {
+            else if (gun.GetBulletsInGun()[i] == ShotGun.LIVE) {//count number of livenum
                 liveNum++;
             }
         }
         int[] list = new int[blankNum + liveNum];
-        for (int i = 0; i < blankNum; i++) {
+        for (int i = 0; i < blankNum; i++) {//add
             list[i] = ShotGun.BLANK;
         }
-        for (int i = blankNum; i < blankNum + liveNum; i++) {
+        for (int i = blankNum; i < blankNum + liveNum; i++) {//add
             list[i] = ShotGun.LIVE;
         }
 
@@ -212,49 +187,47 @@ public class GameSystem {
     }
 
     // DEVELOPED BY: RIMI
-    /**
-     * Fires at the selected target and consumes one shell. Applies damage for live shells
-     * and checks handcuffs when changing turns; a blank shot at oneself keeps the turn.
-     * @param target true to shoot the opponent; false to shoot oneself
-     * @return 1 for opponent/blank, 2 for opponent/live, 3 for self/live, 4 for
-     *     self/blank, or ERROR if no valid shell is found
-     */
+    /** Resolves a shot at the opponent or the current player. A valid shot consumes one shell.
+     *  Live shells deal calculated damage; shooting oneself with a blank preserves the turn.
+     *  Other shots apply the handcuff-aware turn change.
+     *  @param target true to shoot the opponent, false to shoot oneself
+     *  @return a description of the shot, or the string ERROR if no valid shell is available   */
     public String Shooting(boolean target){
         String movement = null;
         if(target) {  // if target is opponent
-            if (gun.GetCurrShellType() == ShotGun.BLANK) {
-                gun.SetBulletsInGunEMPTY();
+            if (gun.GetCurrShellType() == ShotGun.BLANK) { // if shell is blank
+                gun.SetBulletsInGunEMPTY();  // set current shell EMPTY
                 movement = GetCurrPlayer().GetName() + " shot " + GetAnotherPlayer(GetCurrPlayer()).GetName() + ". The bullet was Blank!";
-                if(gun.GetIsDoubleDMG() == true){
+                if(gun.GetIsDoubleDMG() == true){       //if a handsaw is enabled
                     gun.SetIsDoubleDMG(false);
                     movement += "The gun barrel has reinstalled/...";
                 }
                 switchPlayerCuff();
                 return movement;
             }
-            else if (gun.GetCurrShellType() == ShotGun.LIVE) {
+            else if (gun.GetCurrShellType() == ShotGun.LIVE) { // if shell is live
                 int dmg = gun.DamageCalc();
                 GetAnotherPlayer(currPlayer).SetHP(GetAnotherPlayer(currPlayer).GetHP() - dmg);
                 movement = GetCurrPlayer().GetName() + " shot " + GetAnotherPlayer(GetCurrPlayer()).GetName() + ". The bullet was Live!\n";
-                gun.SetBulletsInGunEMPTY();
+                gun.SetBulletsInGunEMPTY(); // set current shell EMPTY
                 switchPlayerCuff();
                 return movement;
             }
         }
         else{        // if target is player oneself
-            if (gun.GetCurrShellType() == ShotGun.LIVE) {
+            if (gun.GetCurrShellType() == ShotGun.LIVE) {  // if shell is live
                 int dmg = gun.DamageCalc();
                 currPlayer.SetHP(currPlayer.GetHP() - dmg);
                 movement = GetCurrPlayer().GetName() + " shot themself. Unfortunately the bullet was Live!\n";
 
-                gun.SetBulletsInGunEMPTY();
+                gun.SetBulletsInGunEMPTY();     // set current shell EMPTY
                 switchPlayerCuff();
                 return movement;
             }
-            else if(gun.GetCurrShellType() == ShotGun.BLANK){
-                gun.SetBulletsInGunEMPTY();
+            else if(gun.GetCurrShellType() == ShotGun.BLANK){  // if shell is blank
+                gun.SetBulletsInGunEMPTY();     // set current shell EMPTY
                 movement = GetCurrPlayer().GetName() + " shot themself. Luckily the bullet was Blank!";
-                if(gun.GetIsDoubleDMG() == true){
+                if(gun.GetIsDoubleDMG() == true){       //if a handsaw is enabled
                     gun.SetIsDoubleDMG(false);
                     movement += "The gun barrel has reinstalled/...";
                 }
@@ -264,18 +237,16 @@ public class GameSystem {
         return "ERROR";
     }
 
-    // DEVELOPED BY: TODO: confirm original code author(s)
-    /**
-     * Checks the opponent handcuff flag. Clears an active cuff and keeps the current
-     * player; otherwise changes players.
-     */
+    // DEVELOPED BY: RIMI
+    /** Checks the opponent handcuff flag. Clears an active cuff and keeps the current
+     *  player; otherwise changes players.                                              */
     private void switchPlayerCuff() {
-        // 如果opponent cuffed状态 == true
+        // if opponent isCuffed  == true
         if (GetAnotherPlayer(GetCurrPlayer()).GetIsCuffed() == true) {
             GetAnotherPlayer(GetCurrPlayer()).ConsumeCuff();
             System.out.println(GetAnotherPlayer(GetCurrPlayer()).GetName() + " is cuffed...unable to move...");
         }
-        // 如果opponent cuffed状态 == false
+        // if opponent isCuffed  == false
         else if (GetAnotherPlayer(GetCurrPlayer()).GetIsCuffed() == false) {
             SetCurrPlayer(GetAnotherPlayer(GetCurrPlayer()));
         }
@@ -296,7 +267,7 @@ public class GameSystem {
     }
     // for testing
 
-    // DEVELOPED BY: TODO: confirm original code author(s)
+    // DEVELOPED BY: Leon
     /**
      * Creates one of the nine concrete item types with equal probability.
      * @return a newly constructed item
@@ -304,7 +275,7 @@ public class GameSystem {
     public Items RandomCreatItem(){
         int type = (int)(Math.random() * 9) + 1;
         Items item;
-        if(type==1){
+        if(type==1){//determine item
             item=new ExpiredMedecine();
             return item;
         }
@@ -342,12 +313,11 @@ public class GameSystem {
         }
     }
 
-    // DEVELOPED BY: TODO: confirm original code author(s)
+    // DEVELOPED BY: Leon
     /**
-     * Stores an item in the current player inventory, replacing any existing item at that
-     * position. The caller must validate the position.
-     * @param position the zero-based inventory slot, from 0 through 7
-     * @param item the item to store or describe
+     * Places an item in the current player's inventory, replacing any existing item in that slot.
+     * @param position a valid zero-based inventory index from 0 through 7
+     * @param item the item to store; this method does not validate it
      */
     public void AddItem(int position,Items item){
         GetCurrPlayer().GetAllItem()[position]=item;
@@ -355,13 +325,9 @@ public class GameSystem {
 
     // For other items to use
 
-    // DEVELOPED BY: TODO: confirm original code author(s)
-    /**
-     * Invokes the selected item effect and clears its slot only when the effect returns
-     * 1. The caller must supply a valid, occupied slot; the indexed overload also
-     * forwards the opponent selection.
-     * @param index the zero-based inventory slot, from 0 through 7
-     */
+    // DEVELOPED BY: Leon&&Rimi
+    /** Applies the selected item using the current player, opponent, shotgun and stage. Removes it only when its effect returns 1.
+     *  @param index a valid zero-based index containing a non-null item                                                                    */
     public void UseItem(int index) {
         // Dynamic dispatch chooses the actual item subclass effect.
         // Only a success result consumes the inventory item.
@@ -369,17 +335,13 @@ public class GameSystem {
             GetCurrPlayer().GetAllItem()[index] = null;
         }
     }
-    // For adrenaline to use
 
-    // DEVELOPED BY: TODO: confirm original code author(s)
-    /**
-     * Invokes the selected item effect and clears its slot only when the effect returns
-     * 1. The caller must supply a valid, occupied slot; the indexed overload also
-     * forwards the opponent selection.
-     * @param index the zero-based inventory slot, from 0 through 7
-     * @param opponentIndex the zero-based opponent inventory slot, from 0 through 7
-     * @param stage the stage configuration
-     */
+    // For adrenaline to use
+    // DEVELOPED BY: Leon&&Rimi
+    /** Applies an item that needs an opponent inventory index, such as adrenaline. Removes the current player's selected item only when its effect returns 1.
+     *  @param index a valid zero-based index containing a non-null item
+     *  @param opponentIndex the opponent slot passed to the effect
+     *  @param stage the stage passed to the effect                                                                                                              */
     public void UseItem(int index, int opponentIndex,Stage stage) {
         // Dynamic dispatch chooses the actual item subclass effect.
         // Only a success result consumes the inventory item.

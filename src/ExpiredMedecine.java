@@ -24,9 +24,9 @@ public class ExpiredMedecine extends HealthItem {
         int Hp=player.GetHP();
         int maxHp=player.GetMaxHp();
         int chance = (int)(Math.random() * 2);
-        if (chance == 0) {
-            if (Hp < maxHp) {
-                if (maxHp - Hp == 1) {
+        if (chance == 0) {//Sets maximum health from the supplied stage without changing current health.
+            if (Hp < maxHp) {//Sets maximum health from the supplied stage without changing current health.
+                if (maxHp - Hp == 1) {//Determine whether to restore one unit of health or two units of health.
                     player.AddHP(1);
                     System.out.println("Restored 1 HP");
                 } else {

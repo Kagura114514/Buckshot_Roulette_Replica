@@ -15,11 +15,11 @@ public class Displayer {
 
 
 
-    // DEVELOPED BY: TODO: confirm original code author(s)
+    // DEVELOPED BY: Leon
     /**
-     * Counts array entries with the blank-shell code 0.
-     * @param list the array of shell codes
-     * @return the number of blank shells
+     * Builds a one-line shell display with eight positions. Prints a space as a side effect for unrecognized values.
+     * @param list the shell values; missing positions are shown as empty
+     * @return the formatted shell symbols and separators
      */
     private int blankBulletNum(int[] list){
         int num=0;
@@ -30,7 +30,7 @@ public class Displayer {
         }
         return num;
     }
-    // DEVELOPED BY: TODO: confirm original code author(s)
+    // DEVELOPED BY: Leon
     /**
      * Counts array entries with the live-shell code 1.
      * @param list the array of shell codes
@@ -45,13 +45,31 @@ public class Displayer {
         }
         return num;
     }
+    // DEVELOPED BY: RIMI
+    /** Prompts for option only between 1 or 2, accept other type of value
+     *  @return - 1 or 2                                                    */
+    public int EnterOpt(){
+        String inp;
+        while(true){
+            inp = input.nextLine();
+            if(inp.length() != 1 || inp == null || (inp.charAt(0) != 49 && inp.charAt(0) != 50)){ // only 1 or 2 is accepted
+                System.out.println("Select a valid target..");
+            }
+            else{
+                if(inp.charAt(0) == 49){
+                    return 1;
+                }
+                else if(inp.charAt(0) == 50){
+                    return 2;
+                }
+            }
+        }
+    }
 
-    // DEVELOPED BY: TODO: confirm original code author(s)
-    /**
-     * Prompts for a player name until it contains from one through seven characters.
-     * @param num the player number shown in the prompt
-     * @return the accepted name
-     */
+    // DEVELOPED BY: RIMI
+    /** Prompts for a player name until it contains from one through seven characters.
+     *  @param  num - the player number shown in the prompt
+     *  @return     - the accepted name                                                  */
     public String EnterName(int num){
         String name;
         while(true) {
@@ -71,11 +89,9 @@ public class Displayer {
         return name;
     }
 
-    // DEVELOPED BY: TODO: confirm original code author(s)
-    /**
-     * Shows a prompt and reads input until an empty line is entered.
-     * @param line the text used in the input prompt
-     */
+    // DEVELOPED BY: RIMI
+    /** Shows a prompt and reads input until an empty line is entered.
+     *  @param line - the text used in the input prompt                  */
     public void Enter(String line){
         System.out.print(line);
         String inp = input.nextLine();
@@ -90,13 +106,11 @@ public class Displayer {
         }
     }
 
-    // DEVELOPED BY: TODO: confirm original code author(s)
-    /**
-     * Reads a single digit from 1 through 8 and converts it to an inventory array index.
-     * Invalid text is rejected before parsing.
-     * @param line the text used in the input prompt
-     * @return the accepted zero-based index from 0 through 7
-     */
+    // DEVELOPED BY: RIMI
+    /** Reads only 1 to 8 and return it with -1
+     *  Invalid text is rejected before parsing.
+     *  @param line - the text used in the input prompt
+     *  @return     - the accepted zero-based index from 0 through 7  */
     public int EnterPos(String line){
         String position;
         int pos;
@@ -122,16 +136,16 @@ public class Displayer {
         return pos-1;
     }
 
-    // DEVELOPED BY: TODO: confirm original code author(s)
+    // DEVELOPED BY: Leon
     /**
      * Prints the numbers of blank and live shells.
      * @param list the array of shell codes
      */
-    public void DisplayBulletNum(int[] list){//过度使用
-        System.out.printf("There are %d blank bullet and %d live bullet\n",blankBulletNum(list),liveBulletNum(list));
+    public void DisplayBulletNum(int[] list){
+        System.out.printf("The gun is reloading....\nThere are %d blank bullet and %d live bullet\n",blankBulletNum(list),liveBulletNum(list));
     }
 
-    // DEVELOPED BY: TODO: confirm original code author(s)
+    // DEVELOPED BY: LEON
     /**
      * Prints the receiving player name and the generated item name, then asks where to
      * place it.
@@ -173,7 +187,7 @@ public class Displayer {
 
 
 
-    // DEVELOPED BY: TODO: confirm original code author(s)
+    // DEVELOPED BY: Leon
     /**
      * Prints the main menu choices.
      */
@@ -190,7 +204,7 @@ public class Displayer {
                          "Choice one option:  ");
     }
 
-    // DEVELOPED BY: TODO: confirm original code author(s)
+    // DEVELOPED BY: Leon
     /**
      * Prints the coin-guessing instructions for the selected player; does not generate
      * the coin result.
@@ -207,7 +221,7 @@ public class Displayer {
                           "|            [0] TAILS                     |\n"     +
                           "+------------------------------------------+\n"     );
     }
-    // DEVELOPED BY: TODO: confirm original code author(s)
+    // DEVELOPED BY: Leon
     /**
      * Prints the ASCII illustration of coin result 1.
      */
@@ -225,7 +239,7 @@ public class Displayer {
                          "     ...........\n"       );
     }
 
-    // DEVELOPED BY: TODO: confirm original code author(s)
+    // DEVELOPED BY: Leon
     /**
      * Prints the ASCII illustration of coin result 0.
      */
@@ -244,7 +258,9 @@ public class Displayer {
     }
 
     private int[] shells;
-
+    // DEVELOPED BY: RIMI
+    /** Copies the shotgun display data into eight cached tray slots, padding unused positions with EMPTY.
+     *  @param gun - the ShotGun object providing display data                                              */
     private void shellSave(ShotGun gun){
         this.shells = new int[8];
         int[] bullets = gun.GetBulletsInDisplay();
@@ -264,7 +280,9 @@ public class Displayer {
             }
         }
     }
-
+    // DEVELOPED BY: RIMI
+    /** Prints the tray border or line ending for one drawing row.
+     *  @param i - the drawing row number from 1 through 8; other values produce no output                                              */
     private void displayLine(int i){
         switch (i){
             case 1:
@@ -293,6 +311,9 @@ public class Displayer {
                 break;
         }
     }
+    // DEVELOPED BY: RIMI
+    /** Prints eight rows of shell artwork using the supplied tray values.
+     *  @param shellType - an array of eight values using BLANK, LIVE or EMPTY */
     private void shellDisplay(int[] shellType){
         for(int i = 0; i < 8; i++){
             String graph = "";
@@ -332,7 +353,9 @@ public class Displayer {
             displayLine(i + 1);
         }
     }
-
+    // DEVELOPED BY: RIMI
+    /** Prints the shell tray using a separate display order, without changing the actual firing order.
+     *  @param gun - the shotgun whose remaining shells are displayed                                       */
     public void DisplayBullets(ShotGun gun){
         shellSave(gun);
         System.out.print("                              ================================================================================================================|\n" +
@@ -346,7 +369,12 @@ public class Displayer {
                          "                     |                                                                                                                |  //\n"     +
                          "                     ===================================================================================================================//\n"      );
     }
-
+    // DEVELOPED BY: Leon
+    /**
+     * After printing the home chessboard
+     *  it is used to show where the player can place it
+     * @param p1itemList inventory array containing at least eight slots
+     */
     public void DisplayMiniGrid(Items[] p1itemList){
         System.out.printf(      "     +-----------------+-----------------+           +-----------------+-----------------+\n" +
                                 "     |1%15s |2%15s |           |5%15s |6%15s |             \n"+
@@ -355,7 +383,12 @@ public class Displayer {
                                 "     +-----------------+-----------------+           +-----------------+-----------------+\n" ,
                 DisplayItemWithMiniGrid(p1itemList[0]),   DisplayItemWithMiniGrid(p1itemList[1]),  DisplayItemWithMiniGrid(p1itemList[4]),   DisplayItemWithMiniGrid(p1itemList[5]),  DisplayItemWithMiniGrid(p1itemList[2]),  DisplayItemWithMiniGrid(p1itemList[3]),  DisplayItemWithMiniGrid(p1itemList[6]),  DisplayItemWithMiniGrid(p1itemList[7]));
     }
-
+    // DEVELOPED BY: Leon
+    /**
+     * Gets the item label used in the compact inventory display.
+     * @param item item to identify; may be null for an empty slot
+     * @return the item label, or an empty string for null or an unknown item
+     */
     public String DisplayItemWithMiniGrid(Items item){
         if(item instanceof ExpiredMedecine){
             return "ExpiredMedecine";
@@ -388,7 +421,12 @@ public class Displayer {
             return "";
         }
     }
-
+    // DEVELOPED BY: Leon
+    /**
+     * Returns the selected item's shape without printing it.
+     * @param item the item to draw; null or an unrecognized type uses the fallback artwork
+     * @return the artwork as an array of row strings
+     */
     private String[] DisplayItem(Items item){
         if(item instanceof ExpiredMedecine){
             return  new String[]{
@@ -464,7 +502,7 @@ public class Displayer {
                     "   |  <----  ||    " ,
                     "   |---------||    " ,
                     "   |   (+)   ||    " ,
-                    "   |  □   ■  ||    " ,
+                    "   | [O] [X] ||    " ,
                     "   |_________|/    " ,
                     "     ||   ||       "
 
@@ -521,7 +559,15 @@ public class Displayer {
 
 
 
-
+    // DEVELOPED BY: Leon
+    /**
+     * Prints the board with item shape, names and health indicators.
+     * Player two appears above player one. This method only displays state.
+     * @param p1 player shown in the lower half
+     * @param p2 player shown in the upper half
+     * @param p1itemList player one's inventory, containing at least eight slots
+     * @param p2itemList player two's inventory, containing at least eight slots
+     */
     public void DisplayerGridWithItem(Player p1,Player p2,Items[] p1itemList,Items[] p2itemList){
         System.out.printf(
                 "+-------------------------------------------------------------------------------------------------------------------------------------+\n" +
@@ -621,7 +667,12 @@ public class Displayer {
                                                                                     p1.GetName()
         );}
 
-
+    // DEVELOPED BY: Leon
+    /**
+     * Prints the board with names and health indicators but no item shape.
+     * @param p1 player shown in the lower half
+     * @param p2 player shown in the upper half
+     */
     public void DisplayerGrid(Player p1,Player p2){
         System.out.printf(
                 "+-------------------------------------------------------------------------------------------------------------------------------------+\n" +
@@ -680,21 +731,28 @@ public class Displayer {
                 p2.GetName(),DisplayerHealth(p2),p2.GetHP(),p2.GetMaxHp(),p1.GetHP(),p1.GetMaxHp(),DisplayerHealth(p1),p1.GetName()
 
         );}
-        private String DisplayerHealth(Player p1){
-            String result = "";
-            String char1="";
-            for(int i=0;i<p1.GetHP();i++){
-                char1 ="♥";
-                result += char1 +" ";
-            }
-            for(int i=0;i<p1.GetMaxHp()-p1.GetHP();i++){
-                char1 ="♡";
-                result += char1 +" ";
-            }
 
-            return  result;
-
+    // DEVELOPED BY: Leon
+    /**
+     * Builds a # bar from current and maximum health without clamping either value.
+     * @param p1 the player whose health is displayed
+     * @return filled # for current HP followed by empty . for missing HP
+     */
+    private String DisplayerHealth(Player p1){
+        String result = "";
+        String char1="";
+        for(int i=0;i<p1.GetHP();i++){//count health
+            char1 ="#";
+            result += char1 +" ";
         }
+        for(int i=0;i<p1.GetMaxHp()-p1.GetHP();i++){// number of the loss health
+            char1 =".";
+            result += char1 +" ";
+        }
+
+        return  result;
+
+    }
 
 
     }

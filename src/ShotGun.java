@@ -13,6 +13,8 @@ public class ShotGun {
     private int[]  bulletsInGun;
     private boolean isDoubleDMG;
     // Constructor
+    /** Loads a new shotgun for stage 1, 2 or 3, with at least one live and one blank shell.
+     *  @param stg a non-null, initialized stage whose number is 1, 2 or 3                     */
     public ShotGun(Stage stg){
         // Instantiate the object depends on the stage level
         if(stg.GetStageNum() == Stage.FST_STAGE){
@@ -83,7 +85,7 @@ public class ShotGun {
                     countBlank++;
                 }
             }
-        }while(countBlank < limit || countLive < limit);
+        }while(countBlank < limit || countLive < limit);  // repeat until the randomized ratio of the shells are valid
     }
     // DEVELOPED BY: RIMI
     /** Return the number in words
@@ -117,7 +119,7 @@ public class ShotGun {
                 str = "eighth";
                 break;
             default:
-                str = "something went wrong";
+                str = "something went wrong"; // won't reach here if in normal case
                 break;
         }
         return str;
@@ -133,11 +135,15 @@ public class ShotGun {
         }
         return -1;
     }
-
+    // DEVELOPED BY: RIMI
+    /** Returns the actual firing-order array. Consumed positions contain EMPTY.
+     *  @return     - the mutable shell array, not a copy    */
     public int[] GetBulletsInGun(){
         return this.bulletsInGun;
     }
 
+    // DEVELOPED BY: RIMI
+    /** Sets the first remaining shell EMPTY      */
     public void SetBulletsInGunEMPTY(){
         int position = getCurrShellPos();
 
@@ -147,34 +153,43 @@ public class ShotGun {
 
     }
 
-    // Magnifying Glass will need this
+    // DEVELOPED BY: RIMI
+    /** Looks up the next remaining shell without consuming it.
+     *  @return BLANK or LIVE, or -1 if the gun is empty           */
     public int GetCurrShellType(){
-        for(int i = 0; i < GetBulletsInGun().length; i++){
+        for(int i = 0; i < GetBulletsInGun().length; i++){ // track the type of the current shell
             if(GetBulletsInGun()[i] != EMPTY){
                 return this.GetBulletsInGun()[i];
             }
         }
         return -1;
     }
-
+    // DEVELOPED BY: RIMI
+    /** Replaces the first remaining shell type; does nothing if the gun is empty.
+     *  @param shellType - the value to store, normally BLANK or LIVE; not validated here           */
     public void SetCurrShellType(int shellType){
-        for(int i = 0; i < GetBulletsInGun().length; i++){
+        for(int i = 0; i < GetBulletsInGun().length; i++){ // to reach to the current position of the shell
             if(GetBulletsInGun()[i] != EMPTY){
                 GetBulletsInGun()[i] = shellType;
-                break;
+                break; // instant break after a value is assigned
             }
         }
     }
 
+    // DEVELOPED BY: RIMI
+    /** Checks whether the handsaw damage boost is active.
+     *  @return true - when double damage is enabled           */
     public boolean GetIsDoubleDMG(){
         return this.isDoubleDMG;
     }
 
+    // DEVELOPED BY: RIMI
+    /** Enable double damage
+     *  @param boo - true to enable the boost, false to clear it           */
     public void SetIsDoubleDMG(boolean boo){
         this.isDoubleDMG = boo;
     }
 
-    // BurnerPhone will need this
     /** Get a random shell info, (it won't give empty shell info)
      *  param@  - current stage level
      *  return  - Random line about the shell position info   */
@@ -182,11 +197,11 @@ public class ShotGun {
         int current = getCurrShellPos();
         int remainingOpt = GetBulletsInGun().length - 1 - current;
         String line = "Something went wrong";
-        if(current == -1 || current > GetBulletsInGun().length - 2){
+        if(current == -1 || current > GetBulletsInGun().length - 2){ // if no shell or shell is only 1 left
             return "How Unfortunate...";
         }
         else{
-            int index = (int)(Math.random() * remainingOpt) + current + 1;
+            int index = (int)(Math.random() * remainingOpt) + current + 1; // index == between 2~current
 
             if(GetBulletsInGun()[index] == BLANK){
                 line = "blank.";
@@ -200,11 +215,11 @@ public class ShotGun {
             return order + " shell ...\n   ...   " + line;
         }
     }
-    // Inverter will need this
+
     // DEVELOPED BY: RIMI
     /** Revert the type of the current shell
      *  @return     true  - success
- *                  false - failed                */
+     *              false - failed                */
     public boolean SwitchShellType(){
         if(GetCurrShellType() == LIVE){
             SetCurrShellType(BLANK);
@@ -216,7 +231,7 @@ public class ShotGun {
         }
         return false;
     }
-    // Handsaw will need this
+
     // DEVELOPED BY: RIMI
     /** Set isDoubleDMG true
      *  return  1 - Set IsDoubleDMG = true successfully
@@ -230,7 +245,7 @@ public class ShotGun {
             return -1;
         }
     }
-    // Will need this when shooting
+
     // DEVELOPED BY: RIMI
     /** Calculate the damage to the shotgun of the current round,
      *  the damage will be doubled if user uses a handsaw
@@ -244,7 +259,7 @@ public class ShotGun {
             return 1;
         }
     }
-    // 注意！ 射击后/使用beer时需要被调用
+
     // DEVELOPED BY: RIMI
     /** Eject the current shell after a shot
      *  @return  true  - ejected a shell successfully
@@ -252,7 +267,7 @@ public class ShotGun {
     public int EjectShell(){
         int pos = getCurrShellPos();
         int type =  GetCurrShellType();
-        if(pos < 0 || pos >= GetBulletsInGun().length){
+        if(pos < 0 || pos >= GetBulletsInGun().length){ // would not reach here in usual case
             return -1;
         }
         else {
@@ -261,12 +276,16 @@ public class ShotGun {
         }
     }
 
+    // DEVELOPED BY: RIMI
+    /** Builds an eight-slot display array with the same remaining live and blank counts in a randomized display order.
+     *  Unused slots contain EMPTY. Does not reveal or change the actual firing order.
+     *  @return a new eight-element display array                                                                         */
     public int[] GetBulletsInDisplay(){
         int[] list = new int[8];
         int liveCount = 0;
         int blankCount = 0;
 
-        for(int i = 0; i < GetBulletsInGun().length; i++){
+        for(int i = 0; i < GetBulletsInGun().length; i++){ // record the type of the current shells
             if(GetBulletsInGun()[i] == LIVE){
                 liveCount++;
             }
@@ -275,13 +294,13 @@ public class ShotGun {
             }
         }
 
-        for(int i = 0; i < 8; i++){
+        for(int i = 0; i < 8; i++){  // assign the new array all EMPTY
             list[i] = ShotGun.EMPTY;
         }
 
         int totalShell = liveCount + blankCount;
-        for(int i = 0; i < totalShell; i++){
-            int v = (int)(Math.random() * 2);
+        for(int i = 0; i < totalShell; i++){    // assign either LIVE or BLANK to the new list with amount according
+            int v = (int)(Math.random() * 2);   // to the BulletsInGun list with random order
             if(v == 0 && liveCount > 0){
                 list[i] = ShotGun.LIVE;
                 liveCount--;

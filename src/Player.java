@@ -1,4 +1,3 @@
-import java.util.Random;
 
 /**
  * Stores a player name, health, inventory, stage wins and handcuff state. Private fields are
@@ -14,7 +13,7 @@ public class Player {
     private String name;
     private boolean isCuffed;
 
-    // DEVELOPED BY:
+    // DEVELOPED BY:Leon
     /**
      * Creates a player with two health points, maximum health two, eight empty slots,
      * zero wins and no handcuffs.
@@ -68,7 +67,7 @@ public class Player {
 
     // DEVELOPED BY: Leon
     /**
-     * Returns the health limit used by health items.
+     * Returns the health limit used by stage.
      * @return the maximum health
      */
     public int GetMaxHp(){
@@ -77,8 +76,7 @@ public class Player {
 
     // DEVELOPED BY: Leon
     /**
-     * Adds the supplied amount directly; the caller is responsible for enforcing a health
-     * limit.
+     *Heal the player
      * @param num the number of health points to add or subtract
      * @return 1 after updating health
      */
@@ -90,7 +88,6 @@ public class Player {
     // DEVELOPED BY: Leon
     /**
      * Returns the actual inventory array, not a copy. Null elements represent unused
-     * slots.
      * @return the mutable eight-slot inventory
      */
     public Items[] GetAllItem(){
@@ -99,14 +96,14 @@ public class Player {
 
     // DEVELOPED BY: Leon
     /**
-     * Clears the selected inventory slot. The caller must supply a valid index.
+     * Clears the selected inventory slot.
      * @param index the zero-based inventory slot, from 0 through 7
      */
     public void RemoveItem (int index){
         items[index]=null;
     }
 
-    // DEVELOPED BY:
+    // DEVELOPED BY:Leon
     /**
      * Counts non-null inventory slots.
      * @return the number of items currently held
@@ -120,6 +117,7 @@ public class Player {
         }
         return count;
     }
+
     public int GetStageWins(){
         return this.stageWins;
     }
@@ -131,6 +129,7 @@ public class Player {
     public void SetStageWins(){
         this.stageWins++;
     }
+
     // DEVELOPED BY: RIMI
     /** Consume the handcuff
      *  @return     true - A handcuff exists, and it is consumed
@@ -138,18 +137,16 @@ public class Player {
     public void ConsumeCuff(){
         this.isCuffed = false;
     }
-    // DEVELOPED BY:
-    /**
-     * Sets the handcuff flag. Turn skipping is handled by GameSystem.
-     */
+
+    // DEVELOPED BY: RIMI
+    /** Sets the handcuff flag. Turn skipping is handled by GameSystem. */
     public void Cuffed(){
         this.isCuffed = true;
     }
-    // DEVELOPED BY:
-    /**
-     * Checks the handcuff flag.
-     * @return true if the player is currently cuffed; false otherwise
-     */
+
+    // DEVELOPED BY: RIMI
+    /** Checks the handcuff flag.
+     *  @return true if the player is currently cuffed; false otherwise */
     public boolean GetIsCuffed(){
         return this.isCuffed;
     }

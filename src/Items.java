@@ -37,7 +37,7 @@ public abstract class Items {
         return type;
     }
 
-    // DEVELOPED BY:
+    // DEVELOPED BY: RIMI
     /**
      * Forwards to the three-parameter effect, ignoring the stage by default.
      * InformationItem overrides this entry point to forward stage information.

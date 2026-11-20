@@ -19,16 +19,19 @@ public class Stage {
     private int maxShellNum;
     private int perRoundNum;
 
+    /**
+     * Creates an unconfigured stage. All integer fields remain zero; this constructor does not select stage 1.
+     */
     public Stage(){
     }
 
     // DEVELOPED BY: Leon
     /**
-     * Initializes the stage settings. An unsupported stage number falls back to stage 1.
+     * Initializes stage settings: stage 1 uses 2 HP and 0 items, stage 2 uses 4 HP and 2 items, and stage 3 uses 5 HP and 4 items. Invalid numbers fall back to stage 1.
      * @param stageNum the stage number, normally 1, 2 or 3
      */
     public Stage(int stageNum){
-        if (stageNum < 1 || stageNum > 3) {//预防报错
+        if (stageNum < 1 || stageNum > 3) {
             System.out.println("Invalid stage. Using stage 1.");
             stageNum = FST_STAGE;
         }
@@ -56,29 +59,26 @@ public class Stage {
 
     // DEVELOPED BY: Leon
     /**
-     * Returns the corresponding stage setting.
+     * Returns the number of stage.
      * @return the stored stage number
      */
     public int GetStageNum(){
         return this.stageNum;
     }
 
-
     // DEVELOPED BY: Leon
     /**
-     * Returns the corresponding stage setting.
+     * Returns the start Hp of player.
      * @return the starting health per player
      */
     public int GetStartHP(){
         return startHP;
     }
 
-
-
-    // DEVELOPED BY:
+    // DEVELOPED BY:Leon
     /**
-     * Returns the corresponding stage setting.
-     * @return the minimum shells per load
+     * Returns the number of items that can be given to the player during this stage.
+     * @return 0, 2 or 4 for stages 1, 2 or 3 respectively
      */
     public int GetPerRoundItemNum(){
         return perRoundNum;
