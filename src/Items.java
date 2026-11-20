@@ -33,33 +33,10 @@ public abstract class Items {
      * Returns the identifier assigned when the item was constructed.
      * @return the item type identifier from 1 through 9
      */
-    public int Gettype() {
+    public int GetType() {
         return type;
     }
 
-    // DEVELOPED BY: Leon
-    /**
-     * Defines the common game-effect contract implemented by item subclasses.
-     * @param player the player using or receiving the effect
-     * @param opponent the opposing player
-     * @param gun the shotgun involved in the operation
-     * @return the result supplied by the concrete effect implementation
-     */
-    public abstract int Effect(Player player,Player opponent, ShotGun gun);
-
-    // DEVELOPED BY:
-    /**
-     * Forwards to the three-parameter effect, ignoring the opponent slot. Adrenaline
-     * requires its five-parameter overload to actually select an opponent item.
-     * @param player the player using or receiving the effect
-     * @param opponent the opposing player
-     * @param gun the shotgun involved in the operation
-     * @param opponentIndex the zero-based opponent inventory slot, from 0 through 7
-     * @return the result supplied by the concrete effect implementation
-     */
-    public int Effect(Player player, Player opponent, ShotGun gun, int opponentIndex) {
-        return Effect(player, opponent, gun);
-    }
     // DEVELOPED BY:
     /**
      * Forwards to the three-parameter effect, ignoring the stage by default.
@@ -81,12 +58,21 @@ public abstract class Items {
      * @param opponent the opposing player
      * @param gun the shotgun involved in the operation
      * @param opponentIndex the zero-based opponent inventory slot, from 0 through 7
-     * @param stage the stage configuration
+     * @param stg the stage configuration
      * @return the result supplied by the concrete effect implementation
      */
-    public int Effect(Player player, Player opponent, ShotGun gun, int opponentIndex, Stage stage) {
-        return Effect(player, opponent, gun, stage);
+    public int Effect(Player player, Player opponent, ShotGun gun, int opponentIndex, Stage stg) {
+        return Effect(player, opponent, gun, stg);
     }
+    // DEVELOPED BY: Leon
+    /**
+     * Defines the common game-effect contract implemented by item subclasses.
+     * @param player the player using or receiving the effect
+     * @param opponent the opposing player
+     * @param gun the shotgun involved in the operation
+     * @return the result supplied by the concrete effect implementation
+     */
+    public abstract int Effect(Player player,Player opponent, ShotGun gun);
 
 
 }

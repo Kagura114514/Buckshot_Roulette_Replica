@@ -6,9 +6,7 @@ import java.util.Scanner;
  * @author TODO: confirm original code author(s)
  */
 public class GameSystem {
-    public static final int ERROR = -1;
-
-    private final Player[] allPlayer = new Player[2];
+    private final Player[] all_Player = new Player[2];
     private Player currPlayer;  // 现在的玩家
     private ShotGun gun;
     private Stage stg;
@@ -30,7 +28,7 @@ public class GameSystem {
      * @param p one of the registered players
      * @return player 2 when p is player 1; otherwise player 1
      */
-    public Player getAnotherPlayer(Player p) {
+    public Player GetAnotherPlayer(Player p) {
         if (p == GetAllPlayer()[0]) {
             return GetAllPlayer()[1];
         } else {
@@ -44,7 +42,7 @@ public class GameSystem {
      * @return the mutable two-player array
      */
     public Player[] GetAllPlayer(){
-        return allPlayer;
+        return all_Player;
     }
 
     // DEVELOPED BY: TODO: confirm original code author(s)
@@ -119,23 +117,14 @@ public class GameSystem {
 
     // DEVELOPED BY: TODO: confirm original code author(s)
     /**
-     * Placeholder for a shooting check; currently always returns true.
-     * @return true regardless of game state
-     */
-    public boolean isShoot(){
-        return true;
-    }
-
-    // DEVELOPED BY: TODO: confirm original code author(s)
-    /**
      * Checks whether either player has won at least two stages.
      * @return 10 for player 1, 11 for player 2, or 0 if neither has won
      */
     public int GetGameWinner() {
-        if(allPlayer[0].GetStageWins() >= 2){
+        if(all_Player[0].GetStageWins() >= 2){
             return 10;
         }
-        else if(allPlayer[1].GetStageWins() >= 2){
+        else if(all_Player[1].GetStageWins() >= 2){
             return 11;
         }
         else{
@@ -161,15 +150,6 @@ public class GameSystem {
             return p1;
         }
 
-    }
-
-    // DEVELOPED BY: TODO: confirm original code author(s)
-    /**
-     * Placeholder for skipping a round; currently does not change game state.
-     * @return true regardless of game state
-     */
-    public boolean SkipRound(){
-        return true;
     }
 
     // DEVELOPED BY: TODO: confirm original code author(s)
@@ -244,7 +224,7 @@ public class GameSystem {
         if(target) {  // if target is opponent
             if (gun.GetCurrShellType() == ShotGun.BLANK) {
                 gun.SetBulletsInGunEMPTY();
-                movement = GetCurrPlayer().GetName() + " shot " + getAnotherPlayer(GetCurrPlayer()).GetName() + ". The bullet was Blank!";
+                movement = GetCurrPlayer().GetName() + " shot " + GetAnotherPlayer(GetCurrPlayer()).GetName() + ". The bullet was Blank!";
                 if(gun.GetIsDoubleDMG() == true){
                     gun.SetIsDoubleDMG(false);
                     movement += "The gun barrel has reinstalled/...";
@@ -254,8 +234,8 @@ public class GameSystem {
             }
             else if (gun.GetCurrShellType() == ShotGun.LIVE) {
                 int dmg = gun.DamageCalc();
-                getAnotherPlayer(currPlayer).SetHP(getAnotherPlayer(currPlayer).GetHP() - dmg);
-                movement = GetCurrPlayer().GetName() + " shot " + getAnotherPlayer(GetCurrPlayer()).GetName() + ". The bullet was Live!\n";
+                GetAnotherPlayer(currPlayer).SetHP(GetAnotherPlayer(currPlayer).GetHP() - dmg);
+                movement = GetCurrPlayer().GetName() + " shot " + GetAnotherPlayer(GetCurrPlayer()).GetName() + ". The bullet was Live!\n";
                 gun.SetBulletsInGunEMPTY();
                 switchPlayerCuff();
                 return movement;
@@ -291,13 +271,13 @@ public class GameSystem {
      */
     private void switchPlayerCuff() {
         // 如果opponent cuffed状态 == true
-        if (getAnotherPlayer(GetCurrPlayer()).GetIsCuffed() == true) {
-            getAnotherPlayer(GetCurrPlayer()).ConsumeCuff();
-            System.out.println(getAnotherPlayer(GetCurrPlayer()).GetName() + " is cuffed...unable to move...");
+        if (GetAnotherPlayer(GetCurrPlayer()).GetIsCuffed() == true) {
+            GetAnotherPlayer(GetCurrPlayer()).ConsumeCuff();
+            System.out.println(GetAnotherPlayer(GetCurrPlayer()).GetName() + " is cuffed...unable to move...");
         }
         // 如果opponent cuffed状态 == false
-        else if (getAnotherPlayer(GetCurrPlayer()).GetIsCuffed() == false) {
-            SetCurrPlayer(getAnotherPlayer(GetCurrPlayer()));
+        else if (GetAnotherPlayer(GetCurrPlayer()).GetIsCuffed() == false) {
+            SetCurrPlayer(GetAnotherPlayer(GetCurrPlayer()));
         }
     }
 
@@ -315,18 +295,6 @@ public class GameSystem {
         return false;
     }
     // for testing
-
-    // DEVELOPED BY: TODO: confirm original code author(s)
-    /**
-     * Prints the raw shell array for debugging, including its actual order.
-     * @param gun the shotgun involved in the operation
-     */
-    public void DisplayBullets(ShotGun gun){
-        for(int i = 0; i < gun.GetBulletsInGun().length; i++){
-            System.out.print(gun.GetBulletsInGun()[i] + " ");
-        }
-        System.out.println();
-    }
 
     // DEVELOPED BY: TODO: confirm original code author(s)
     /**
@@ -397,7 +365,7 @@ public class GameSystem {
     public void UseItem(int index) {
         // Dynamic dispatch chooses the actual item subclass effect.
         // Only a success result consumes the inventory item.
-        if(GetCurrPlayer().GetAllItem()[index].Effect(GetCurrPlayer(), getAnotherPlayer(GetCurrPlayer()), GetGun(), GetStage())==1) {
+        if(GetCurrPlayer().GetAllItem()[index].Effect(GetCurrPlayer(), GetAnotherPlayer(GetCurrPlayer()), GetGun(), GetStage())==1) {
             GetCurrPlayer().GetAllItem()[index] = null;
         }
     }
@@ -415,7 +383,7 @@ public class GameSystem {
     public void UseItem(int index, int opponentIndex,Stage stage) {
         // Dynamic dispatch chooses the actual item subclass effect.
         // Only a success result consumes the inventory item.
-        if(GetCurrPlayer().GetAllItem()[index].Effect(GetCurrPlayer(), getAnotherPlayer(GetCurrPlayer()), GetGun(), opponentIndex,stage)==1) {
+        if(GetCurrPlayer().GetAllItem()[index].Effect(GetCurrPlayer(), GetAnotherPlayer(GetCurrPlayer()), GetGun(), opponentIndex,stage)==1) {
             GetCurrPlayer().GetAllItem()[index] = null;
         }
     }

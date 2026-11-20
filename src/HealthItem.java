@@ -33,5 +33,5 @@ public  abstract class HealthItem extends Items {
      * @param player the player using or receiving the effect
      * @return the result returned by the specialized effect
      */
-    public  abstract int Effect(Player player);
+    public abstract int Effect(Player player);
 }

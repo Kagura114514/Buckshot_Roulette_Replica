@@ -73,14 +73,6 @@ public class Stage {
         return startHP;
     }
 
-    // DEVELOPED BY: Leon
-    /**
-     * Returns the corresponding stage setting.
-     * @return the starting health per player
-     */
-    public int GetMinShellNum(){
-        return minShellNum;
-    }
 
 
     // DEVELOPED BY:

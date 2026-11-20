@@ -46,7 +46,7 @@ public class Adrenaline extends OpponentItem {
                 System.out.println("The empty one cannot be chosen");
                 return -1;
             }
-            else if(stolen.Gettype() == Items.ADRENALINE){
+            else if(stolen.GetType() == Items.ADRENALINE){
                 System.out.println("Cannot steal Adrenaline!");
                 return -1;
             }

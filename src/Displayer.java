@@ -4,43 +4,16 @@ import java.util.Scanner;
  * Provides console menus, board drawings, item labels and input helpers. GameMain supplies
  * game data for display; this class also reads names and inventory positions.
  *
- * @author TODO: confirm original code author(s)
+ * @author Leon & Rimi
  */
 public class Displayer {
-    Scanner input;
+    private Scanner input;
 
     public Displayer() {
         input = new Scanner(System.in);
     }
 
-    // DEVELOPED BY: TODO: confirm original code author(s)
-    /**
-     * Builds eight display positions from shell codes: solid for live, hollow for blank.
-     * Positions beyond the array length are represented by spaces.
-     * @param list the array of shell codes
-     * @return the shell-symbol string; codes other than 0 and 1 also print a space
-     */
-    private String DisplayBullets(int[] list){
-        String result = "";
-        for(int i=0;i<8;i++){
-            String symbol =" ";
-            if(i<list.length) {
-                if (list[i] == 1) {
-                    symbol = "■";
-                } else if (list[i] == 0) {
-                    symbol = "□";
-                } else {
-                    System.out.print(" ");
-                }
-            }
-            result += " " + symbol + " \\";
-        }
-        return result;
-    }
 
-    private String DisplayBullets2(int[] list){
-        return "";
-    }
 
     // DEVELOPED BY: TODO: confirm original code author(s)
     /**
@@ -270,10 +243,7 @@ public class Displayer {
                            "     ...........\n"      );
     }
 
-    public void DisplaySignMachine(){
-    }
-
-    int[] shells;
+    private int[] shells;
 
     private void shellSave(ShotGun gun){
         this.shells = new int[8];
@@ -295,7 +265,7 @@ public class Displayer {
         }
     }
 
-    private void DisplayLine(int i){
+    private void displayLine(int i){
         switch (i){
             case 1:
                 System.out.print("|\n                            /");
@@ -359,11 +329,9 @@ public class Displayer {
                 }
             }
             System.out.print(graph);
-            DisplayLine(i + 1);
+            displayLine(i + 1);
         }
     }
-
-
 
     public void DisplayBullets(ShotGun gun){
         shellSave(gun);
@@ -378,7 +346,6 @@ public class Displayer {
                          "                     |                                                                                                                |  //\n"     +
                          "                     ===================================================================================================================//\n"      );
     }
-
 
     public void DisplayMiniGrid(Items[] p1itemList){
         System.out.printf(      "     +-----------------+-----------------+           +-----------------+-----------------+\n" +
@@ -422,7 +389,7 @@ public class Displayer {
         }
     }
 
-    public String[] DisplayItem(Items item){
+    private String[] DisplayItem(Items item){
         if(item instanceof ExpiredMedecine){
             return  new String[]{
                     "    _________     ",

@@ -90,7 +90,7 @@ public class GameMain {
                     dp.DisplayBulletNum(gs.GetBulletsInDisplay());
                     dp.Enter("Press Enter to continue...");
                     do {
-                        dp.DisplayerGrid(gs.GetCurrPlayer(),gs.getAnotherPlayer(gs.GetCurrPlayer()));//显示grid
+                        dp.DisplayerGrid(gs.GetCurrPlayer(),gs.GetAnotherPlayer(gs.GetCurrPlayer()));//显示grid
                         if(playerMovement != null){
                             System.out.println(playerMovement + "\n");
                             playerMovement = null;
@@ -170,7 +170,7 @@ public class GameMain {
                         // player using items
                         if(gs.GetCurrPlayer().CountItems() > 0) {
                             do {
-                                dp.DisplayerGridWithItem(gs.GetCurrPlayer(), gs.getAnotherPlayer(gs.GetCurrPlayer()), gs.GetCurrPlayer().GetAllItem(), gs.getAnotherPlayer(gs.GetCurrPlayer()).GetAllItem());//显示grid
+                                dp.DisplayerGridWithItem(gs.GetCurrPlayer(), gs.GetAnotherPlayer(gs.GetCurrPlayer()), gs.GetCurrPlayer().GetAllItem(), gs.GetAnotherPlayer(gs.GetCurrPlayer()).GetAllItem());//显示grid
                                 if(playerMovement != null){
                                     System.out.println(playerMovement + "\n");
                                     playerMovement = null;
@@ -207,7 +207,7 @@ public class GameMain {
                             } while (choice.equals("Y") && gs.isRemainBullet() && gs.GetAllPlayer()[0].GetHP() > 0 && gs.GetAllPlayer()[1].GetHP() > 0 && gs.GetCurrPlayer().CountItems() > 0);
                         }
                         else{
-                            dp.DisplayerGridWithItem(gs.GetCurrPlayer(), gs.getAnotherPlayer(gs.GetCurrPlayer()), gs.GetCurrPlayer().GetAllItem(), gs.getAnotherPlayer(gs.GetCurrPlayer()).GetAllItem());
+                            dp.DisplayerGridWithItem(gs.GetCurrPlayer(), gs.GetAnotherPlayer(gs.GetCurrPlayer()), gs.GetCurrPlayer().GetAllItem(), gs.GetAnotherPlayer(gs.GetCurrPlayer()).GetAllItem());
                             if(playerMovement != null){
                                 System.out.println(playerMovement + "\n");
                                 playerMovement = null;
@@ -300,7 +300,7 @@ public class GameMain {
                             // player using items
                             if(gs.GetCurrPlayer().CountItems() > 0) {
                                 do {
-                                    dp.DisplayerGridWithItem(gs.GetCurrPlayer(), gs.getAnotherPlayer(gs.GetCurrPlayer()), gs.GetCurrPlayer().GetAllItem(), gs.getAnotherPlayer(gs.GetCurrPlayer()).GetAllItem());//显示grid
+                                    dp.DisplayerGridWithItem(gs.GetCurrPlayer(), gs.GetAnotherPlayer(gs.GetCurrPlayer()), gs.GetCurrPlayer().GetAllItem(), gs.GetAnotherPlayer(gs.GetCurrPlayer()).GetAllItem());//显示grid
                                     if(playerMovement != null){
                                         System.out.println(playerMovement + "\n");
                                         playerMovement = null;
@@ -337,7 +337,7 @@ public class GameMain {
                                 } while (choice.equals("Y") && gs.isRemainBullet() && gs.GetAllPlayer()[0].GetHP() > 0 && gs.GetAllPlayer()[1].GetHP() > 0 && gs.GetCurrPlayer().CountItems() > 0);
                             }
                             else{
-                                dp.DisplayerGridWithItem(gs.GetCurrPlayer(), gs.getAnotherPlayer(gs.GetCurrPlayer()), gs.GetCurrPlayer().GetAllItem(), gs.getAnotherPlayer(gs.GetCurrPlayer()).GetAllItem());
+                                dp.DisplayerGridWithItem(gs.GetCurrPlayer(), gs.GetAnotherPlayer(gs.GetCurrPlayer()), gs.GetCurrPlayer().GetAllItem(), gs.GetAnotherPlayer(gs.GetCurrPlayer()).GetAllItem());
                                 if(playerMovement != null){
                                     System.out.println(playerMovement + "\n");
                                     playerMovement = null;

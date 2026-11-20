@@ -89,18 +89,6 @@ public class Player {
 
     // DEVELOPED BY: Leon
     /**
-     * Subtracts the supplied amount directly without clamping to zero.
-     * @param num the number of health points to add or subtract
-     * @return 1 after updating health
-     */
-    public int MinusHP(int num){
-        hp-=num;
-        return 1;
-    }
-
-
-    // DEVELOPED BY: Leon
-    /**
      * Returns the actual inventory array, not a copy. Null elements represent unused
      * slots.
      * @return the mutable eight-slot inventory

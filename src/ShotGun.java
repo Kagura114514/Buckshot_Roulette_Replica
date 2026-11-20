@@ -1,14 +1,14 @@
 public class ShotGun {
     /** Items involved in this class are:
-     ** Magnifying Glass : 可查看当前枪膛内是否为实弹或空包弹
-     ** Beer             : 弹出当前枪膛内的子弹并跳过当前回合
-     ** Handsaw          : 若此发子弹为实弹则造成2点伤害
-     ** BurnerPhone      : 可预知剩余子弹中的第几发子弹为实弹或空包弹 (例：第四发为空包弹)
-     ** Inverter         : 将当前枪膛内的子弹切换为实弹或空包弹（例：当前枪膛内为空包弹，使用道具后转为实弹
+     ** Magnifying Glass
+     ** Beer
+     ** Handsaw
+     ** BurnerPhone
+     ** Inverter
      */
-    public static final int BLANK     = 0; // 空包弹
-    public static final int LIVE      = 1; // 实弹
-    public static final int EMPTY     = 2; // 无子弹状态（已射出）
+    public static final int BLANK     = 0;
+    public static final int LIVE      = 1;
+    public static final int EMPTY     = 2; // when no bullet
 
     private int[]  bulletsInGun;
     private boolean isDoubleDMG;
