@@ -53,7 +53,7 @@ public class Adrenaline extends OpponentItem {
             else{
                 if(stolen.Effect(player, opponent, gun, stg) == 1) {
                     opponent.RemoveItem(opponentIndex);
-                    System.out.println("Steal one from the other party in the play and use it immediately");
+                    System.out.println("Opponent's item is used");
                     return 1;
                 }
                 else{

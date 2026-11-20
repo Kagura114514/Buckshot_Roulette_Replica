@@ -239,47 +239,49 @@ public class GameSystem {
      * @return 1 for opponent/blank, 2 for opponent/live, 3 for self/live, 4 for
      *     self/blank, or ERROR if no valid shell is found
      */
-    public int Shooting(boolean target){
+    public String Shooting(boolean target){
+        String movement = null;
         if(target) {  // if target is opponent
             if (gun.GetCurrShellType() == ShotGun.BLANK) {
                 gun.SetBulletsInGunEMPTY();
-                System.out.println("shot the opponent. Blank!");
+                movement = GetCurrPlayer().GetName() + " shot " + getAnotherPlayer(GetCurrPlayer()).GetName() + ". The bullet was Blank!";
                 if(gun.GetIsDoubleDMG() == true){
                     gun.SetIsDoubleDMG(false);
-                    System.out.println("The gun barrel has reinstalled/...");
+                    movement += "The gun barrel has reinstalled/...";
                 }
                 switchPlayerCuff();
-                return 1;
+                return movement;
             }
             else if (gun.GetCurrShellType() == ShotGun.LIVE) {
                 int dmg = gun.DamageCalc();
                 getAnotherPlayer(currPlayer).SetHP(getAnotherPlayer(currPlayer).GetHP() - dmg);
-                System.out.println("shot the opponent. Live!\n");
+                movement = GetCurrPlayer().GetName() + " shot " + getAnotherPlayer(GetCurrPlayer()).GetName() + ". The bullet was Live!\n";
                 gun.SetBulletsInGunEMPTY();
                 switchPlayerCuff();
-                return 2;
+                return movement;
             }
         }
         else{        // if target is player oneself
             if (gun.GetCurrShellType() == ShotGun.LIVE) {
                 int dmg = gun.DamageCalc();
                 currPlayer.SetHP(currPlayer.GetHP() - dmg);
-                System.out.println("shot yourself. Live!\n");
+                movement = GetCurrPlayer().GetName() + " shot themself. Unfortunately the bullet was Live!\n";
+
                 gun.SetBulletsInGunEMPTY();
                 switchPlayerCuff();
-                return 3;
+                return movement;
             }
             else if(gun.GetCurrShellType() == ShotGun.BLANK){
                 gun.SetBulletsInGunEMPTY();
-                System.out.println("shot yourself. Blank!");
+                movement = GetCurrPlayer().GetName() + " shot themself. Luckily the bullet was Blank!";
                 if(gun.GetIsDoubleDMG() == true){
                     gun.SetIsDoubleDMG(false);
-                    System.out.println("The gun barrel has reinstalled/...");
+                    movement += "The gun barrel has reinstalled/...";
                 }
-                return 4;
+                return movement;
             }
         }
-        return ERROR;
+        return "ERROR";
     }
 
     // DEVELOPED BY: TODO: confirm original code author(s)
