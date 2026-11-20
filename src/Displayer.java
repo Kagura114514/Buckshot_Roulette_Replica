@@ -200,7 +200,7 @@ public class Displayer {
                          "|2.EXIT GAME                     |\n" +
                          "|......                          |\n" +
                          "+--------------------------------+\n" +
-                         "Choice one option:  ");
+                         "Choice one option: ");
     }
 
     // DEVELOPED BY: Leon
